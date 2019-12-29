@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LogoutComponent } from './logout/logout.component';
+import { DashboardComponent } from './dashboard.component';
 
 
 const routes: Routes = [
-  { path: '', component: LogoutComponent },
-  { path: 'logout', component: LogoutComponent, outlet: 'dashboard_pages' }
+  { path: '', component: DashboardComponent },
+  { path: 'logout', component: LogoutComponent,  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,  { enableTracing: false })],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class DashboardRoutingModule { }

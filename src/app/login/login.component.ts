@@ -24,19 +24,9 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-
-    // State for the User. If Authentication State == False, the app reverts back to the landing page
-    this.auth.authenticationState.subscribe(state => {
-      if (state) {
-        this.router.navigateByUrl('/dashboard');
-      } else {
-        // this.router.navigate(['']);
-      }
-    })
   }
 
   login(data) {
-    console.log(data);
     this.auth.login(data);
   }
 

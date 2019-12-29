@@ -13,8 +13,6 @@ export class AuthService {
   BACKEND_URL = environment.url;
   authenticationState = new BehaviorSubject(false);
 
-
-
   constructor(
     private http: HttpClient
   ) {
@@ -28,15 +26,20 @@ export class AuthService {
 
    // Login User
    login(data) {
-    console.log('Logging in');
     return this.http.post(`${this.BACKEND_URL}/api/admin/login`, data)
     .pipe(
       tap(res => {
+        console.log('Logging in...');
         this.authenticationState.next(true);
       }),
       catchError(e => {
         throw new Error(e);
       })
     ).subscribe();
+  }
+
+  logout() {
+    console.log('Logging out...');
+    this.authenticationState.next(false);
   }
 }
