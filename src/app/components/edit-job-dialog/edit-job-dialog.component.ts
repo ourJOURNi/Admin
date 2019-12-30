@@ -49,7 +49,12 @@ export class EditJobDialogComponent implements OnInit {
 
   update(job) {
     job.id = this.id;
-    this.jobs.updateJob(job).subscribe();
+    this.jobs.updateJob(job).subscribe(data => {
+      this.jobs.getJobs().subscribe(data => {
+        let jobsArray = Object.values(data);
+        this.jobs.jobsSubject.next(jobsArray);
+      });
+    });
     this.dialogRef.close();
   }
 

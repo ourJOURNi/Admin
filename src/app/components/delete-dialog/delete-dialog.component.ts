@@ -19,15 +19,18 @@ export class DeleteDialogComponent implements OnInit {
   ) {
     this.title = data.title;
     this.id = data.id;
-    console.log('id: ' + this.id);
    }
 
   ngOnInit() {
   }
 
   delete(id) {
-    console.log('Deleting job...');
-    this.jobs.deleteJob(id).subscribe();
+    this.jobs.deleteJob(id).subscribe(data => {
+      this.jobs.getJobs().subscribe(data => {
+        let jobsArray = Object.values(data);
+        this.jobs.jobsSubject.next(jobsArray);
+      });
+    });
     this.dialogRef.close();
   }
 

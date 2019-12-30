@@ -5,7 +5,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
 import { AddJobDialogComponent } from '../../components/add-job-dialog/add-job-dialog.component';
 import { EditJobDialogComponent } from '../../components/edit-job-dialog/edit-job-dialog.component';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-jobs',
@@ -13,9 +12,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
-  allJobs: any;
-  dashJobs = new BehaviorSubject(this.allJobs);
-
+  allJobs = [];
 
   constructor(
     private jobs: JobsService,
@@ -25,7 +22,12 @@ export class JobsComponent implements OnInit {
 
   ngOnInit() {
     this.jobs.getJobs().subscribe(jobs => {
-      this.allJobs = Object.values(jobs);
+      let jobsArray = Object.values(jobs);
+      this.jobs.jobsSubject.next(jobsArray);
+      this.jobs.jobsSubject.subscribe(data => {
+        this.allJobs = data;
+        console.log(this.allJobs);
+      });
     });
   }
 

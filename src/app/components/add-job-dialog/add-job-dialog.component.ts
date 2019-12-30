@@ -32,8 +32,12 @@ export class AddJobDialogComponent implements OnInit {
   add(job) {
     console.log('Adding job...');
     job['datedCreated'] = Date.now();
-    console.log(job);
-    this.jobs.addJob(job).subscribe();
+    this.jobs.addJob(job).subscribe(data => {
+      this.jobs.getJobs().subscribe(data => {
+        let jobsArray = Object.values(data);
+        this.jobs.jobsSubject.next(jobsArray);
+      });
+    });
     this.dialogRef.close();
   }
 
