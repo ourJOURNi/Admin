@@ -1,1 +1,25 @@
-<p>jobs works!</p>
+<div class="container">
+    <div class="dashboard-page-header">
+        <button mat-raised-button class="add" (click)="openAddJobDialog()">Add Job</button>
+        <h2>Jobs: {{allJobs.length}}</h2>
+    </div>
+    <div>
+        <mat-card *ngFor="let job of dashJobs">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{job.title}}</mat-card-title>
+                <mat-card-subtitle>{{job.companyName}}</mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-content>
+                  <p>
+                    {{job.fullJobDescription}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button (click)="openEditDialog(job)">Edit</button>
+                  <button mat-button (click)="openDeleteDialog(job)">Delete</button>
+                </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

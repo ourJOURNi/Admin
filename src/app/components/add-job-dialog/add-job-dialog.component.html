@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Add Job</h2>
+<mat-dialog-content>
+  <form [formGroup]="addJobForm" (ngSubmit)="add(this.addJobForm.value)">
+      <mat-form-field>
+          <input
+          matInput
+          placeholder="Title"
+          formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Company Name"
+          formControlName="companyName">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Company Email"
+          formControlName="companyEmail">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Rate of Pay - x/hr"
+          formControlName="rateOfPay">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Summary of Job"
+          formControlName="summary">
+        </mat-form-field>
+        <mat-form-field>
+          <textarea
+          matInput
+          rows="10"
+          placeholder="Full Description of Job"
+          formControlName="fullJobDescription">
+          </textarea>
+        </mat-form-field>
+        <mat-dialog-actions>
+            <button mat-raised-button class="add" type="submit">Add Job</button>
+            <button class="mat-raised-button" (click)="close()">Cancel</button>
+        </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+
+
