@@ -7,12 +7,10 @@ import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dia
 import { AddJobDialogComponent } from '../../components/add-job-dialog/add-job-dialog.component';
 import { EditJobDialogComponent } from '../../components/edit-job-dialog/edit-job-dialog.component';
 
-import { JobsComponent } from '../jobs/jobs.component';
-
+import { JobRoutingModule } from './jobs-routing.module';
 
 @NgModule({
   declarations: [
-    JobsComponent,
     DeleteDialogComponent,
     AddJobDialogComponent,
     EditJobDialogComponent
@@ -20,7 +18,8 @@ import { JobsComponent } from '../jobs/jobs.component';
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JobRoutingModule
   ],
   entryComponents: [
     DeleteDialogComponent,

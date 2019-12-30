@@ -14,12 +14,13 @@ mat-card {
   background: lightblue;
 }
 
-mat-dialog-actions {
-  float: right;
+mat-toolbar {
+  position: fixed;
+  z-index: 9999;
 }
 
-mat-dialog-actions > button {
-  margin-right: 10px;
+.filler {
+  width: 65%;
 }
 
 .danger {
@@ -30,24 +31,10 @@ mat-dialog-actions > button {
 .add {
   background: green;
   color: white;
-  float: right;
-  position: relative;
-  left: -50px;
-}
-
-.dashboard-page-header {
-  background: rgba(245,245,245, 1);
-  height: auto;
-  width: 100%;
-  padding: 0px 20px 0 20px;
-  margin-bottom: 100px;
-  position: fixed;
+  position: absolute;
+  right: 0;
   top: 0;
-  left: 0;
-  z-index: 999;
-  display: block;
 }
-
 
 .login-container {
   background: rgba(240,240,240);
@@ -61,6 +48,6 @@ mat-dialog-actions > button {
 }
 
 .container {
-  padding-top: 100px;
+  padding-top: 50px;
 }
 

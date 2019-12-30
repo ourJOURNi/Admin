@@ -8,10 +8,13 @@ import { StudentsComponent } from './students/students.component';
 import { MentorsComponent } from './mentors/mentors.component';
 import { PostsComponent } from './posts/posts.component';
 import { EventsComponent } from './events/events.component';
+import { JobsComponent } from './jobs/jobs.component';
+import { JobsModule } from './jobs/jobs.module';
 
 
 @NgModule({
   declarations: [
+    JobsComponent,
     LogoutComponent,
     DashboardComponent,
     StudentsComponent,
@@ -22,7 +25,8 @@ import { EventsComponent } from './events/events.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MaterialModule
+    MaterialModule,
+    JobsModule
   ]
 })
 export class DashboardModule { }

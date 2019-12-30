@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { JobsComponent } from './jobs.component';
 
 const routes: Routes = [
-  { path: 'jobs', component: JobsComponent }
+  { path: 'jobs', loadChildren: () => import('./jobs.module').then(m => m.JobsModule) }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,  { enableTracing: false })],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class JobRoutingModule { }

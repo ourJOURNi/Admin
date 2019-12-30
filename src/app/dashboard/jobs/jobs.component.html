@@ -1,9 +1,9 @@
-<div class="container">
-    <div class="dashboard-page-header">
+    <mat-toolbar>
+        <h3>Jobs: {{allJobs.length}}</h3>
+        <span class="filler"></span>
         <button mat-raised-button class="add" (click)="openAddJobDialog()">Add Job</button>
-        <h2>Jobs: {{allJobs.length}}</h2>
-    </div>
-    <div>
+    </mat-toolbar>
+    <div class="container">
         <mat-card *ngFor="let job of allJobs">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
@@ -22,4 +22,3 @@
                 </mat-card-actions>
         </mat-card>
     </div>
-</div>

@@ -3,7 +3,7 @@
     <mat-sidenav mode="side" opened>
       <h4>Admin Dashboard</h4>
       <mat-nav-list>
-          <a mat-list-item routerLinkActive="active"  [routerLink]="['jobs']">Jobs</a>
+          <a mat-list-item routerLinkActive="active"  [routerLink]="[{ outlets: { dashboardPages: ['jobs'] } }]">Jobs</a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="['students']">Students</a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="['mentors']">Mentors</a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="['posts']">Posts</a>
@@ -13,7 +13,6 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <h1>dashboard?</h1>
         <router-outlet name="dashboardPages"></router-outlet>
     </mat-sidenav-content>
 

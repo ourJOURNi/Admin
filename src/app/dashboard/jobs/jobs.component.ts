@@ -22,8 +22,11 @@ export class JobsComponent implements OnInit {
 
   ngOnInit() {
     this.jobs.getJobs().subscribe(jobs => {
-      let jobsArray = Object.values(jobs);
+
+      const jobsArray = Object.values(jobs);
       this.jobs.jobsSubject.next(jobsArray);
+
+      // Subscribe to Jobs Subject in Jobs Service for Real time update changes
       this.jobs.jobsSubject.subscribe(data => {
         this.allJobs = data;
         console.log(this.allJobs);
