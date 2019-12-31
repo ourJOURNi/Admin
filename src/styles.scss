@@ -10,13 +10,35 @@ mat-form-field {
 }
 
 mat-card {
-  margin: 40px;
+  margin: 100px;
+  padding: 10px;
   background: lightblue;
 }
 
 mat-toolbar {
   position: fixed;
   z-index: 9999;
+  box-shadow: 1px 1px 5px #888;
+  background: white;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  background: lightblue;
+}
+
+mat-card-content{
+  background: rgba(240,240,240, 0.4);
+  padding: 40px;
+
+  p {
+    width: 400px;
+  }
+}
+
+.card-button {
+  background: rgba(240,240,240, 0.8);
 }
 
 .filler {

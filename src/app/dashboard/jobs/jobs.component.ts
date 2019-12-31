@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../services/jobs.service';
-import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
-import { AddJobDialogComponent } from '../../components/add-job-dialog/add-job-dialog.component';
-import { EditJobDialogComponent } from '../../components/edit-job-dialog/edit-job-dialog.component';
+import { DeleteDialogComponent } from '../jobs/delete-dialog/delete-dialog.component';
+import { AddJobDialogComponent } from '../jobs/add-job-dialog/add-job-dialog.component';
+import { EditJobDialogComponent } from '../jobs/edit-job-dialog/edit-job-dialog.component';
 
 @Component({
   selector: 'app-jobs',
@@ -16,7 +15,6 @@ export class JobsComponent implements OnInit {
 
   constructor(
     private jobs: JobsService,
-    private router: Router,
     public dialog: MatDialog
   ) { }
 
@@ -41,7 +39,12 @@ export class JobsComponent implements OnInit {
 
     dialogConfig.data = {
       id: data._id,
-      title: data.title
+      title: data.title,
+      companyName: data.companyName,
+      companyEmail: data.companyEmail,
+      summary: data.summary,
+      fullJobDescription: data.fullJobDescription,
+      rateOfPay: data.rateOfPay
   };
 
     this.dialog.open(DeleteDialogComponent, dialogConfig);

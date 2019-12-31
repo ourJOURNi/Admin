@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { JobsService } from '../../services/jobs.service';
+import { JobsService } from '../../../services/jobs.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 
@@ -11,6 +11,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class DeleteDialogComponent implements OnInit {
   title: string;
   id: string;
+  companyName: string;
+  companyEmail: string;
+  summary: string;
+  fullJobDescription: string;
+  rateOfPay: string;
 
   constructor(
     private jobs: JobsService,
@@ -19,6 +24,11 @@ export class DeleteDialogComponent implements OnInit {
   ) {
     this.title = data.title;
     this.id = data.id;
+    this.companyName = data.companyName;
+    this.companyEmail = data.companyEmail;
+    this.summary = data.summary;
+    this.fullJobDescription = data.fullJobDescription;
+    this.rateOfPay = data.rateOfPay;
    }
 
   ngOnInit() {

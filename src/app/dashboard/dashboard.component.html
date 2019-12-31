@@ -3,17 +3,17 @@
     <mat-sidenav mode="side" opened>
       <h4>Admin Dashboard</h4>
       <mat-nav-list>
-          <a mat-list-item routerLinkActive="active"  [routerLink]="[{ outlets: { dashboardPages: ['jobs'] } }]">Jobs</a>
-          <a mat-list-item routerLinkActive="active"  [routerLink]="['students']">Students</a>
-          <a mat-list-item routerLinkActive="active"  [routerLink]="['mentors']">Mentors</a>
-          <a mat-list-item routerLinkActive="active"  [routerLink]="['posts']">Posts</a>
-          <a mat-list-item routerLinkActive="active" [routerLink]="['events']">Events</a>
-          <a mat-list-item routerLinkActive="active" [routerLink]="['logout']">Logout</a>
+          <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['jobs'] } }]">Jobs</a>
+          <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['students'] } }]">Students</a>
+          <a mat-list-item disabled=true routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['mentors'] } }]">Mentors</a>
+          <a mat-list-item disabled=true routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['posts'] } }]">Posts</a>
+          <a mat-list-item disabled=true routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['events'] } }]">Events</a>
+          <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['logout'] } }]">Logout</a>
        </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <router-outlet name="dashboardPages"></router-outlet>
+        <router-outlet name="open"></router-outlet>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

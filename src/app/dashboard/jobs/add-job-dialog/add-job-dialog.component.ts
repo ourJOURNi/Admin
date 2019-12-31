@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobsService } from '../../services/jobs.service';
+import { JobsService } from '../../../services/jobs.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 

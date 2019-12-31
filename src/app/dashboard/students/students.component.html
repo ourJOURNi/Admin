@@ -1,1 +1,32 @@
-<p>students works!</p>
+<mat-toolbar>
+  <h3>Students: {{allStudents.length}}</h3>
+</mat-toolbar>
+<div class="container">
+  <br>
+    <h4>Users in this section have signed up for the platform</h4>
+  <mat-card *ngFor="let student of allStudents">
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+            profile picture
+            <img src="{{student.profilePicture}}" alt="">
+          </div>
+          <mat-card-title>{{student.fullName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{student.gender}}</p>
+          <p>School: {{student.school}}</p>
+          <p>Grade: {{student.grade}}</p>
+          <p>{{student.email}}</p>
+          <p>{{student.addressOne}}</p>
+          <p>{{student.addressTwo}}</p>
+          <p>Date of Birth: {{student.dob}}</p>
+          <p>{{student.phone}}</p>
+          <p>{{student.city}}</p>
+          <p>{{student.state}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="openEditDialog(student)">Edit</button>
+            <button mat-button (click)="openDeleteDialog(student)">Delete</button>
+          </mat-card-actions>
+  </mat-card>
+</div>

@@ -8,23 +8,20 @@ import { PostsComponent } from './posts/posts.component';
 import { EventsComponent } from './events/events.component';
 import { LogoutComponent } from './logout/logout.component';
 import { JobsModule } from './jobs/jobs.module';
+import { StudentsModule } from './students/students.module';
 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, children: [
-    { path: '', component: JobsComponent, outlet: 'dashboardPages'}
-  ] }
-  // { path: 'students', component: StudentsComponent },
-  // { path: 'mentors', component: MentorsComponent },
-  // { path: 'posts', component: PostsComponent },
-  // { path: 'events', component: EventsComponent },
-  // { path: 'logout', component: LogoutComponent }
+  { path: '', component: DashboardComponent
+  }
+
 ];
 
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    JobsModule],
+    JobsModule,
+    StudentsModule],
   exports: [RouterModule]
 })
 export class DashboardRoutingModule { }

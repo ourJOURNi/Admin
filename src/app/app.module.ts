@@ -11,7 +11,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 
-import { JobsModule } from './dashboard/jobs/jobs.module';
 
 
 @NgModule({
@@ -28,9 +27,7 @@ import { JobsModule } from './dashboard/jobs/jobs.module';
     FlexLayoutModule,
     FormsModule,
     DashboardModule,
-    ReactiveFormsModule,
-    JobsModule
-  ],
+    ReactiveFormsModule  ],
   providers: [],
   bootstrap: [AppComponent]
 })

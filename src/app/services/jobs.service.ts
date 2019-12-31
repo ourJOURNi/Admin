@@ -24,7 +24,6 @@ export class JobsService {
     }
 
     deleteJob(id) {
-      console.log(id);
       return this.http.delete(`${this.BACKEND_URL}/api/admin/jobs/delete-job/${id}`);
     }
 

@@ -10,6 +10,7 @@ import { PostsComponent } from './posts/posts.component';
 import { EventsComponent } from './events/events.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { JobsModule } from './jobs/jobs.module';
+import { StudentsModule } from './students/students.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { JobsModule } from './jobs/jobs.module';
     CommonModule,
     DashboardRoutingModule,
     MaterialModule,
-    JobsModule
+    JobsModule,
+    StudentsModule
   ]
 })
 export class DashboardModule { }
