@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Delete Mentor?</h2>
+<p>{{photo}}</p>
+<p>{{name}}</p>
+<p>{{title}}</p>
+<p>{{address}}</p>
+<p>{{city}}, {{state}}, {{zip}}</p>
+<p>{{phone}}</p>
+<p>{{email}}</p>
+<p>{{description}}</p>
+<mat-dialog-content>
+      <p>Are you sure you want to delete this Job? It cannot be undone.</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button class="danger" (click)="delete(id)">Delete</button>
+    <button class="mat-raised-button" (click)="close()">Cancel</button>
+</mat-dialog-actions>

@@ -9,7 +9,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./edit-job-dialog.component.scss']
 })
 export class EditJobDialogComponent implements OnInit {
+
   editJobForm: FormGroup;
+
   id: string;
   title: string;
   companyName: string;
@@ -48,7 +50,7 @@ export class EditJobDialogComponent implements OnInit {
   }
 
   update(job) {
-    job.id = this.id;
+    job._id = this.id;
     this.jobs.updateJob(job).subscribe(data => {
       this.jobs.getJobs().subscribe(data => {
         let jobsArray = Object.values(data);

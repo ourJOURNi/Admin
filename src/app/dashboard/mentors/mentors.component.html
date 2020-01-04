@@ -1,1 +1,25 @@
-<p>mentors works!</p>
+<mat-toolbar>
+    <h3>Mentors: {{allMentors.length}}</h3>
+    <span class="filler"></span>
+    <button mat-raised-button class="add" (click)="openAddMentorDialog()">Add</button>
+</mat-toolbar>
+<div class="container">
+    <mat-card *ngFor="let mentor of allMentors">
+        <mat-card-header>
+            <div mat-card-avatar class="logo"></div>
+            <mat-card-title>{{mentor.name}}</mat-card-title>
+            <mat-card-subtitle>{{mentor.email}}</mat-card-subtitle>
+            <mat-card-subtitle>{{mentor.title}}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+              <p>{{mentor.city}}, {{mentor.state}}, {{mentor.zip}}</p>
+              <p>{{mentor.summary}}</p>
+              <p>{{mentor.description}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button class="card-button" mat-button (click)="openEditMentorDialog(mentor)">Edit</button>
+              <button class="card-button" mat-button (click)="openDeleteDialog(mentor)">Delete</button>
+            </mat-card-actions>
+    </mat-card>
+</div>

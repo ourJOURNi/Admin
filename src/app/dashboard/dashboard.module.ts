@@ -11,6 +11,8 @@ import { EventsComponent } from './events/events.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { JobsModule } from './jobs/jobs.module';
 import { StudentsModule } from './students/students.module';
+import { EventsModule } from './events/events.module';
+import { MentorsModule } from './mentors/mentors.module';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { StudentsModule } from './students/students.module';
     DashboardRoutingModule,
     MaterialModule,
     JobsModule,
-    StudentsModule
+    StudentsModule,
+    EventsModule,
+    MentorsModule
   ]
 })
 export class DashboardModule { }

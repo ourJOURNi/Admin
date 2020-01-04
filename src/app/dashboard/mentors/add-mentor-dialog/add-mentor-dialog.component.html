@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>Add Mentor</h2>
+<mat-dialog-content>
+  <form [formGroup]="addMentorForm" (ngSubmit)="add(this.addMentorForm.value)">
+      <mat-form-field>
+          <input
+          matInput
+          placeholder="Name"
+          formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Email"
+          formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Address"
+          formControlName="address">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="City"
+          formControlName="city">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="State"
+          formControlName="state">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+          matInput
+          placeholder="Zip"
+          formControlName="zip">
+        </mat-form-field>
+        <mat-form-field>
+            <input
+            matInput
+            placeholder="Photo"
+            formControlName="photo">
+          </mat-form-field>
+          <mat-form-field>
+            <input
+            matInput
+            placeholder="Title"
+            formControlName="title">
+          </mat-form-field>
+          <mat-form-field>
+            <textarea
+            matInput
+            rows="10"
+            placeholder="Description"
+            formControlName="description">
+            </textarea>
+        </mat-form-field>
+        <mat-dialog-actions>
+            <button mat-raised-button class="add" type="submit">Add Mentors</button>
+            <button class="mat-raised-button" (click)="close()">Cancel</button>
+        </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+
+

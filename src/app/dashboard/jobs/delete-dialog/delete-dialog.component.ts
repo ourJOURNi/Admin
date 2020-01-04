@@ -9,8 +9,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   styleUrls: ['./delete-dialog.component.scss']
 })
 export class DeleteDialogComponent implements OnInit {
-  title: string;
+
   id: string;
+  title: string;
   companyName: string;
   companyEmail: string;
   summary: string;

@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Add Job</h2>
+<mat-dialog-content>
+  <form [formGroup]="editEventForm" (ngSubmit)="update(this.editEventForm.value)">
+    <mat-form-field>
+      <input
+      matInput
+      placeholder="Title"
+      formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      placeholder="Organizer"
+      formControlName="organizer">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      placeholder="location"
+      formControlName="location">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      placeholder="Date"
+      formControlName="date">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      placeholder="Photo"
+      formControlName="photo">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+      matInput
+      rows="10"
+      placeholder="description"
+      formControlName="description">
+      </textarea>
+    </mat-form-field>
+        <mat-dialog-actions>
+            <button mat-raised-button class="add" type="submit">Edit Job</button>
+            <button class="mat-raised-button" (click)="close()">Cancel</button>
+        </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+
+
