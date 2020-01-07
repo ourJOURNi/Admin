@@ -38,12 +38,12 @@ export class EditEventDialogComponent implements OnInit {
 
   ngOnInit() {
     this.editEventForm = this.formBuilder.group({
-      title: ['Event 3000', Validators.required],
-      organizer: ['Eddie Taliaferro', Validators.required],
-      location: ['Detroit, MI, 48228', [Validators.required, Validators.email]],
-      date: ['lololol', Validators.required],
-      description: ['this is a description of the event', Validators.required],
-      photo: ['lol', Validators.required],
+      title: ['', Validators.required],
+      organizer: ['', Validators.required],
+      location: ['', [Validators.required, Validators.email]],
+      date: ['', Validators.required],
+      description: ['', Validators.required],
+      photo: ['', Validators.required],
     });
   }
 
