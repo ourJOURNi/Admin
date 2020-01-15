@@ -23,6 +23,7 @@ export class DeleteDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
+
     this.title = data.title;
     this.id = data.id;
     this.companyName = data.companyName;

@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Delete Post?</h2>
+<p>By: {{creatorName}}</p>
+<p>Email: {{creatorEmail}}</p>
+<mat-dialog-content>
+      <p>Are you sure you want to delete this Post? It cannot be undone.</p>
+      <br>
+      <p>Post: </p>
+      <h3>{{post}}</h3>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button class="danger" (click)="delete(id)">Delete</button>
+    <button class="mat-raised-button" (click)="close()">Cancel</button>
+</mat-dialog-actions>

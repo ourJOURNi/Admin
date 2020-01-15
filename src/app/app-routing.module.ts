@@ -12,7 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
-    { path: '', component: JobsComponent, outlet: 'open'},
+    { path: '', component: PostsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
     { path: 'students', component: StudentsComponent,  outlet: 'open' },
     { path: 'mentors', component: MentorsComponent,  outlet: 'open' },

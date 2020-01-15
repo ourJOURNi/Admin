@@ -13,6 +13,7 @@ import { JobsModule } from './jobs/jobs.module';
 import { StudentsModule } from './students/students.module';
 import { EventsModule } from './events/events.module';
 import { MentorsModule } from './mentors/mentors.module';
+import { PostsModule } from './posts/posts.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MentorsModule } from './mentors/mentors.module';
     JobsModule,
     StudentsModule,
     EventsModule,
-    MentorsModule
+    MentorsModule,
+    PostsModule
   ]
 })
 export class DashboardModule { }
