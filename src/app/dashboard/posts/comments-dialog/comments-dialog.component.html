@@ -1,0 +1,30 @@
+<div *ngIf="comments.length === 0">
+    <p>This post has no comments</p>
+  </div>
+
+  <h1 mat-dialog-title>Comments ({{comments.length}})</h1>
+    <mat-card *ngFor="let comment of comments">
+    <mat-card-header>
+      <div mat-card-avatar class="logo"></div>
+      <mat-card-title>{{comment.userFullName}}</mat-card-title>
+      <mat-card-subtitle>{{comment.userEmail}}</mat-card-subtitle>
+      <mat-card-subtitle>{{comment.date}}</mat-card-subtitle>
+      <mat-card-subtitle>Likes: {{comment.likes}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p style="font-size: 1em;">
+          <span style="font: 2em">"</span>
+          {{comment.comment}}
+          <span style="font: 2em">"</span>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="card-button" mat-button (click)="openDeleteCommentDialog(comment)">Delete</button>
+      </mat-card-actions>
+  </mat-card>
+
+  <hr>
+  <mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Cancel</button>
+  </mat-dialog-actions>

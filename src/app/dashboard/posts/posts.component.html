@@ -1,9 +1,10 @@
 <mat-toolbar>
     <h3>Posts: {{allPosts.length}}</h3>
     <span class="filler"></span>
-    <button mat-raised-button class="add" (click)="reportedPage()">Reported ( 0 )</button>
-    <button mat-raised-button class="add" (click)="verifyPage()">Verify ( 0 )</button>
+    <!-- <button mat-raised-button class="add" (click)="reportedPage()">Reported ( {{ reportedPost.length }} )</button>
+    <button mat-raised-button class="add" (click)="verifyPage()">Verify ( {{ unverifiedPost.length }} )</button> -->
 </mat-toolbar>
+<router-outlet name="posts"></router-outlet>
 <div class="container">
     <mat-card *ngFor="let post of allPosts">
         <mat-card-header>
@@ -20,8 +21,8 @@
               </p>
             </mat-card-content>
             <mat-card-actions>
-              <button class="card-button" mat-button >Followers ({{post.followers.length}})</button>
-              <button class="card-button" mat-button >Comments ({{post.comments.length}})</button>
+              <button class="card-button" mat-button (click)="openFollowersDialog(post)" >Followers ({{post.followers.length}})</button>
+              <button class="card-button" mat-button (click)="openCommentsDialog(post)" >Comments ({{post.comments.length}})</button>
               <button class="card-button" mat-button (click)="openDeleteDialog(post)">Delete</button>
             </mat-card-actions>
     </mat-card>

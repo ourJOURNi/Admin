@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeletePostDialogComponent } from './delete-post-dialog/delete-post-dialog.component';
+import { FollowersDialogComponent } from './followers-dialog/followers-dialog.component';
+import { CommentsDialogComponent } from './comments-dialog/comments-dialog.component';
+
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,10 +15,14 @@ import { DeletePostDialogComponent } from './delete-post-dialog/delete-post-dial
 })
 export class PostsComponent implements OnInit {
   allPosts = [];
+  reportedPost;
+  unverifiedPost;
 
   constructor(
     private posts: PostsService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
     this.posts.getPosts().subscribe(
@@ -30,10 +38,23 @@ export class PostsComponent implements OnInit {
       });
       }
     );
+
+    this.posts.getReportedPosts().subscribe(
+      posts => {
+        this.reportedPost = Object.values(posts);
+      }
+    );
+
+    this.posts.getUnverifiedPosts().subscribe(
+      posts => {
+        this.unverifiedPost = Object.values(posts);
+      }
+    );
   }
 
   reportedPage() {
     console.log('Going to reported Page');
+    this.router.navigate( [ { outlets: { posts: ['/reported'] } } ]);
   }
 
   verifyPage() {
@@ -53,6 +74,34 @@ export class PostsComponent implements OnInit {
   };
 
     this.dialog.open(DeletePostDialogComponent, dialogConfig);
+  }
+
+  openFollowersDialog(data) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: data._id,
+      followers: data.followers
+  };
+
+    this.dialog.open(FollowersDialogComponent, dialogConfig);
+
+  }
+
+  openCommentsDialog(data) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.width = '800px';
+    dialogConfig.height = '800px';
+    dialogConfig.autoFocus = false;
+
+    dialogConfig.data = {
+      id: data._id,
+      comments: data.comments
+  };
+
+    this.dialog.open(CommentsDialogComponent, dialogConfig);
+
   }
 
 }

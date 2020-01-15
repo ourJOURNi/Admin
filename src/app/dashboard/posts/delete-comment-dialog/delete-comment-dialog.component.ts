@@ -1,0 +1,55 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { PostsService } from '../../../services/posts.service';
+
+
+@Component({
+  selector: 'app-delete-comment-dialog',
+  templateUrl: './delete-comment-dialog.component.html',
+  styleUrls: ['./delete-comment-dialog.component.scss']
+})
+export class DeleteCommentDialogComponent implements OnInit {
+
+  postID;
+  commentID;
+  userFullName;
+  userEmail;
+  comment;
+  likes;
+
+  constructor(
+    private posts: PostsService,
+    private dialogRef: MatDialogRef<DeleteCommentDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) data) {
+
+    this.postID = data.postID;
+    this.commentID = data.commentID;
+    this.userFullName = data.userFullName;
+    this.userEmail = data.userEmail;
+    this.comment = data.comment;
+    this.likes = data.likes;
+
+    console.log(this.postID);
+    console.log(this.commentID);
+    }
+
+  ngOnInit() {
+  }
+
+  delete(id, commentID) {
+    console.log(id);
+    this.posts.deleteComment(id, commentID).subscribe(data => {
+      this.posts.getPosts().subscribe(data => {
+        let postsArray = Object.values(data);
+        this.posts.posts$.next(postsArray);
+      });
+    });
+    this.dialogRef.close();
+  }
+
+  close() {
+    this.dialogRef.close();
+  }
+
+
+}

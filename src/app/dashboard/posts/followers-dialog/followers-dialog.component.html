@@ -1,0 +1,31 @@
+<div *ngIf="followers.length === 0">
+  <p>This post has no followers</p>
+</div>
+<h1 mat-dialog-title>Followers</h1>
+<div>
+  <mat-card *ngFor="let follower of followers">
+  <mat-card-header>
+    <div mat-card-avatar class="logo"></div>
+    <mat-card-title>{{follower}}</mat-card-title>
+    <!-- <mat-card-subtitle>{{post.creatorEmail}}</mat-card-subtitle> -->
+  </mat-card-header>
+
+  <mat-card-content>
+      <p style="font-size: 1em;">
+        <span style="font: 2em">"</span>
+        {{follower}}
+        <span style="font: 2em">"</span>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button class="card-button" mat-button (click)="openFollowersDialog(post)" >Followers ({{post.followers.length}})</button>
+      <button class="card-button" mat-button (click)="openCommentsDialog(post)" >Comments ({{post.comments.length}})</button>
+      <button class="card-button" mat-button (click)="openDeleteDialog(post)">Delete</button> -->
+    </mat-card-actions>
+</mat-card>
+</div>
+
+<hr>
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Cancel</button>
+</mat-dialog-actions>

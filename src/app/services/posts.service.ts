@@ -19,7 +19,19 @@ export class PostsService {
       return this.http.get(`${this.BACKEND_URL}/api/admin/posts`);
     }
 
+    getReportedPosts() {
+      return this.http.get(`${this.BACKEND_URL}/api/admin/posts/reported-comments`);
+    }
+
+    getUnverifiedPosts() {
+      return this.http.get(`${this.BACKEND_URL}/api/admin/posts/verify`);
+    }
+
     deletePost(_id) {
       return this.http.delete(`${this.BACKEND_URL}/api/admin/posts/delete-post/${_id}`);
+    }
+
+    deleteComment(_id, commentID) {
+      return this.http.delete(`${this.BACKEND_URL}/api/admin/posts/delete-commment/${_id}/${commentID}`);
     }
 }
