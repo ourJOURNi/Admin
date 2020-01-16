@@ -10,17 +10,20 @@ import { LogoutComponent } from './dashboard/logout/logout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportedComponent } from './dashboard/posts/reported/reported.component';
 import { VerifyComponent } from './dashboard/posts/verify/verify.component';
+import { DeniedComponent } from './dashboard/posts/verify/denied/denied.component';
+
 
 const routes: Routes = [
-  { path: '', component: VerifyComponent },
+  { path: '', component: DeniedComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: '', component: PostsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
     { path: 'students', component: StudentsComponent,  outlet: 'open' },
     { path: 'mentors', component: MentorsComponent,  outlet: 'open' },
     { path: 'posts', component: PostsComponent,  outlet: 'open'},
-    { path: 'reported', component: ReportedComponent, outlet: 'posts'},
-    { path: 'verified', component: VerifyComponent, outlet: 'open'},
+    { path: 'reported', component: ReportedComponent, outlet: 'open'},
+    { path: 'verify', component: VerifyComponent, outlet: 'open'},
+    { path: 'denied', component: DeniedComponent, outlet: 'open'},
     { path: 'events', component: EventsComponent,  outlet: 'open' },
     { path: 'logout', component: LogoutComponent,  outlet: 'open' }
   ] }

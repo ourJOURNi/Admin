@@ -14,6 +14,7 @@ import { DeleteReportedCommentDialogComponent } from './reported/delete-reported
 import { SeenCommentDialogComponent } from './reported/seen-comment-dialog/seen-comment-dialog.component';
 import { VerifyDialogComponent } from './verify/verify-dialog/verify-dialog.component';
 import { DenyDialogComponent } from './verify/deny-dialog/deny-dialog.component';
+import { DeniedComponent } from './verify/denied/denied.component';
 
 
 
@@ -28,7 +29,8 @@ import { DenyDialogComponent } from './verify/deny-dialog/deny-dialog.component'
     DeleteReportedCommentDialogComponent,
     SeenCommentDialogComponent,
     VerifyDialogComponent,
-    DenyDialogComponent
+    DenyDialogComponent,
+    DeniedComponent
   ],
   imports: [
     CommonModule,

@@ -59,6 +59,7 @@ export class PostsComponent implements OnInit {
 
   verifyPage() {
     console.log('Going to verified Page');
+    this.router.navigate(['verify']);
   }
 
   openDeleteDialog(data) {

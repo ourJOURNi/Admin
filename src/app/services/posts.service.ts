@@ -10,6 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 export class PostsService {
   BACKEND_URL = environment.url;
   posts$ = new BehaviorSubject([]);
+  deniedPosts$ = new BehaviorSubject([]);
+  ReportedPosts$ = new BehaviorSubject([]);
 
   constructor(
     private http: HttpClient
@@ -25,6 +27,10 @@ export class PostsService {
 
     getUnverifiedPosts() {
       return this.http.get(`${this.BACKEND_URL}/api/admin/posts/verify`);
+    }
+
+    getDeniedPosts() {
+      return this.http.get(`${this.BACKEND_URL}/api/admin/posts/denied`);
     }
 
     verify(id) {
