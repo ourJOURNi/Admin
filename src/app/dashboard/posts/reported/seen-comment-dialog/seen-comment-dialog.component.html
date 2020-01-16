@@ -1,15 +1,15 @@
-<h2 mat-dialog-title>Delete Comment?</h2>
-<p>{{userFullName}}</p>
-<p>{{userEmail}}</p>
-<p>Likes: {{likes}}</p>
+<h2 mat-dialog-title>Mark this Reported Comment as Seen?</h2>
+<h4>By:</h4><p> {{reportedUserName}}</p>
+<h4>Email:</h4><p> {{reportedUserEmail}}</p>
+<h4>Reported Comment:</h4><p> "{{comment}}"</p>
 <mat-dialog-content>
-      <p>Are you sure you want to delete this Comment? It cannot be undone.</p>
+      <p>Are you sure you want to Mark this Comment as Seeb? It cannot be undone.</p>
       <br>
       <p>Post: </p>
       <h3>{{comment}}</h3>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-raised-button class="danger" (click)="delete()">Delete</button>
+    <button mat-raised-button class="success" (click)="reportedCommentsArchive()">Send to Archive</button>
     <button class="mat-raised-button" (click)="close()">Cancel</button>
 </mat-dialog-actions>

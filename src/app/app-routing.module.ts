@@ -12,7 +12,7 @@ import { ReportedComponent } from './dashboard/posts/reported/reported.component
 import { VerifyComponent } from './dashboard/posts/verify/verify.component';
 
 const routes: Routes = [
-  { path: '', component: ReportedComponent },
+  { path: '', component: VerifyComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: '', component: PostsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
