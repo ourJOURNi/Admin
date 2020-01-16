@@ -1,1 +1,28 @@
-<p>reported works!</p>
+<mat-toolbar>
+    <h3>Reported Comments: </h3>
+    <span class="filler"></span>
+    <button mat-raised-button class="add"> View All </button>
+    <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
+</mat-toolbar>
+<div class="container">
+  <mat-card *ngFor="let post of allReportedComments">
+    <mat-card-header>
+        <div mat-card-avatar class="logo"></div>
+        <mat-card-title>Reporting: {{post.userFullname}}</mat-card-title>
+        <mat-card-subtitle>{{post.userEmail}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p style="color: red">Reported User: {{post.reportedUserName}}</p>
+        <p style="color: red">Reported User's Email: {{post.reportedUserEmail}}</p>
+          <p style="font-size: 1em; color: red;"> Reported Comment</p>
+          <p style="font-size: 1em; color: red;">{{post.comment}}</p>
+          <p style="font-size: 1em;"> On Post</p>
+          <p>{{post.post}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="card-button" mat-button (click)="openDeleteReportedCommentDialog(post)">Delete</button>
+          <button class="card-button" mat-button (click)="openSeenReportedCommentDialog(post)">Mark as Seen</button>
+        </mat-card-actions>
+</mat-card>
+</div>

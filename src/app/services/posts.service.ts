@@ -19,7 +19,7 @@ export class PostsService {
       return this.http.get(`${this.BACKEND_URL}/api/admin/posts`);
     }
 
-    getReportedPosts() {
+    getReportedComments() {
       return this.http.get(`${this.BACKEND_URL}/api/admin/posts/reported-comments`);
     }
 
@@ -32,6 +32,10 @@ export class PostsService {
     }
 
     deleteComment(_id, commentID) {
-      return this.http.delete(`${this.BACKEND_URL}/api/admin/posts/delete-commment/${_id}/${commentID}`);
+      return this.http.delete(`${this.BACKEND_URL}/api/admin/posts/delete-comment/${_id}/${commentID}`);
+    }
+
+    deleteReportedComment(_id, commentID) {
+      return this.http.delete(`${this.BACKEND_URL}/api/admin/posts/delete-reported-comment/${_id}/${commentID}`);
     }
 }

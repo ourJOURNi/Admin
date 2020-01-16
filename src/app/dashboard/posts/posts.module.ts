@@ -10,6 +10,8 @@ import { VerifyComponent } from './verify/verify.component';
 import { FollowersDialogComponent } from './followers-dialog/followers-dialog.component';
 import { CommentsDialogComponent } from './comments-dialog/comments-dialog.component';
 import { DeleteCommentDialogComponent } from './delete-comment-dialog/delete-comment-dialog.component';
+import { DeleteReportedCommentDialogComponent } from './reported/delete-reported-comment-dialog/delete-reported-comment-dialog.component';
+import { SeenCommentDialogComponent } from './reported/seen-comment-dialog/seen-comment-dialog.component';
 
 
 
@@ -20,7 +22,9 @@ import { DeleteCommentDialogComponent } from './delete-comment-dialog/delete-com
     VerifyComponent,
     FollowersDialogComponent,
     CommentsDialogComponent,
-    DeleteCommentDialogComponent
+    DeleteCommentDialogComponent,
+    DeleteReportedCommentDialogComponent,
+    SeenCommentDialogComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import { DeleteCommentDialogComponent } from './delete-comment-dialog/delete-com
     DeletePostDialogComponent,
     FollowersDialogComponent,
     CommentsDialogComponent,
-    DeleteCommentDialogComponent
+    DeleteCommentDialogComponent,
+    DeleteReportedCommentDialogComponent,
+    SeenCommentDialogComponent
   ]
 })
 export class PostsModule { }

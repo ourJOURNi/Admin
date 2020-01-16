@@ -12,16 +12,15 @@ import { ReportedComponent } from './dashboard/posts/reported/reported.component
 import { VerifyComponent } from './dashboard/posts/verify/verify.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: ReportedComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: '', component: PostsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
     { path: 'students', component: StudentsComponent,  outlet: 'open' },
     { path: 'mentors', component: MentorsComponent,  outlet: 'open' },
-    { path: 'posts', component: PostsComponent,  outlet: 'open', children: [
-      { path: 'reported', component: ReportedComponent, outlet: 'posts'},
-      { path: 'verified', component: VerifyComponent, outlet: 'posts'}
-    ] },
+    { path: 'posts', component: PostsComponent,  outlet: 'open'},
+    { path: 'reported', component: ReportedComponent, outlet: 'posts'},
+    { path: 'verified', component: VerifyComponent, outlet: 'open'},
     { path: 'events', component: EventsComponent,  outlet: 'open' },
     { path: 'logout', component: LogoutComponent,  outlet: 'open' }
   ] }

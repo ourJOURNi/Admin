@@ -1,6 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { PostsService } from '../../../services/posts.service';
+import { CommentsDialogComponent } from '../comments-dialog/comments-dialog.component';
+
 
 
 @Component({
@@ -20,6 +22,7 @@ export class DeleteCommentDialogComponent implements OnInit {
   constructor(
     private posts: PostsService,
     private dialogRef: MatDialogRef<DeleteCommentDialogComponent>,
+    private commentsDialogRef: MatDialogRef<CommentsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
 
     this.postID = data.postID;
@@ -29,22 +32,21 @@ export class DeleteCommentDialogComponent implements OnInit {
     this.comment = data.comment;
     this.likes = data.likes;
 
-    console.log(this.postID);
-    console.log(this.commentID);
     }
 
   ngOnInit() {
+
   }
 
-  delete(id, commentID) {
-    console.log(id);
-    this.posts.deleteComment(id, commentID).subscribe(data => {
+  delete() {
+    this.posts.deleteComment(this.postID, this.commentID).subscribe(data => {
       this.posts.getPosts().subscribe(data => {
         let postsArray = Object.values(data);
         this.posts.posts$.next(postsArray);
       });
     });
     this.dialogRef.close();
+    this.commentsDialogRef.close();
   }
 
   close() {

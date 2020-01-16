@@ -39,7 +39,7 @@ export class PostsComponent implements OnInit {
       }
     );
 
-    this.posts.getReportedPosts().subscribe(
+    this.posts.getReportedComments().subscribe(
       posts => {
         this.reportedPost = Object.values(posts);
       }
@@ -54,7 +54,7 @@ export class PostsComponent implements OnInit {
 
   reportedPage() {
     console.log('Going to reported Page');
-    this.router.navigate( [ { outlets: { posts: ['/reported'] } } ]);
+    this.router.navigate(['']);
   }
 
   verifyPage() {
