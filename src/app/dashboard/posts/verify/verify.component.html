@@ -5,6 +5,12 @@
     <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
+
+  <div *ngIf="allUnverifiedPosts.length === 0" style="position: relative; top: 200px;
+  left: 200px">
+      <h1>There are no posts to be verifed.</h1>
+  </div>
+
   <mat-card *ngFor="let post of allUnverifiedPosts">
     <mat-card-header>
         <div mat-card-avatar class="logo"></div>
