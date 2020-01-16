@@ -27,6 +27,14 @@ export class PostsService {
       return this.http.get(`${this.BACKEND_URL}/api/admin/posts/verify`);
     }
 
+    verify(id) {
+      return this.http.post(`${this.BACKEND_URL}/api/admin/posts/verify`, {_id: id});
+    }
+
+    deny(id) {
+      return this.http.post(`${this.BACKEND_URL}/api/admin/posts/deny`, {_id: id});
+    }
+
     deletePost(_id) {
       return this.http.delete(`${this.BACKEND_URL}/api/admin/posts/delete-post/${_id}`);
     }

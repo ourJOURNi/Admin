@@ -1,1 +1,25 @@
-<p>verify works!</p>
+<mat-toolbar>
+    <h3>Verify Posts: </h3>
+    <span class="filler"></span>
+    <button mat-raised-button class="add"> Denied Posts</button>
+    <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
+</mat-toolbar>
+<div class="container">
+  <mat-card *ngFor="let post of allUnverifiedPosts">
+    <mat-card-header>
+        <div mat-card-avatar class="logo"></div>
+        <mat-card-title>{{post.creatorName}}</mat-card-title>
+        <mat-card-subtitle>{{post.creatorEmail}}</mat-card-subtitle>
+        <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
+        <mat-card-subtitle>_id: {{post._id}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <h3>{{post.post}}</h3>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="card-button" style="background: green; color: white;" mat-button (click)="verifyYesDialog(post)">Yes</button>
+          <button class="card-button danger" mat-button (click)="verifyNoDialog(post)">No</button>
+        </mat-card-actions>
+</mat-card>
+</div>
