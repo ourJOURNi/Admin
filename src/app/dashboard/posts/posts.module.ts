@@ -15,6 +15,7 @@ import { SeenCommentDialogComponent } from './reported/seen-comment-dialog/seen-
 import { VerifyDialogComponent } from './verify/verify-dialog/verify-dialog.component';
 import { DenyDialogComponent } from './verify/deny-dialog/deny-dialog.component';
 import { DeniedComponent } from './verify/denied/denied.component';
+import { ReportedArchiveComponent } from './reported/reported-archive/reported-archive.component';
 
 
 
@@ -30,7 +31,8 @@ import { DeniedComponent } from './verify/denied/denied.component';
     SeenCommentDialogComponent,
     VerifyDialogComponent,
     DenyDialogComponent,
-    DeniedComponent
+    DeniedComponent,
+    ReportedArchiveComponent
   ],
   imports: [
     CommonModule,

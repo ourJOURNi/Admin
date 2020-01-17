@@ -25,6 +25,10 @@ export class PostsService {
       return this.http.get(`${this.BACKEND_URL}/api/admin/posts/reported-comments`);
     }
 
+    getReportedCommentsArchive() {
+      return this.http.get(`${this.BACKEND_URL}/api/admin/posts/reported-comments-archive`);
+    }
+
     getUnverifiedPosts() {
       return this.http.get(`${this.BACKEND_URL}/api/admin/posts/verify`);
     }
