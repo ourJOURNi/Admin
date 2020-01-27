@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { EventsService } from '../../../services/events.service';
+import { format } from 'date-fns';
+
 
 @Component({
   selector: 'app-delete-event-dialog',
@@ -37,12 +39,19 @@ export class DeleteEventDialogComponent implements OnInit {
 
   delete(id) {
     this.events.deleteEvent(id).subscribe(data => {
-      this.events.getEvents().subscribe(data => {
-        let eventsArray = Object.values(data);
-        this.events.eventsSubject.next(eventsArray);
+      this.events.getEvents().subscribe(events => {
+        const eventsArray = Object.values(events);
+
+        for (const event of eventsArray) {
+          event.date = format( new Date(event.date), 'MMMM-dd-yyyy');
+          event.time = format( new Date(event.date), 'hh:mm a');
+        }
+
+        this.events.eventsSubject.next(eventsArray.reverse());
+        this.dialogRef.close();
+
       });
     });
-    this.dialogRef.close();
   }
 
   close() {

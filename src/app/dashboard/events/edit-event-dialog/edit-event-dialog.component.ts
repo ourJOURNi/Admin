@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EventsService } from '../../../services/events.service';
+import { format } from 'date-fns';
+
 
 
 @Component({
@@ -16,8 +18,13 @@ export class EditEventDialogComponent implements OnInit {
   id: string;
   title: string;
   organizer: string;
-  location: string;
+  addressOne: string;
+  addressTwo: string;
+  city: string;
+  state: string;
+  zip: string;
   date: string;
+  time: string;
   description: string;
   photo: string;
 
@@ -30,20 +37,30 @@ export class EditEventDialogComponent implements OnInit {
       this.id = data.id;
       this.title = data.title;
       this.organizer = data.organizer;
-      this.location = data.location;
+      this.addressOne = data.addressOne;
+      this.addressTwo = data.addressTwo;
+      this.city = data.city;
+      this.state = data.state;
+      this.zip = data.zip;
       this.date = data.date;
+      this.time = data.time;
       this.description = data.description;
-      this.photo = data.id;
+      this.photo = data.photo;
      }
 
   ngOnInit() {
     this.editEventForm = this.formBuilder.group({
       title: [this.title, Validators.required],
       organizer: [this.organizer, Validators.required],
-      location: [this.location, [Validators.required, Validators.email]],
-      date: [this.date, Validators.required],
-      description: [this.description, Validators.required],
-      photo: [this.photo, Validators.required],
+      addressOne: [this.addressOne, Validators.required],
+      addressTwo: [this.addressTwo, Validators.required],
+      city: [ this.city, Validators.required],
+      state: [ this.state, Validators.required],
+      zip: [ this.zip, Validators.required],
+      date: [ this.date, Validators.required],
+      time: [ this.time, Validators.required],
+      description: [ this.description, Validators.required],
+      photo: ['', Validators.required],
     });
   }
 
@@ -54,9 +71,15 @@ export class EditEventDialogComponent implements OnInit {
   update(event) {
     event._id = this.id;
     this.events.updateEvent(event).subscribe(data => {
-      this.events.getEvents().subscribe(data => {
-        let eventsArray = Object.values(data);
-        this.events.eventsSubject.next(eventsArray);
+      this.events.getEvents().subscribe(events => {
+        const eventsArray = Object.values(events);
+
+        for (const event of eventsArray) {
+          event.date = format( new Date(event.date), 'MMMM-dd-yyyy');
+          event.time = format( new Date(event.date), 'hh:mm a');
+        }
+
+        this.events.eventsSubject.next(eventsArray.reverse());
       });
     });
     this.dialogRef.close();

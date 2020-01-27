@@ -4,6 +4,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteEventDialogComponent } from '../events/delete-event-dialog/delete-event-dialog.component';
 import { AddEventDialogComponent } from '../events/add-event-dialog/add-event-dialog.component';
 import { EditEventDialogComponent } from '../events/edit-event-dialog/edit-event-dialog.component';
+import { format } from 'date-fns';
+
 
 @Component({
   selector: 'app-events',
@@ -18,15 +20,21 @@ export class EventsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.events.getEvents().subscribe(events => {
-
+    this.events.getEvents().subscribe(
+      events => {
       const eventsArray = Object.values(events);
-      this.events.eventsSubject.next(eventsArray);
+      console.log(eventsArray);
+
+      for (const event of eventsArray) {
+        event.date = format( new Date(event.date), 'MMMM-dd-yyyy');
+        event.time = format( new Date(event.date), 'hh:mm a');
+      }
+
+      this.events.eventsSubject.next(eventsArray.reverse());
 
       // Subscribe to Jobs Subject in Jobs Service for Real time update changes
       this.events.eventsSubject.subscribe(data => {
-        this.allEvents = data;
-        console.log(this.allEvents);
+        this.allEvents = data.reverse();
       });
     });
   }
@@ -40,9 +48,14 @@ export class EventsComponent implements OnInit {
       id: data._id,
       title: data.title,
       organizer: data.organizer,
-      location: data.location,
-      date: data.date,
+      addressOne: data.addressOne,
+      addressTwo: data.addressTwo,
+      city: data.city,
+      state: data.state,
+      zip: data.zip,
       description: data.description,
+      date: data.date,
+      time: data.time,
       photo: data.photo
   };
 
@@ -68,9 +81,14 @@ export class EventsComponent implements OnInit {
       id: data._id,
       title: data.title,
       organizer: data.organizer,
-      location: data.location,
-      date: data.date,
+      addressOne: data.addressOne,
+      addressTwo: data.addressTwo,
+      city: data.city,
+      state: data.state,
+      zip: data.zip,
       description: data.description,
+      date: data.date,
+      time: data.time,
       photo: data.photo
   };
 
