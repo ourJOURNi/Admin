@@ -11,8 +11,8 @@ import { EventsRoutingModule } from './events-routing.module';
 
 @NgModule({
   declarations: [
-    AddEventDialogComponent, 
-    DeleteEventDialogComponent, 
+    AddEventDialogComponent,
+    DeleteEventDialogComponent,
     EditEventDialogComponent],
   imports: [
     CommonModule,

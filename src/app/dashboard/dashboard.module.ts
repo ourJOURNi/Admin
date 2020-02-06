@@ -14,6 +14,10 @@ import { StudentsModule } from './students/students.module';
 import { EventsModule } from './events/events.module';
 import { MentorsModule } from './mentors/mentors.module';
 import { PostsModule } from './posts/posts.module';
+import { FairsModule } from './fairs/fairs.module';
+import { PostSurveyModule } from './post-survey/post-survey.module';
+import { FairsComponent } from './fairs/fairs.component';
+import { PostSurveyComponent } from './post-survey/post-survey.component';
 
 
 @NgModule({
@@ -24,7 +28,9 @@ import { PostsModule } from './posts/posts.module';
     StudentsComponent,
     MentorsComponent,
     PostsComponent,
-    EventsComponent
+    EventsComponent,
+    FairsComponent,
+    PostSurveyComponent
       ],
   imports: [
     CommonModule,
@@ -34,7 +40,9 @@ import { PostsModule } from './posts/posts.module';
     StudentsModule,
     EventsModule,
     MentorsModule,
-    PostsModule
+    PostsModule,
+    FairsModule,
+    PostSurveyModule
   ]
 })
 export class DashboardModule { }
