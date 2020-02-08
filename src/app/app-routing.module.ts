@@ -17,7 +17,7 @@ import { DeniedComponent } from './dashboard/posts/verify/denied/denied.componen
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: FairsComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: '', component: PostsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
@@ -30,7 +30,6 @@ const routes: Routes = [
     { path: 'denied', component: DeniedComponent, outlet: 'open'},
     { path: 'events', component: EventsComponent,  outlet: 'open' },
     { path: 'fairs', component: FairsComponent, outlet: 'open'},
-    { path: 'survey', component: PostSurveyComponent,  outlet: 'open' },
     { path: 'logout', component: LogoutComponent,  outlet: 'open' }
   ] }
 ];

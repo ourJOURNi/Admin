@@ -43,7 +43,7 @@ export class AddEventDialogComponent implements OnInit {
           const eventsArray = Object.values(events);
 
           for (const event of eventsArray) {
-            event.date = format( new Date(event.date), 'MMMM-dd-yyyy');
+            event.date = format( new Date(event.date), 'MMMM dd, yyyy');
             event.time = format( new Date(event.date), 'hh:mm a');
           }
           this.events.eventsSubject.next(eventsArray.reverse());

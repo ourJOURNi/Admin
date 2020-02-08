@@ -27,13 +27,13 @@ export class FairsComponent implements OnInit {
       console.log(fairsArray);
 
       for (const fair of fairsArray) {
-        fair.date = format( new Date(fair.date), 'MMMM-dd-yyyy');
+        fair.date = format( new Date(fair.date), 'MMMM dd, yyyy');
         fair.time = format( new Date(fair.date), 'hh:mm a');
       }
 
       this.fairs.fairsSubject.next(fairsArray.reverse());
 
-      // Subscribe to Jobs Subject in Jobs Service for Real time update changes
+      // Subscribe to Fairs Subject in Fairs Service for Real time update changes
       this.fairs.fairsSubject.subscribe(data => {
         this.allFairs = data.reverse();
       });
@@ -81,12 +81,12 @@ export class FairsComponent implements OnInit {
     dialogConfig.data = {
       id: data._id,
       title: data.title,
-      organizer: data.organizer,
-      addressOne: data.addressOne,
-      addressTwo: data.addressTwo,
+      dateCreated: data.dateCreated,
+      address: data.address,
       city: data.city,
       state: data.state,
       zip: data.zip,
+      summary: data.summary,
       description: data.description,
       date: data.date,
       time: data.time,

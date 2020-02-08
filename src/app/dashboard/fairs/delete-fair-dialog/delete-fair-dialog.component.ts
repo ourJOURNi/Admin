@@ -13,10 +13,14 @@ export class DeleteFairsDialogComponent implements OnInit {
 
   id: string;
   title: string;
-  organizer: string;
-  location: string;
   date: string;
+  time: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
   description: string;
+  summary: string;
   dateCreated: string;
   photo: string;
 
@@ -27,9 +31,12 @@ export class DeleteFairsDialogComponent implements OnInit {
 
       this.id = data.id;
       this.title = data.title;
-      this.organizer = data.organizer;
-      this.location = data.location;
       this.date = data.date;
+      this.address = data.address;
+      this.city = data.city;
+      this.state = data.state;
+      this.zip = data.zip;
+      this.dateCreated = data.dateCreated;
       this.description = data.description;
       this.photo = data.photo;
     }
@@ -43,7 +50,7 @@ export class DeleteFairsDialogComponent implements OnInit {
         const fairsArray = Object.values(fairs);
 
         for (const event of fairsArray) {
-          event.date = format( new Date(event.date), 'MMMM-dd-yyyy');
+          event.date = format( new Date(event.date), 'MMMM dd, yyyy');
           event.time = format( new Date(event.date), 'hh:mm a');
         }
 

@@ -26,13 +26,13 @@ export class EventsComponent implements OnInit {
       console.log(eventsArray);
 
       for (const event of eventsArray) {
-        event.date = format( new Date(event.date), 'MMMM-dd-yyyy');
+        event.date = format( new Date(event.date), 'MMMM dd, yyyy');
         event.time = format( new Date(event.date), 'hh:mm a');
       }
 
       this.events.eventsSubject.next(eventsArray.reverse());
 
-      // Subscribe to Jobs Subject in Jobs Service for Real time update changes
+      // Subscribe to Events Subject in Events Service for Real time update changes
       this.events.eventsSubject.subscribe(data => {
         this.allEvents = data.reverse();
       });

@@ -1,0 +1,10 @@
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  width: 90%;
+}
+
+span {
+  font-weight: 900;
+  color: #005191;
+}

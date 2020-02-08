@@ -1,5 +1,6 @@
 <mat-toolbar>
     <h3>Fairs: {{allFairs.length}}</h3>
+    <span class="example-fill-remaining-space"></span>
     <button mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
@@ -10,34 +11,23 @@
           </mat-card-header>
 
           <mat-card-content>
+                     <p><span>Time: </span>{{fair.time}}</p>
+                     <p><span>Date: </span>{{fair.date}}</p>
+                     <p><span>Address: </span>{{fair.address}}</p>
+                     <p><span>City: </span>{{fair.city}}</p>
+                     <p><span>State: </span>{{fair.state}}</p>
+                     <p><span>Zip: </span>{{fair.zip}}</p>
+                     <p><span>Summary : </span><br><br>{{fair.summary}}</p>
+                     <p><span>Description : </span><br><br>{{fair.description}}</p>
 
-                <mat-grid-list style="height: 300px" cols="2" rowHeight="300px">
-                    <mat-grid-tile>
-                     {{fair.organizer}}<br>
-                     {{fair.date}}<br>
-                     {{fair.time}}<br>
-                     {{fair.addressOne}},
-                     {{fair.addressTwo}}<br>
-                     {{fair.city}},
-                     {{fair.state}},
-                     {{fair.zip}}<br><br>
-                     {{fair.description}}<br>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                     {{fair.photo}}
-                    </mat-grid-tile>
-                    <!-- <p>{{fair.organizer}}</p>
-                    <p>{{fair.addressOne}}</p>
-                    <p>{{fair.addressTwo}}</p>
-                    <p>{{fair.city}}, {{fair.state}}, {{fair.zip}}</p>
-                    <p>{{fair.date}}</p>
-                    <p>{{fair.time}}</p>
-                    <p>{{fair.description}}</p> -->
-                  </mat-grid-list>
+                     <p><span>Schools : </span><br><br></p>
+                     <p *ngFor="let student of fair.students">{{student}}</p>
+
+                     <p><span>Partners : </span><br><br>{{fair.partners}}</p>
             </mat-card-content>
             <mat-card-actions>
-              <button class="card-button" mat-button (click)="openDeleteFairsDialog(fair)">Edit</button>
-              <button class="card-button" mat-button (click)="DeleteFairsDialogComponent(fair)">Delete</button>
+              <button class="card-button" mat-button (click)="openEditFairDialog(fair)">Edit</button>
+              <button class="card-button" mat-button (click)="openDeleteFairsDialog(fair)">Delete</button>
             </mat-card-actions>
     </mat-card>
 </div>

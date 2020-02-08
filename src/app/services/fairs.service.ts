@@ -20,6 +20,8 @@ export class FairsService {
   }
 
   addFair(fair) {
+    console.log('From Fairs service: ');
+    console.log(fair);
     return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/add-fair`, fair);
   }
 
@@ -28,9 +30,11 @@ export class FairsService {
   }
 
   updateFair(fair) {
-    console.log('Updating Job...');
+    console.log(fair);
     return this.http.put(`${this.BACKEND_URL}/api/admin/fairs/update-fair`, fair);
   }
+
+
 
 
 }

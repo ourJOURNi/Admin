@@ -21,21 +21,20 @@ export class AddFairDialogComponent implements OnInit {
 
     ngOnInit() {
       this.addFairForm = this.formBuilder.group({
-        title: ['Youth Tech Exploration', Validators.required],
-        organizer: ['Journi', Validators.required],
-        addressOne: ['777 Main', Validators.required],
-        addressTwo: ['', Validators.required],
+        title: ['Tech Fair', Validators.required],
+        date: ['', Validators.required],
+        address: ['777 Main', Validators.required],
         city: ['Detroit', Validators.required],
         state: ['MI', Validators.required],
         zip: ['48202', Validators.required],
-        date: ['', Validators.required],
-        time: ['', Validators.required],
-        description: ['description', Validators.required],
-        photo: ['photo', Validators.required],
+        description: ['', Validators.required],
+        summary: ['', Validators.required],
       });
     }
 
     add(fair) {
+
+      console.log(fair);
       console.log('Adding fair...');
       fair.datedCreated = Date.now();
       this.fairs.addFair(fair).subscribe(data => {
@@ -43,7 +42,7 @@ export class AddFairDialogComponent implements OnInit {
           const fairsArray = Object.values(fairs);
 
           for (const fair of fairsArray) {
-            fair.date = format( new Date(fair.date), 'MMMM-dd-yyyy');
+            fair.date = format( new Date(fair.date), 'MMMM dd, yyyy');
             fair.time = format( new Date(fair.date), 'hh:mm a');
           }
           this.fairs.fairsSubject.next(fairsArray.reverse());

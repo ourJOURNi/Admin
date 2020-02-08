@@ -17,15 +17,15 @@ export class EditFairDialogComponent implements OnInit {
 
   id: string;
   title: string;
-  organizer: string;
-  addressOne: string;
-  addressTwo: string;
+  address: string;
+  date: string;
+  time: string;
   city: string;
   state: string;
   zip: string;
-  date: string;
-  time: string;
+  summary: string;
   description: string;
+  dateCreated: string;
   photo: string;
 
   constructor(
@@ -36,32 +36,29 @@ export class EditFairDialogComponent implements OnInit {
 
       this.id = data.id;
       this.title = data.title;
-      this.organizer = data.organizer;
-      this.addressOne = data.addressOne;
-      this.addressTwo = data.addressTwo;
+      this.address = data.address;
       this.city = data.city;
       this.state = data.state;
+      this.summary = data.summary;
       this.zip = data.zip;
       this.date = data.date;
+      this.dateCreated = data.dateCreated;
       this.time = data.time;
       this.description = data.description;
-      this.photo = data.photo;
      }
 
   ngOnInit() {
     this.editFairForm = this.formBuilder.group({
       title: [this.title, Validators.required],
-      organizer: [this.organizer, Validators.required],
-      addressOne: [this.addressOne, Validators.required],
-      addressTwo: [this.addressTwo, Validators.required],
-      city: [ this.city, Validators.required],
-      state: [ this.state, Validators.required],
+      address: [this.address, Validators.required],
+      city: [this.city, Validators.required],
+      state: [this.state, Validators.required],
       zip: [ this.zip, Validators.required],
       date: [ this.date, Validators.required],
       time: [ this.time, Validators.required],
+      summary: [ this.summary, Validators.required],
       description: [ this.description, Validators.required],
-      photo: ['', Validators.required],
-    });
+     });
   }
 
   close() {
@@ -72,14 +69,14 @@ export class EditFairDialogComponent implements OnInit {
     fair._id = this.id;
     this.fairs.updateFair(fair).subscribe(data => {
       this.fairs.getFairs().subscribe(fairs => {
-        const eventsArray = Object.values(fairs);
+        const fairsArray = Object.values(fairs);
 
-        for (const fair of eventsArray) {
-          fair.date = format( new Date(fair.date), 'MMMM-dd-yyyy');
+        for (const fair of fairsArray) {
+          fair.date = format( new Date(fair.date), 'MMMM dd, yyyy');
           fair.time = format( new Date(fair.date), 'hh:mm a');
         }
 
-        this.fairs.fairsSubject.next(eventsArray.reverse());
+        this.fairs.fairsSubject.next(fairsArray.reverse());
       });
     });
     this.dialogRef.close();

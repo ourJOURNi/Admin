@@ -45,7 +45,6 @@ export class EditEventDialogComponent implements OnInit {
       this.date = data.date;
       this.time = data.time;
       this.description = data.description;
-      this.photo = data.photo;
      }
 
   ngOnInit() {
@@ -60,7 +59,6 @@ export class EditEventDialogComponent implements OnInit {
       date: [ this.date, Validators.required],
       time: [ this.time, Validators.required],
       description: [ this.description, Validators.required],
-      photo: ['', Validators.required],
     });
   }
 
@@ -75,7 +73,7 @@ export class EditEventDialogComponent implements OnInit {
         const eventsArray = Object.values(events);
 
         for (const event of eventsArray) {
-          event.date = format( new Date(event.date), 'MMMM-dd-yyyy');
+          event.date = format( new Date(event.date), 'MMMM dd, yyyy');
           event.time = format( new Date(event.date), 'hh:mm a');
         }
 
