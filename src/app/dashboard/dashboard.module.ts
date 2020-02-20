@@ -15,9 +15,8 @@ import { EventsModule } from './events/events.module';
 import { MentorsModule } from './mentors/mentors.module';
 import { PostsModule } from './posts/posts.module';
 import { FairsModule } from './fairs/fairs.module';
-import { PostSurveyModule } from './post-survey/post-survey.module';
 import { FairsComponent } from './fairs/fairs.component';
-import { PostSurveyComponent } from './post-survey/post-survey.component';
+
 
 
 @NgModule({
@@ -29,8 +28,7 @@ import { PostSurveyComponent } from './post-survey/post-survey.component';
     MentorsComponent,
     PostsComponent,
     EventsComponent,
-    FairsComponent,
-    PostSurveyComponent
+    FairsComponent
       ],
   imports: [
     CommonModule,
@@ -41,8 +39,7 @@ import { PostSurveyComponent } from './post-survey/post-survey.component';
     EventsModule,
     MentorsModule,
     PostsModule,
-    FairsModule,
-    PostSurveyModule
+    FairsModule
   ]
 })
 export class DashboardModule { }

@@ -12,12 +12,11 @@ import { ReportedComponent } from './dashboard/posts/reported/reported.component
 import { ReportedArchiveComponent } from './dashboard/posts/reported/reported-archive/reported-archive.component';
 import { VerifyComponent } from './dashboard/posts/verify/verify.component';
 import { FairsComponent } from './dashboard/fairs/fairs.component';
-import { PostSurveyComponent } from './dashboard/post-survey/post-survey.component';
 import { DeniedComponent } from './dashboard/posts/verify/denied/denied.component';
 
 
 const routes: Routes = [
-  { path: '', component: FairsComponent },
+  { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: '', component: PostsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},

@@ -54,7 +54,7 @@ export class PostsComponent implements OnInit {
 
   reportedPage() {
     console.log('Going to reported Page');
-    this.router.navigate(['']);
+    this.router.navigate(['reported']);
   }
 
   verifyPage() {

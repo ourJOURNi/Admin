@@ -1,7 +1,6 @@
 <mat-toolbar>
     <h3>Fairs: {{allFairs.length}}</h3>
-    <span class="example-fill-remaining-space"></span>
-    <button mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
+    <button float-left mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
     <mat-card *ngFor="let fair of allFairs">
