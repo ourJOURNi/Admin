@@ -8,3 +8,23 @@ span {
   font-weight: 900;
   color: #005191;
 }
+
+.flex-container {
+  display: flex;
+}
+
+mat-card {
+  margin: 20px;
+}
+
+/* Responsive Styles */
+/* Medium size viewport */
+@media screen and (max-width: 767px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+/* Small size viewport */
+@media screen and (max-width: 575px) {
+}
