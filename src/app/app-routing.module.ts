@@ -22,10 +22,11 @@ const routes: Routes = [
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
     { path: 'students', component: StudentsComponent,  outlet: 'open' },
     { path: 'mentors', component: MentorsComponent,  outlet: 'open' },
-    { path: 'posts', component: PostsComponent,  outlet: 'open'},
-    { path: 'reported', component: ReportedComponent, outlet: 'open'},
+    { path: 'posts', component: PostsComponent,  outlet: 'open', children: [
+      { path: 'verify', component: VerifyComponent, outlet: 'open'},
+      { path: 'reported', component: ReportedComponent, outlet: 'open'}
+    ]},
     { path: 'reported-arhive', component: ReportedArchiveComponent, outlet: 'open'},
-    { path: 'verify', component: VerifyComponent, outlet: 'open'},
     { path: 'denied', component: DeniedComponent, outlet: 'open'},
     { path: 'events', component: EventsComponent,  outlet: 'open' },
     { path: 'fairs', component: FairsComponent, outlet: 'open'},

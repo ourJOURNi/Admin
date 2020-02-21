@@ -4,7 +4,8 @@ import { ReportedComponent } from '../posts/reported/reported.component';
 import { VerifyComponent } from '../posts/verify/verify.component';
 
 const routes: Routes = [
-  { path: 'posts', loadChildren: () => import('./posts.module').then(m => m.PostsModule) }
+  { path: 'posts', loadChildren: () => import('./posts.module').then(m => m.PostsModule) },
+  { path: 'verify', component: VerifyComponent }
 ];
 
 @NgModule({

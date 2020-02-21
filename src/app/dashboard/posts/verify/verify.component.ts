@@ -31,6 +31,7 @@ export class VerifyComponent implements OnInit {
 
     goBack() {
       console.log('Going back to cali');
+      this.router.navigate(['dashboard']);
     }
 
     verifyYesDialog(data) {

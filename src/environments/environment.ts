@@ -4,7 +4,7 @@
 
 import 'zone.js/dist/zone-error';
 
-const ip = '10.0.1.8';
+const ip = '172.19.47.87';
 const baseUrl = `http://${ip}:3000`;
 
 const url = baseUrl + '/api';
