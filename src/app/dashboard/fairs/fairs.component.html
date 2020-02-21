@@ -4,8 +4,8 @@
     <button mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
-  <div class="flex-container" fxLayout="row wrap" fxLayoutGaps="40px">
-    <mat-card *ngFor="let fair of allFairs" fxFlex="0 1 calc(33% - 16px)" fxFlex.lt-lg="calc(50% - 16px)">
+  <div class="flex-container">
+    <mat-card *ngFor="let fair of allFairs">
         <mat-card-header>
             <div mat-card-avatar class="logo"></div>
             <mat-card-title>{{fair.title}}</mat-card-title>

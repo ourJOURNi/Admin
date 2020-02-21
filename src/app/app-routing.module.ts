@@ -17,7 +17,7 @@ import { DeniedComponent } from './dashboard/posts/verify/denied/denied.componen
 
 
 const routes: Routes = [
-  { path: '', component: FairsComponent },
+  { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: '', component: PostsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},

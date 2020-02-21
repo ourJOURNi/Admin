@@ -11,6 +11,9 @@ span {
 
 .flex-container {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 mat-card {
@@ -19,7 +22,7 @@ mat-card {
 
 /* Responsive Styles */
 /* Medium size viewport */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 959px) {
   .flex-container {
     flex-direction: column;
   }
