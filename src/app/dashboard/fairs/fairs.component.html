@@ -3,6 +3,7 @@
     <button float-left mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
+  <div class="flex-container">
     <mat-card *ngFor="let fair of allFairs">
         <mat-card-header>
             <div mat-card-avatar class="logo"></div>
@@ -29,4 +30,5 @@
               <button class="card-button" mat-button (click)="openDeleteFairsDialog(fair)">Delete</button>
             </mat-card-actions>
     </mat-card>
+  </div>
 </div>
