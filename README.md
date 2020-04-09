@@ -1,3 +1,8 @@
+ ++ Connecting to AWS EC2 FYF APP (Bitnami MEAN)
+   -- navigate to Express folder
+   -- sudo ssh -i "fyf-admin.pem" bitnami@ec2-18-222-26-143.us-east-2.compute.amazonaws.com
+
+
 # Admin
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.

@@ -1,34 +1,34 @@
 <mat-toolbar>
-    <h3>Fairs: {{allFairs.length}}</h3>
-    <button float-left mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
+  <h3>Fairs: {{allFairs.length}}</h3>
+  <button float-left mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
-  <div class="flex-container">
-    <mat-card *ngFor="let fair of allFairs">
-        <mat-card-header>
-            <div mat-card-avatar class="logo"></div>
-            <mat-card-title>{{fair.title}}</mat-card-title>
-          </mat-card-header>
+<div class="flex-container">
+  <mat-card *ngFor="let fair of allFairs">
+      <mat-card-header>
+          <div mat-card-avatar class="logo"></div>
+          <mat-card-title>{{fair.title}}</mat-card-title>
+        </mat-card-header>
 
-          <mat-card-content>
-                     <p><span>Time: </span>{{fair.time}}</p>
-                     <p><span>Date: </span>{{fair.date}}</p>
-                     <p><span>Address: </span>{{fair.address}}</p>
-                     <p><span>City: </span>{{fair.city}}</p>
-                     <p><span>State: </span>{{fair.state}}</p>
-                     <p><span>Zip: </span>{{fair.zip}}</p>
-                     <p><span>Summary : </span><br><br>{{fair.summary}}</p>
-                     <p><span>Description : </span><br><br>{{fair.description}}</p>
+        <mat-card-content>
+          <p><span>Time: </span>{{fair.time}}</p>
+          <p><span>Date: </span>{{fair.date}}</p>
+          <p><span>Address: </span>{{fair.address}}</p>
+          <p><span>City: </span>{{fair.city}}</p>
+          <p><span>State: </span>{{fair.state}}</p>
+          <p><span>Zip: </span>{{fair.zip}}</p>
+          <p><span>Summary : </span><br><br>{{fair.summary}}</p>
+          <p><span>Description : </span><br><br>{{fair.description}}</p>
 
-                     <p><span>Schools : </span><br><br></p>
-                     <p *ngFor="let student of fair.students">{{student}}</p>
+          <p><span>Schools : </span><br><br></p>
+          <p *ngFor="let student of fair.students">{{student}}</p>
 
-                     <p><span>Partners : </span><br><br>{{fair.partners}}</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button class="card-button" mat-button (click)="openEditFairDialog(fair)">Edit</button>
-              <button class="card-button" mat-button (click)="openDeleteFairsDialog(fair)">Delete</button>
-            </mat-card-actions>
-    </mat-card>
-  </div>
+          <p><span>Partners : </span><br><br>{{fair.partners}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button class="card-button" mat-button (click)="openEditFairDialog(fair)">Edit</button>
+            <button class="card-button" mat-button (click)="openDeleteFairsDialog(fair)">Delete</button>
+          </mat-card-actions>
+  </mat-card>
+</div>
 </div>
