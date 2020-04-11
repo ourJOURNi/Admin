@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# EC2 Key Pair
+fyf-admin.pem
+
 # compiled output
 /dist
 /tmp
