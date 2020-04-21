@@ -1,7 +1,7 @@
 <mat-toolbar>
     <h3>Verify Posts: </h3>
     <span class="filler"></span>
-    <button mat-raised-button class="add"> Denied Archives</button>
+    <button mat-raised-button class="add" (click)="goToDeniedPosts()"> Denied Archives</button>
     <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
@@ -17,7 +17,6 @@
         <mat-card-title>{{post.creatorName}}</mat-card-title>
         <mat-card-subtitle>{{post.creatorEmail}}</mat-card-subtitle>
         <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
-        <mat-card-subtitle>_id: {{post._id}}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>

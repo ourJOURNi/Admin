@@ -6,6 +6,7 @@ import { FollowersDialogComponent } from './followers-dialog/followers-dialog.co
 import { CommentsDialogComponent } from './comments-dialog/comments-dialog.component';
 
 import { Router } from '@angular/router';
+import { format } from 'date-fns';
 
 
 @Component({
@@ -33,7 +34,12 @@ export class PostsComponent implements OnInit {
 
         // Subscribe to Posts Subject in Posts Service for Real time updates
         this.posts.posts$.subscribe(data => {
-        this.allPosts = data;
+        this.allPosts = data.reverse();
+
+        for (const post of this.allPosts) {
+          post.date = format( new Date(post.date), 'MMMM dd, yyyy hh:mm a');
+        }
+
         console.log(this.allPosts);
       });
       }

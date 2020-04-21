@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteDialogComponent } from '../jobs/delete-dialog/delete-dialog.component';
 import { AddJobDialogComponent } from '../jobs/add-job-dialog/add-job-dialog.component';
 import { EditJobDialogComponent } from '../jobs/edit-job-dialog/edit-job-dialog.component';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-jobs',
@@ -27,6 +28,10 @@ export class JobsComponent implements OnInit {
       // Subscribe to Jobs Subject in Jobs Service for Real time updates
       this.jobs.jobsSubject.subscribe(data => {
         this.allJobs = data;
+
+        for (let job of this.allJobs) {
+          job.date = format( new Date(job.date), 'MMMM dd, yyyy hh:mm a');
+        }
         console.log(this.allJobs);
       });
     });

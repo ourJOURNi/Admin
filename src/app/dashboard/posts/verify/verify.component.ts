@@ -6,6 +6,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { VerifyDialogComponent } from '../verify/verify-dialog/verify-dialog.component';
 import { DenyDialogComponent } from '../verify/deny-dialog/deny-dialog.component';
 
+import { format } from 'date-fns';
+
+
 @Component({
   selector: 'app-verify',
   templateUrl: './verify.component.html',
@@ -25,6 +28,10 @@ export class VerifyComponent implements OnInit {
         posts => {
           this.allUnverifiedPosts = posts;
           console.log(this.allUnverifiedPosts);
+
+          for (const unverified of this.allUnverifiedPosts) {
+            unverified.date = format( new Date(unverified.date), 'MMMM dd, yyyy hh:mm a');
+          }
         }
       );
     }
@@ -32,6 +39,11 @@ export class VerifyComponent implements OnInit {
     goBack() {
       console.log('Going back to cali');
       this.router.navigate(['dashboard']);
+    }
+
+    goToDeniedPosts() {
+      console.log('Going to Denied Posts pagex');
+      this.router.navigate(['denied']);
     }
 
     verifyYesDialog(data) {

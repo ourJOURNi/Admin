@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { DeleteCommentDialogComponent } from '../delete-comment-dialog/delete-comment-dialog.component';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-comments-dialog',
@@ -26,6 +27,10 @@ export class CommentsDialogComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.comments);
+
+    for (const comment of this.comments) {
+      comment.date = format( new Date(comment.date), 'MMMM dd, yyyy hh:mm a');
+    }
   }
 
   close() {
@@ -45,7 +50,7 @@ export class CommentsDialogComponent implements OnInit {
       userFullName: data.userFullName,
       userEmail: data.userEmail,
       comment: data.comment,
-      likes: data.likes,
+      likes: data.likes
   };
 
     this.dialog.open(DeleteCommentDialogComponent, dialogConfig);

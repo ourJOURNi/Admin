@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material/material.module';
 
 import { PostsRoutingModule } from './posts-routing.module';
+import { VerifyRoutingModule } from './verify/verify-routing.module';
 import { ReportedComponent } from './reported/reported.component';
 import { VerifyComponent } from './verify/verify.component';
 
@@ -37,6 +38,7 @@ import { ReportedArchiveComponent } from './reported/reported-archive/reported-a
   imports: [
     CommonModule,
     PostsRoutingModule,
+    VerifyRoutingModule,
     MaterialModule
   ],
   entryComponents: [
