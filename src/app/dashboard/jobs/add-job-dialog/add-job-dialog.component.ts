@@ -31,11 +31,9 @@ export class AddJobDialogComponent implements OnInit {
 
   add(job) {
     console.log('Adding job...');
-    job['datedCreated'] = Date.now();
     this.jobs.addJob(job).subscribe(data => {
-
       this.jobs.getJobs().subscribe(data => {
-        let jobsArray = Object.values(data);
+        let jobsArray = Object.values(data).reverse();
         this.jobs.jobsSubject.next(jobsArray);
       });
     });

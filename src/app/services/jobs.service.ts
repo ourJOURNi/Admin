@@ -23,8 +23,8 @@ export class JobsService {
       return this.http.post(`${this.BACKEND_URL}/api/admin/jobs/add-job`, job);
     }
 
-    deleteJob(_id) {
-      return this.http.delete(`${this.BACKEND_URL}/api/admin/jobs/delete-job/${_id}`);
+    deleteJob(id) {
+      return this.http.delete(`${this.BACKEND_URL}/api/admin/jobs/delete-job/${id}`);
     }
 
     updateJob(job) {

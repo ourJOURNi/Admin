@@ -37,6 +37,7 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   delete(id) {
+    console.log('Deleting job...');
     this.jobs.deleteJob(id).subscribe(data => {
       this.jobs.getJobs().subscribe(data => {
         let jobsArray = Object.values(data);

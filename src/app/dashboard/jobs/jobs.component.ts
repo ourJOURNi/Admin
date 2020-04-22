@@ -22,7 +22,7 @@ export class JobsComponent implements OnInit {
   ngOnInit() {
     this.jobs.getJobs().subscribe(jobs => {
 
-      const jobsArray = Object.values(jobs);
+      const jobsArray = Object.values(jobs).reverse();
       this.jobs.jobsSubject.next(jobsArray);
 
       // Subscribe to Jobs Subject in Jobs Service for Real time updates
@@ -30,7 +30,7 @@ export class JobsComponent implements OnInit {
         this.allJobs = data;
 
         for (let job of this.allJobs) {
-          job.date = format( new Date(job.date), 'MMMM dd, yyyy hh:mm a');
+          job.dateCreated = format( new Date(job.dateCreated), 'MMMM dd, yyyy');
         }
         console.log(this.allJobs);
       });
