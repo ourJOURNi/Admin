@@ -29,12 +29,12 @@ export class PostsComponent implements OnInit {
     this.posts.getPosts().subscribe(
       posts => {
 
-        const postsArray = Object.values(posts);
+        const postsArray = Object.values(posts).reverse();
         this.posts.posts$.next(postsArray);
 
         // Subscribe to Posts Subject in Posts Service for Real time updates
         this.posts.posts$.subscribe(data => {
-        this.allPosts = data.reverse();
+        this.allPosts = data;
 
         for (const post of this.allPosts) {
           post.date = format( new Date(post.date), 'MMMM dd, yyyy hh:mm a');
