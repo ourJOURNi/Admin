@@ -42,14 +42,15 @@ export class EditEventDialogComponent implements OnInit {
       this.city = data.city;
       this.state = data.state;
       this.zip = data.zip;
+      this.description = data.description;
       this.date = data.date;
       this.time = data.time;
-      this.description = data.description;
+      this.photo = data.photo;
      }
 
   ngOnInit() {
     this.editEventForm = this.formBuilder.group({
-      title: [this.title, Validators.required],
+      title: [this.title, Validators.required, Validators.maxLength(80)],
       organizer: [this.organizer, Validators.required],
       addressOne: [this.addressOne, Validators.required],
       addressTwo: [this.addressTwo, Validators.required],

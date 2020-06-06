@@ -21,7 +21,7 @@ export class AddEventDialogComponent implements OnInit {
 
     ngOnInit() {
       this.addEventForm = this.formBuilder.group({
-        title: ['Youth Tech Exploration', Validators.required],
+        title: ['Youth Tech Exploration', Validators.required, Validators.maxLength(80)],
         organizer: ['Journi', Validators.required],
         addressOne: ['777 Main', Validators.required],
         addressTwo: ['', Validators.required],
