@@ -16,9 +16,14 @@ export class EditJobDialogComponent implements OnInit {
   title: string;
   companyName: string;
   companyEmail: string;
+  companyLogo: string;
   summary: string;
   fullJobDescription: string;
   rateOfPay: number;
+
+  formData: FormData;
+  uploadedLogoURL;
+  logoUploaded = false;
 
   constructor(
     private jobs: JobsService,
@@ -35,14 +40,41 @@ export class EditJobDialogComponent implements OnInit {
      }
 
   ngOnInit() {
+
+    // TODO: Get current logo, if any, from selected job
+    // TODO: Also get current pictures from mentors and events from their respective pages
+
     this.editJobForm = this.formBuilder.group({
       title: [this.title, Validators.required],
       companyName: [this.companyName, Validators.required],
       companyEmail: [this.companyEmail, [Validators.required, Validators.email]],
+      companyLogo: [this.companyLogo],
       summary: [this.summary, Validators.required],
       fullJobDescription: [this.fullJobDescription, Validators.required],
       rateOfPay: [this.rateOfPay, Validators.required],
     });
+  }
+
+  getFormData(event) {
+    const formElement = document.querySelectorAll('form');
+    formElement.forEach(form => {
+      if (form.id === 'edit-job-form') {
+        console.log('Got form: ', form);
+        this.formData = new FormData(form);
+        this.logoUploaded = true
+      }
+    });
+
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      // Convert image file to base64 string
+      this.uploadedLogoURL = reader.result;
+    }, false);
+
+    if (formElement) {
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    
   }
 
   close() {
@@ -57,6 +89,23 @@ export class EditJobDialogComponent implements OnInit {
         this.jobs.jobsSubject.next(jobsArray);
       });
     });
+
+    const formElement = document.querySelectorAll('form');
+    formElement.forEach(form => {
+      if (form.id === 'edit-job-form') {
+        console.log('Got form: ', form);
+        this.formData = new FormData(form);
+        // this.formData.append('oldLogoKey', this.awsPrefix);
+      }
+    });
+
+    if (this.logoUploaded == true) {
+      this.jobs.uploadLogo(this.formData.get('companyLogo')).subscribe( data => {
+        console.log('Logo upload result: ', data);
+        console.log('Logo upload done');
+      })
+    }
+
     this.dialogRef.close();
   }
 

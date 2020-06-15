@@ -19,8 +19,8 @@ export class JobsService {
       return this.http.get(`${this.BACKEND_URL}/api/admin/jobs`);
     }
 
-    addJob(job) {
-      return this.http.post(`${this.BACKEND_URL}/api/admin/jobs/add-job`, job);
+    addJob(job, logoURL) {
+      return this.http.post(`${this.BACKEND_URL}/api/admin/jobs/add-job`, { job, logoURL });
     }
 
     deleteJob(id) {
@@ -30,6 +30,11 @@ export class JobsService {
     updateJob(job) {
       console.log('Updating Job...');
       return this.http.put(`${this.BACKEND_URL}/api/admin/jobs/update-job`, job);
+    }
+
+    uploadLogo(imageForm) {
+      console.log('Uploading image...');
+      return this.http.post(`${this.BACKEND_URL}/api/admin/photo/upload-job-logo`, imageForm);
     }
 
 }

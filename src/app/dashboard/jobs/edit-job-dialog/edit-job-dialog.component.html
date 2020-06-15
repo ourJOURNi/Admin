@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Add Job</h2>
+<h2 mat-dialog-title>Edit Job</h2>
 <mat-dialog-content>
-  <form [formGroup]="editJobForm" (ngSubmit)="update(this.editJobForm.value)">
+  <form [formGroup]="editJobForm" (ngSubmit)="update(this.editJobForm.value)" id="edit-job-form">
       <mat-form-field>
           <input
           matInput
@@ -19,10 +19,19 @@
           placeholder="Company Email"
           formControlName="companyEmail">
         </mat-form-field>
+        <div>
+          <label>Company Logo</label>
+          <input
+          type="file"
+          accept="image/jpeg, image/png"
+          name="companyLogo"
+          formControlName="companyLogo"
+          (change)="getFormData($event)">
+        </div>
         <mat-form-field>
           <input
           matInput
-          placeholder="Rate of Pay - x/hr"
+          placeholder="Rate of Pay (per hour)"
           formControlName="rateOfPay">
         </mat-form-field>
         <mat-form-field>

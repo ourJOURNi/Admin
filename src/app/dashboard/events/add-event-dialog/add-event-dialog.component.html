@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Add Event</h2>
 <mat-dialog-content>
-  <form [formGroup]="addEventForm" (ngSubmit)="add(this.addEventForm.value)">
+  <form [formGroup]="addEventForm" (ngSubmit)="add(this.addEventForm.value)" id="add-event-form">
       <mat-form-field>
           <input
           required
@@ -58,13 +58,18 @@
           formControlName="date"
           type="datetime-local">
         </mat-form-field>
-        <mat-form-field>
+        <div id="event-photo-group">
+          <label>Photo</label>
           <input
           required
-          matInput
-          placeholder="Photo"
-          formControlName="photo">
-        </mat-form-field>
+          type="file"
+          accept="image/jpeg, image/png"
+          name="eventPhoto"
+          formControlName="photo"
+          (change)="getFormData($event)">
+          <canvas *ngIf="!photoUploaded" id="default-photo-wrapper"></canvas>
+          <img *ngIf="photoUploaded" class="event-photo-selection" src="{{ uploadedPhotoURL }}" alt="Event Photo">
+        </div>
         <mat-form-field>
           <textarea
           required
