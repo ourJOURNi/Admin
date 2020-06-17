@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Add Mentor</h2>
 <mat-dialog-content>
-  <form [formGroup]="addMentorForm" (ngSubmit)="add(this.addMentorForm.value)">
+  <form [formGroup]="addMentorForm" (ngSubmit)="add(this.addMentorForm.value)" id="add-mentor-form">
       <mat-form-field>
           <input
           matInput
@@ -37,29 +37,34 @@
           placeholder="Zip"
           formControlName="zip">
         </mat-form-field>
+        <div id="mentor-photo-group">
+          <label>Photo</label>
+          <input
+          type="file"
+          accept="image/jpeg, image/png"
+          name="mentorPhoto"
+          formControlName="photo"
+          (change)="getFormData($event)">
+          <canvas *ngIf="!photoUploaded" id="default-photo-wrapper"></canvas>
+          <img *ngIf="photoUploaded" class="mentor-photo-selection" src="{{ uploadedPhotoURL }}" alt="Mentor Photo">
+        </div>
         <mat-form-field>
-            <input
-            matInput
-            placeholder="Photo"
-            formControlName="photo">
-          </mat-form-field>
-          <mat-form-field>
-            <input
-            matInput
-            placeholder="Title"
-            formControlName="title">
-          </mat-form-field>
-          <mat-form-field>
-            <textarea
-            matInput
-            rows="10"
-            placeholder="Description"
-            formControlName="description">
-            </textarea>
+          <input
+          matInput
+          placeholder="Title"
+          formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <textarea
+          matInput
+          rows="10"
+          placeholder="Description"
+          formControlName="description">
+          </textarea>
         </mat-form-field>
         <mat-dialog-actions>
-            <button mat-raised-button class="add" type="submit">Add Mentors</button>
-            <button class="mat-raised-button" (click)="close()">Cancel</button>
+          <button mat-raised-button class="add" type="submit">Add Mentors</button>
+          <button class="mat-raised-button" (click)="close()">Cancel</button>
         </mat-dialog-actions>
   </form>
 </mat-dialog-content>

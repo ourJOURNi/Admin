@@ -19,8 +19,8 @@ export class EventsService {
     return this.http.get(`${this.BACKEND_URL}/api/admin/events`);
   }
 
-  addEvent(event) {
-    return this.http.post(`${this.BACKEND_URL}/api/admin/events/add-event`, event);
+  addEvent(event, photoURL) {
+    return this.http.post(`${this.BACKEND_URL}/api/admin/events/add-event`, { event, photoURL });
   }
 
   deleteEvent(id) {
@@ -30,6 +30,11 @@ export class EventsService {
   updateEvent(event) {
     console.log('Updating Job...');
     return this.http.put(`${this.BACKEND_URL}/api/admin/events/update-event`, event);
+  }
+
+  uploadPhoto(imageForm) {
+    console.log('Uploading image...');
+    return this.http.post(`${this.BACKEND_URL}/api/admin/photo/upload-event-photo`, imageForm);
   }
 
 

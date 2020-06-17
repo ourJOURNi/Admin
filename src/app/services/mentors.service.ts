@@ -19,8 +19,8 @@ export class MentorsService {
       return this.http.get(`${this.BACKEND_URL}/api/admin/mentors`);
     }
 
-    addMentor(mentor) {
-      return this.http.post(`${this.BACKEND_URL}/api/admin/mentors/add-mentor`, mentor);
+    addMentor(mentor, photoURL) {
+      return this.http.post(`${this.BACKEND_URL}/api/admin/mentors/add-mentor`, { mentor, photoURL });
     }
 
     deleteMentor(_id) {
@@ -30,6 +30,11 @@ export class MentorsService {
     updateMentor(mentor) {
       console.log('Updating Mentor...');
       return this.http.put(`${this.BACKEND_URL}/api/admin/mentors/update-mentor`, mentor);
+    }
+
+    uploadPhoto(imageForm) {
+      console.log('Uploading image...')
+      return this.http.post(`${this.BACKEND_URL}/api/admin/photo/upload-mentor-photo`, imageForm)
     }
 
 }
