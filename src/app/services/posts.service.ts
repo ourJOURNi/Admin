@@ -11,6 +11,8 @@ export class PostsService {
   BACKEND_URL = environment.url;
   posts$ = new BehaviorSubject([]);
   deniedPosts$ = new BehaviorSubject([]);
+  reportedArchiveComments$ = new BehaviorSubject([]);
+  deniedArchiveComments$ = new BehaviorSubject([]);
   ReportedPosts$ = new BehaviorSubject([]);
 
   constructor(

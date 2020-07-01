@@ -1,20 +1,19 @@
 <mat-toolbar>
-    <h3>Denied Posts: </h3>
-    <span class="filler"></span>
-    <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
+    <h3 class="page-header">Denied Posts: {{allDeniedPosts.length}}</h3>
+    <span class="spacer"></span>
+    <button class="page-button" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
 
-  <h3>These are all the posts that have been denied during the verification process.</h3>
+  <h4 class="page-description">These are all the posts that have been denied during the verification process.</h4>
 
-  <div *ngIf="allDeniedPosts.length === 0" style="position: relative; top: 200px;
-  left: 200px">
-      <h3>There have been no post that have been denied. If you see this, something is wrong.</h3>
+  <div *ngIf="allDeniedPosts.length === 0" style="text-align: center; margin-top: 20%;">
+      <h4 class="page-description">There have been no post that have been denied. If you see this, something is wrong.</h4>
   </div>
 
   <mat-card *ngFor="let post of allDeniedPosts">
     <mat-card-header>
-        <div mat-card-avatar class="logo"></div>
+      <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
         <mat-card-title>{{post.creatorName}}</mat-card-title>
         <mat-card-subtitle>{{post.creatorEmail}}</mat-card-subtitle>
         <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
@@ -23,8 +22,5 @@
       <mat-card-content>
         <h3>{{post.post}}</h3>
         </mat-card-content>
-        <!-- <mat-card-actions>
-
-        </mat-card-actions> -->
 </mat-card>
 </div>

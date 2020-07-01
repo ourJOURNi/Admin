@@ -1,30 +1,31 @@
 <mat-toolbar>
-    <h3>Verify Posts: </h3>
-    <span class="filler"></span>
-    <button mat-raised-button class="add" (click)="goToDeniedPosts()"> Denied Archives</button>
-    <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
+    <h3 class="page-header">Verify Posts: {{allUnverifiedPosts.length}}</h3>
+    <span class="spacer"></span>
+    <button class="page-button" (click)="goToDeniedPosts()"> Denied Archives</button>
+    <button class="page-button" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
 
-  <div *ngIf="allUnverifiedPosts.length === 0" style="position: relative; top: 200px;
-  left: 200px">
-      <h1>There are no posts to be verifed.</h1>
+  <div *ngIf="allUnverifiedPosts.length === 0" style="text-align: center; margin-top: 20%;">
+      <h4 class="page-description">There are no posts to be verifed.</h4>
   </div>
 
   <mat-card *ngFor="let post of allUnverifiedPosts">
     <mat-card-header>
-        <div mat-card-avatar class="logo"></div>
+      <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
         <mat-card-title>{{post.creatorName}}</mat-card-title>
         <mat-card-subtitle>{{post.creatorEmail}}</mat-card-subtitle>
         <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
-        <h3>{{post.post}}</h3>
+        <p style="font-size: 1em; white-space: pre-wrap;">
+          {{post.post}}
+        </p>
         </mat-card-content>
         <mat-card-actions>
-          <button class="card-button" style="background: green; color: white;" mat-button (click)="verifyYesDialog(post)">Yes</button>
-          <button class="card-button danger" mat-button (click)="verifyNoDialog(post)">No</button>
+          <button class="card-button" style="width: 100px;" (click)="verifyYesDialog(post)">Yes</button>
+          <button class="delete-button" style="width: 100px;" (click)="verifyNoDialog(post)">No</button>
         </mat-card-actions>
 </mat-card>
 </div>

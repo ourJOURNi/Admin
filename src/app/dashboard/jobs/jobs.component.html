@@ -1,12 +1,15 @@
     <mat-toolbar>
-        <h3>Jobs: {{allJobs.length}}</h3>
-        <span class="filler"></span>
-        <button mat-raised-button class="add" (click)="openAddJobDialog()">Add Job</button>
+      <mat-toolbar-row>
+        <h3 class="page-header">Jobs: {{allJobs.length}}</h3>
+        <span class="spacer"></span>
+        <button class="page-button" (click)="openAddJobDialog()">Add</button>
+      </mat-toolbar-row>
     </mat-toolbar>
     <div class="container">
+      <h4 class="page-description">View, Edit, and Delete all Jobs on the FYF App.</h4>
         <mat-card *ngFor="let job of allJobs">
             <mat-card-header>
-                <div mat-card-avatar class="logo"></div>
+              <img mat-card-avatar class="pictures" src="{{job.companyLogo}}" alt="Job Logo">
                 <mat-card-title>{{job.title}}</mat-card-title>
                 <mat-card-subtitle>{{job.companyEmail}}</mat-card-subtitle>
                 <mat-card-subtitle>{{job.date}}</mat-card-subtitle>
@@ -18,8 +21,8 @@
                   <p>Full Job Description: {{job.fullJobDescription}}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button class="card-button" mat-button (click)="openEditDialog(job)">Edit</button>
-                  <button class="card-button" mat-button (click)="openDeleteDialog(job)">Delete</button>
+                  <button class="card-button" (click)="openEditDialog(job)">Edit</button>
+                  <button class="delete-button" (click)="openDeleteDialog(job)">Delete</button>
                 </mat-card-actions>
         </mat-card>
     </div>

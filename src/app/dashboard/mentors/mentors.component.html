@@ -1,25 +1,26 @@
 <mat-toolbar>
-    <h3>Mentors: {{allMentors.length}}</h3>
-    <span class="filler"></span>
-    <button mat-raised-button class="add" (click)="openAddMentorDialog()">Add</button>
+    <h3 class="page-header">Mentors: {{allMentors.length}}</h3>
+    <span class="spacer"></span>
+    <button class="page-button" (click)="openAddMentorDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
+  <h4 class="page-description">View, Add, Delete, and Edit all Mentors on the FYF App.</h4>
     <mat-card *ngFor="let mentor of allMentors">
         <mat-card-header>
-            <div mat-card-avatar class="logo"></div>
+          <img mat-card-avatar class="pictures" src="{{mentor.photo}}" alt="Mentor Photo">
             <mat-card-title>{{mentor.name}}</mat-card-title>
             <mat-card-subtitle>{{mentor.email}}</mat-card-subtitle>
             <mat-card-subtitle>{{mentor.title}}</mat-card-subtitle>
           </mat-card-header>
 
           <mat-card-content>
-              <p>{{mentor.city}}, {{mentor.state}}, {{mentor.zip}}</p>
+              <p>{{mentor.city}}, {{mentor.state}}</p>
               <p>{{mentor.summary}}</p>
               <p>{{mentor.description}}</p>
             </mat-card-content>
             <mat-card-actions>
-              <button class="card-button" mat-button (click)="openEditMentorDialog(mentor)">Edit</button>
-              <button class="card-button" mat-button (click)="openDeleteDialog(mentor)">Delete</button>
+              <button class="card-button" (click)="openEditMentorDialog(mentor)">Edit</button>
+              <button class="delete-button" (click)="openDeleteDialog(mentor)">Delete</button>
             </mat-card-actions>
     </mat-card>
 </div>

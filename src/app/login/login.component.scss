@@ -1,15 +1,21 @@
 .login-container {
-  background: rgba(240,240,240);
+  background: none;
   width: 400px;
-  height: 400px;
+  height: auto;
   margin: 0 auto;
   position: relative;
   top: 100px;
-  padding: 25px;
+  padding: 65px;
 }
 
 button {
   margin: 0 auto;
   position: relative;
   top: 50px;
+  color: white;
+  background: #005191;
+}
+
+form {
+  margin-top: 50px;
 }

@@ -16,7 +16,7 @@ import { format } from 'date-fns';
 })
 export class PostsComponent implements OnInit {
   allPosts = [];
-  reportedPost;
+  reportedPost = [];
   unverifiedPost;
 
   constructor(

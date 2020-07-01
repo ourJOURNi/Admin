@@ -1,44 +1,30 @@
 <mat-toolbar>
-    <h3>Events: {{allEvents.length}}</h3>
-    <span class="filler"></span>
-    <button mat-raised-button class="add" (click)="openAddEventsDialog()">Add</button>
+    <h3 class="page-header">Events: {{allEvents.length}}</h3>
+    <span class="spacer"></span>
+    <button class="page-button" (click)="openAddEventsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
+  <h4 class="page-description">View, Delete, and Edit all Events on the FYF App.</h4>
     <mat-card *ngFor="let event of allEvents">
         <mat-card-header>
-            <div mat-card-avatar class="logo"></div>
             <mat-card-title>{{event.title}}</mat-card-title>
           </mat-card-header>
 
           <mat-card-content>
-
-                <mat-grid-list style="height: 300px" cols="2" rowHeight="300px">
-                    <mat-grid-tile>
-                     {{event.organizer}}<br>
-                     {{event.date}}<br>
-                     {{event.time}}<br>
-                     {{event.addressOne}},
-                     {{event.addressTwo}}<br>
-                     {{event.city}},
-                     {{event.state}},
-                     {{event.zip}}<br><br>
-                     {{event.description}}<br>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                     {{event.photo}}
-                    </mat-grid-tile>
-                    <!-- <p>{{event.organizer}}</p>
-                    <p>{{event.addressOne}}</p>
-                    <p>{{event.addressTwo}}</p>
-                    <p>{{event.city}}, {{event.state}}, {{event.zip}}</p>
-                    <p>{{event.date}}</p>
-                    <p>{{event.time}}</p>
-                    <p>{{event.description}}</p> -->
-                  </mat-grid-list>
-            </mat-card-content>
+            <img mat-card-image src="../../../assets/logo-2.png">
+              <p><span>Company Name:</span> {{event.organizer}}</p>
+              <p><span>Date:</span> {{event.date}}</p>
+              <p><span>Time:</span> {{event.time}}</p>
+              <p><span>Address 1:</span> {{event.addressOne}},</p>
+              <p><span>Address 2:</span> {{event.addressTwo}}</p>
+              <p><span>City:</span> {{event.city}},</p>
+              <p><span>State:</span> {{event.state}},</p>
+              <p><span>Zip:</span> {{event.zip}}</p>
+              <p><span>Description:</span><br><br> {{event.description}}</p>
+          </mat-card-content>
             <mat-card-actions>
-              <button class="card-button" mat-button (click)="openEditEventDialog(event)">Edit</button>
-              <button class="card-button" mat-button (click)="openDeleteDialog(event)">Delete</button>
+              <button class="card-button" (click)="openEditEventDialog(event)">Edit</button>
+              <button class="delete-button" (click)="openDeleteDialog(event)">Delete</button>
             </mat-card-actions>
     </mat-card>
 </div>

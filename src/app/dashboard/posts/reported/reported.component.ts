@@ -22,7 +22,7 @@ export class ReportedComponent implements OnInit {
   ngOnInit() {
     this.posts.getReportedComments().subscribe(
       posts => {
-        this.allReportedComments = posts['reportedComments'];
+        this.allReportedComments = posts['reportedComments'].reverse();
         console.log(this.allReportedComments);
       }
     );
@@ -30,6 +30,10 @@ export class ReportedComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['dashboard']);
+  }
+
+  reportedArchives() {
+    this.router.navigate(['reported-archive']);
   }
 
   openDeleteReportedCommentDialog(data) {

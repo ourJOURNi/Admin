@@ -1,28 +1,32 @@
 <mat-toolbar>
-    <h3>Reported Comments: </h3>
-    <span class="filler"></span>
-    <button mat-raised-button class="add"> Reported Archives </button>
-    <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
+    <h3 class="page-header">Reported Comments: {{allReportedComments.length}} </h3>
+    <span class="spacer"></span>
+    <button class="page-button" (click)=reportedArchives()> Reported Archives </button>
+    <button class="page-button" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
+
+  <div *ngIf="allReportedComments.length === 0" style="text-align: center; margin-top: 20%;">
+      <h4 class="page-description">There are no reported comments that need to be viewed</h4>
+  </div>
+
   <mat-card *ngFor="let post of allReportedComments">
     <mat-card-header>
-        <div mat-card-avatar class="logo"></div>
-        <mat-card-title>Reporting: {{post.userFullname}}</mat-card-title>
-        <mat-card-subtitle>{{post.userEmail}}</mat-card-subtitle>
+      <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
+        <mat-card-title>Reporting: {{post.reportedUserName}}</mat-card-title>
+        <mat-card-subtitle>{{post.reportedUserEmail}}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
-        <p style="color: red">Reported User: {{post.reportedUserName}}</p>
-        <p style="color: red">Reported User's Email: {{post.reportedUserEmail}}</p>
-          <p style="font-size: 1em; color: red;"> Reported Comment</p>
-          <p style="font-size: 1em; color: red;">{{post.comment}}</p>
-          <p style="font-size: 1em;"> On Post</p>
-          <p>{{post.post}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button class="card-button" mat-button (click)="openDeleteReportedCommentDialog(post)">Delete</button>
-          <button class="card-button" mat-button (click)="openSeenReportedCommentDialog(post)">Mark as Seen</button>
+        <p>Post ID: {{post.postID}}</p>
+        <p >Reporting User: {{post.userFullname}}</p>
+        <p>Reporting Email: {{post.userEmail}}</p>
+        <hr style="background: #999;">
+        <p style="white-space: pre-wrap; color: #e4405f">{{post.commentContents}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="card-button" (click)="openSeenReportedCommentDialog(post)">Mark as Seen</button>
+        <button class="delete-button" (click)="openDeleteReportedCommentDialog(post)">Delete</button>
         </mat-card-actions>
 </mat-card>
 </div>

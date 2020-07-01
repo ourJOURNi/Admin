@@ -1,33 +1,29 @@
 <mat-toolbar>
-  <h3>Reported Comment Archive</h3>
-  <span class="filler"></span>
-  <button mat-raised-button class="add" (click)="goBack()">Go Back </button>
+  <h3 class="page-header">Reported Comment Archive</h3>
+  <span class="spacer"></span>
+  <button class="page-button" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
 
-<h3>These are all the posts that have been reported whether or not they have been deleted or not.</h3>
+<h4 class="page-description">These are all the comments that have been reported whether or not they have been deleted or not.</h4>
 
-<div *ngIf="allReportedPosts.length[1] === 0" style="position: relative; top: 200px;
-left: 200px">
-    <h3>There have been no comments that have been added to the reported comments archieve. If you see this, something is wrong.</h3>
+<div *ngIf="allReportedComments.length[1] === 0" style="text-align: center; margin-top: 20%;">
+    <h3>There have been no comments that have been added to the reported comments archieve.</h3>
 </div>
 
-<mat-card *ngFor="let post of allReportedPosts[1]">
+<mat-card *ngFor="let comment of allReportedComments[1]">
   <mat-card-header>
-      <div mat-card-avatar class="logo"></div>
-      <mat-card-title>Reporting User: {{post.userFullname}}</mat-card-title>
-      <mat-card-subtitle>{{post.userEmail}}</mat-card-subtitle>
-      <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
-      <mat-card-subtitle>Post _id: {{post.postID}}</mat-card-subtitle>
-      <mat-card-subtitle>Post: {{post.post}}</mat-card-subtitle>
-      <mat-card-subtitle>Post _id: {{post.postID}}</mat-card-subtitle>
-      <mat-card-subtitle>Date: {{post.date}}</mat-card-subtitle>
-    </mat-card-header>
+      <img mat-card-avatar class="pictures" src="{{comment.creatorProfilePicture}}" alt="Profile">
+        <mat-card-title>Reporting: {{comment.reportedUserName}}</mat-card-title>
+        <mat-card-subtitle>{{comment.reportedUserEmail}}</mat-card-subtitle>
+      </mat-card-header>
 
-    <mat-card-content>
-      <h3>Reported Comment: {{post.comment}}</h3>
-      <h3>Reported User: {{post.reportedUserName}}</h3>
-      <h3>Reported Comment: {{post.reportedUserEmail}}</h3>
+      <mat-card-content>
+        <p>Post ID: {{comment.postID}}</p>
+        <p >Reporting User: {{comment.userFullname}}</p>
+        <p>Reporting Email: {{comment.userEmail}}</p>
+        <hr style="background: #999;">
+        <p style="white-space: pre-wrap; color: #e4405f">{{comment.comment}}</p>
       </mat-card-content>
       <!-- <mat-card-actions>
 

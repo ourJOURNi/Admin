@@ -10,25 +10,25 @@ import { Router } from '@angular/router';
 })
 export class ReportedArchiveComponent implements OnInit {
 
-  allReportedPosts = [];
+  allReportedComments = [];
 
   constructor(
-    private comments: PostsService,
+    private posts: PostsService,
     public dialog: MatDialog,
     private router: Router
     ) { }
 
     ngOnInit() {
-      this.comments.getReportedCommentsArchive().subscribe(
+      this.posts.getReportedCommentsArchive().subscribe(
         comments => {
 
           const commentsArray = Object.values(comments);
-          this.comments.deniedPosts$.next(commentsArray);
+          this.posts.reportedArchiveComments$.next(commentsArray);
 
           // Subscribe to Posts Subject in Posts Service for Real time updates
-          this.comments.deniedPosts$.subscribe(data => {
-          this.allReportedPosts = data;
-          console.log(this.allReportedPosts);
+          this.posts.reportedArchiveComments$.subscribe(data => {
+          this.allReportedComments = data;
+          console.log(this.allReportedComments);
         });
         }
       );

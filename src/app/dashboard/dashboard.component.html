@@ -1,13 +1,13 @@
-<mat-sidenav-container class="example-container">
+<mat-sidenav-container class="menu-container">
 
     <mat-sidenav mode="side" opened>
-      <h4>Admin Dashboard</h4>
+      <img src="../../assets/logo-2.png" alt="Logo">
       <mat-nav-list>
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['jobs'] } }]">Jobs</a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['students'] } }]">Students</a>
-          <a mat-list-item disabled=true routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['mentors'] } }]">Mentors</a>
-          <a mat-list-item disabled=true routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['posts'] } }]">Posts</a>
-          <a mat-list-item disabled=true routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['events'] } }]">Events</a>
+          <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['mentors'] } }]">Mentors</a>
+          <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['posts'] } }]">Posts</a>
+          <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['events'] } }]">Events</a>
           <!-- <a mat-list-item disabled=true routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['fairs'] } }]">Fairs</a> -->
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['logout'] } }]">Logout</a>
        </mat-nav-list>

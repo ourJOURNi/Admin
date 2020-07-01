@@ -2,12 +2,14 @@
 <h4>By:</h4><p> {{creatorName}}</p>
 <h4>Email:</h4><p> {{creatorEmail}}</p>
 <h4>on:</h4><p> {{date}}</p>
-<h4>Post:</h4><p> "{{post}}"</p>
+<h4>Post:</h4>
+<p style="background: lightgray; padding: 10px; white-space: pre-wrap;"> "{{post}}"</p>
+<hr style="background: #999;">
 <mat-dialog-content>
-      <p>Are you sure you want to Verify this comment? It can't be undone. After this post is verifed, the User will be notifed, and their post will be added to the Inspiration Posts.</p>
+  <p style="color: #e4405f">Are you sure you want to Verify this comment? It can't be undone. After this post is verifed, the User will be notifed, and their post will be added to the Inspiration Posts.</p>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-raised-button class="success" style="background: green; color: white;" (click)="verify(id)">Verify</button>
-    <button class="mat-raised-button" (click)="close()">Cancel</button>
+    <button class="page-success-button" (click)="verify(id)">Verify</button>
+    <button class="page-button" (click)="close()">Cancel</button>
 </mat-dialog-actions>

@@ -2,12 +2,15 @@
 <h4>By:</h4><p> {{creatorName}}</p>
 <h4>Email:</h4><p> {{creatorEmail}}</p>
 <h4>on:</h4><p> {{date}}</p>
-<h4>Post:</h4><p> "{{post}}"</p>
+<h4>Post:</h4>
+<p style="background: lightgray; padding: 10px; white-space: pre-wrap;">{{post}}</p>
+<hr style="background: #999;">
 <mat-dialog-content>
-      <p>Are you sure you want to Deny this comment? It can't be undone. After this post has been Denied, the User will be notifed, and their post will be added to the Denied Posts Collection.</p>
+  <p style="color: #e4405f">Are you sure you want to Deny this Post? It can't be undone.
+    After this post has been Denied, the User will be notifed, and their post will be added to the Denied Posts Collection.</p>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-raised-button class="card-button danger" (click)="deny(id)">Deny</button>
-    <button class="mat-raised-button" (click)="close()">Cancel</button>
+    <button class="page-danger-button" (click)="deny(id)">Deny</button>
+    <button class="page-button" (click)="close()">Cancel</button>
 </mat-dialog-actions>
