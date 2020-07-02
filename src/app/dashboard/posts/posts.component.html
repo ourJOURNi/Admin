@@ -9,6 +9,12 @@
 <router-outlet name="posts"></router-outlet>
 <div class="container">
   <h4 class="page-description">View and Delete all Posts on the FYF App.</h4>
+  <form>
+    <mat-form-field class="search">
+      <mat-label>Search for Post</mat-label>
+      <input (keyup.enter)="test()" matInput placeholder="Find by Student Name">
+    </mat-form-field>
+  </form>
     <mat-card *ngFor="let post of allPosts">
         <mat-card-header>
           <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
@@ -18,6 +24,9 @@
           </mat-card-header>
 
           <mat-card-content>
+            <p style="font-size: 1em; color: #005191">
+              {{post.title}}
+            </p>
               <p style="font-size: 1em;">
                 {{post.post}}
               </p>

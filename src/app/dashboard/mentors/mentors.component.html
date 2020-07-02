@@ -5,6 +5,12 @@
 </mat-toolbar>
 <div class="container">
   <h4 class="page-description">View, Add, Delete, and Edit all Mentors on the FYF App.</h4>
+  <form>
+    <mat-form-field class="search">
+      <mat-label>Search for Mentor</mat-label>
+      <input (keyup.enter)="test()" matInput placeholder="Find by Mentor Name">
+    </mat-form-field>
+  </form>
     <mat-card *ngFor="let mentor of allMentors">
         <mat-card-header>
           <img mat-card-avatar class="pictures" src="{{mentor.photo}}" alt="Mentor Photo">

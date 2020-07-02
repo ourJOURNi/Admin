@@ -5,6 +5,12 @@
 </mat-toolbar>
 <div class="container">
   <h4 class="page-description">View, Delete, and Edit all Events on the FYF App.</h4>
+  <form>
+    <mat-form-field class="search">
+      <mat-label>Search for Event</mat-label>
+      <input (keyup.enter)="test()" matInput placeholder="Find by Event Title">
+    </mat-form-field>
+  </form>
     <mat-card *ngFor="let event of allEvents">
         <mat-card-header>
             <mat-card-title>{{event.title}}</mat-card-title>

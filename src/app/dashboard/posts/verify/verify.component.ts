@@ -26,12 +26,18 @@ export class VerifyComponent implements OnInit {
     ngOnInit() {
       this.posts.getUnverifiedPosts().subscribe(
         posts => {
-          this.allUnverifiedPosts = posts;
-          console.log(this.allUnverifiedPosts);
+          let unverifiedPosts = Object.values(posts);
+          this.posts.postToBeVerified$.next(unverifiedPosts);
+          this.posts.postToBeVerified$.subscribe(
+            data => {
 
-          for (const unverified of this.allUnverifiedPosts) {
-            unverified.date = format( new Date(unverified.date), 'MMMM dd, yyyy hh:mm a');
-          }
+              this.allUnverifiedPosts = data;
+
+              for (const unverified of this.allUnverifiedPosts) {
+                unverified.date = format( new Date(unverified.date), 'MMMM dd, yyyy hh:mm a');
+              }
+            }
+          );
         }
       );
     }

@@ -3,6 +3,12 @@
 </mat-toolbar>
 <div class="container">
   <h4 class="page-description">View all Students on the FYF App.</h4>
+  <form>
+    <mat-form-field class="search">
+      <mat-label>Search for Student</mat-label>
+      <input (keyup.enter)="test()" matInput placeholder="Find by Name">
+    </mat-form-field>
+  </form>
   <mat-card *ngFor="let student of allStudents">
       <mat-card-header>
         <mat-card-title>{{student.fullName}}</mat-card-title>

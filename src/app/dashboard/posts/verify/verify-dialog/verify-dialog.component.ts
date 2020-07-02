@@ -30,15 +30,17 @@ export class VerifyDialogComponent implements OnInit {
   }
 
   async verify(id) {
-    await this.posts.verify(id).subscribe();
+    await this.posts.verify(id).subscribe(
+      posts => {
+        let verifiedPosts = Object.values(posts);
+        this.posts.postToBeVerified$.next(verifiedPosts);
+      }
+    );
     await this.dialogRef.close();
 
     console.log('This post has been verified and added to Post Collection');
   }
 
-  close() {
-    this.dialogRef.close();
-  }
 
 
 

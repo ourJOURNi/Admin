@@ -32,7 +32,12 @@ export class DenyDialogComponent implements OnInit {
   }
 
   async deny(id) {
-    await this.posts.deny(id).subscribe();
+    await this.posts.deny(id).subscribe(
+      posts => {
+        console.log(posts);
+        let deniedPosts = Object.values(posts);
+        this.posts.postToBeVerified$.next(deniedPosts);
+      });
     await this.dialogRef.close();
 
     console.log('This post has been denied and added to Denied Post Collection');

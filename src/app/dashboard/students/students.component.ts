@@ -33,6 +33,10 @@ export class StudentsComponent implements OnInit {
       });
   }
 
+  test() {
+    console.log('wassup');
+  }
+
   openDeleteDialog(student) {
     const dialogConfig = new MatDialogConfig();
 

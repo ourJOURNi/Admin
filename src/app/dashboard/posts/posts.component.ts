@@ -48,6 +48,7 @@ export class PostsComponent implements OnInit {
     this.posts.getReportedComments().subscribe(
       posts => {
         this.reportedPost = Object.values(posts);
+        console.log('reported: ' + this.reportedPost);
       }
     );
 
@@ -56,6 +57,10 @@ export class PostsComponent implements OnInit {
         this.unverifiedPost = Object.values(posts);
       }
     );
+  }
+
+  test() {
+    console.log('test');
   }
 
   reportedPage() {

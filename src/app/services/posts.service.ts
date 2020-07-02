@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class PostsService {
   BACKEND_URL = environment.url;
   posts$ = new BehaviorSubject([]);
+  postToBeVerified$ = new BehaviorSubject([]);
   deniedPosts$ = new BehaviorSubject([]);
   reportedArchiveComments$ = new BehaviorSubject([]);
   deniedArchiveComments$ = new BehaviorSubject([]);
