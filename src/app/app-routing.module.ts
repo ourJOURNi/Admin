@@ -13,12 +13,15 @@ import { ReportedArchiveComponent } from './dashboard/posts/reported/reported-ar
 import { VerifyComponent } from './dashboard/posts/verify/verify.component';
 import { FairsComponent } from './dashboard/fairs/fairs.component';
 import { DeniedComponent } from './dashboard/posts/verify/denied/denied.component';
+import { FairPageComponent } from './dashboard/fairs/fair-page/fair-page.component';
+
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
-    { path: '', component: PostsComponent, outlet: 'open'},
+    { path: '', component: FairsComponent, outlet: 'open'},
+    { path: 'fairs', component: FairsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
     { path: 'students', component: StudentsComponent,  outlet: 'open' },
     { path: 'mentors', component: MentorsComponent,  outlet: 'open' },
@@ -28,7 +31,6 @@ const routes: Routes = [
     { path: 'reported-archive', component: ReportedArchiveComponent, outlet: 'open'},
     { path: 'denied', component: DeniedComponent, outlet: 'open'},
     { path: 'events', component: EventsComponent,  outlet: 'open' },
-    { path: 'fairs', component: FairsComponent, outlet: 'open'},
     { path: 'logout', component: LogoutComponent,  outlet: 'open' }
   ] }
 ];

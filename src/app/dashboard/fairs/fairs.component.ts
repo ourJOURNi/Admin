@@ -5,6 +5,7 @@ import { DeleteFairsDialogComponent } from '../fairs/delete-fair-dialog/delete-f
 import { AddFairDialogComponent } from '../fairs/add-fair-dialog/add-fair-dialog.component';
 import { EditFairDialogComponent } from '../fairs/edit-fair-dialog/edit-fair-dialog.component';
 import { format } from 'date-fns';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class FairsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private fairs: FairsService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -38,6 +40,10 @@ export class FairsComponent implements OnInit {
         this.allFairs = data.reverse();
       });
     });
+  }
+
+  fairPage(id) {
+    this.router.navigate(['fair-page', id]);
   }
 
   openDeleteFairsDialog(data) {

@@ -10,6 +10,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 
@@ -27,7 +29,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatListModule,
     MatDialogModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

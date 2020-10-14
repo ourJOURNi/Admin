@@ -1,15 +1,13 @@
 <h2 mat-dialog-title>Mark this Reported Comment as Seen?</h2>
 <h4>By:</h4><p> {{reportedUserName}}</p>
 <h4>Email:</h4><p> {{reportedUserEmail}}</p>
-<h4>Reported Comment:</h4><p> "{{comment}}"</p>
+<h4>Reported Comment:</h4>
+<p style="color: #e4405f;">{{commentContents}}</p>
 <mat-dialog-content>
-      <p>Are you sure you want to Mark this Comment as Seeb? It cannot be undone.</p>
-      <br>
-      <p>Post: </p>
-      <h3>{{comment}}</h3>
+      <p>Are you sure you want to Mark this Comment as seen? It cannot be undone. It will be added to the Reported Archives, and not deleted.</p>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-raised-button class="success" (click)="reportedCommentsArchive()">Send to Archive</button>
-    <button class="mat-raised-button" (click)="close()">Cancel</button>
+    <button class="page-danger-button" (click)="reportedCommentsArchive()">Send to Archive</button>
+    <button class="page-button" (click)="close()">Cancel</button>
 </mat-dialog-actions>

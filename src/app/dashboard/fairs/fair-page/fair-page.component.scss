@@ -1,0 +1,33 @@
+.top-bar {
+  background: #999;
+  height: 40px;
+  padding: 8px;
+}
+
+.fair-info{
+  height: auto;
+  padding: 30px 20px;
+}
+
+.partner-logo{
+  height: 40px;
+  width: 40px;
+  margin: 15px;
+}
+
+.students,
+.chaperones,
+.partners,
+.volunteers {
+  height: auto;
+  padding: 70px 20px;
+}
+
+.agenda,
+.faq,
+.lunch {
+  margin: 40px 0;
+  padding: 0.8em;
+  background: rgb(238, 238, 238);
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.1)
+}

@@ -1,12 +1,16 @@
 <mat-toolbar>
   <h3>Fairs: {{allFairs.length}}</h3>
-  <button float-left mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
+  <button float-right mat-raised-button class="add" (click)="openAddFairsDialog()">Add</button>
 </mat-toolbar>
+
 <div class="container">
-<div class="flex-container">
-  <mat-card *ngFor="let fair of allFairs">
+  <div *ngFor="let fair of allFairs" class="fair-link">
+    <p id="fair-title">{{fair.title}}</p>
+    <p id="fair-date">{{fair.date}}</p>
+    <button (click)="fairPage(fair._id)">View</button>
+  </div>
+  <!-- <mat-card *ngFor="let fair of allFairs">
       <mat-card-header>
-          <div mat-card-avatar class="logo"></div>
           <mat-card-title>{{fair.title}}</mat-card-title>
         </mat-card-header>
 
@@ -29,6 +33,5 @@
             <button class="card-button" mat-button (click)="openEditFairDialog(fair)">Edit</button>
             <button class="card-button" mat-button (click)="openDeleteFairsDialog(fair)">Delete</button>
           </mat-card-actions>
-  </mat-card>
-</div>
+  </mat-card> -->
 </div>

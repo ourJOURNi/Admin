@@ -1,14 +1,47 @@
+.fair-link{
+  width: 300px; height: 150px;
+  border-radius: 5px;
+  background: #005191;
+  color: white;
+  font-size: 1.3em;
+  position: relative;
+  padding: 0.2em;
+
+  #fair-title {
+    margin: 0; padding: 0;
+    position: relative;
+    top: 4px;
+    left: 10px;
+  }
+
+  #fair-date {
+    padding: 0; margin: 0;
+    position: relative;
+    top: 8px;
+    left: 10px;
+    opacity: 0.7;
+  }
+
+  button {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    height: 40px;
+    width: 90px;
+    border-radius: 5px;
+    background: white;
+    color: #005191;
+    font-size: 1em;
+  }
+}
 
 span {
   font-weight: 900;
   color: #005191;
 }
 
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+.container {
+  margin: 60px 25px;
 }
 
 mat-card {

@@ -6,6 +6,7 @@ import { AddFairDialogComponent } from './add-fair-dialog/add-fair-dialog.compon
 import { DeleteFairsDialogComponent } from './delete-fair-dialog/delete-fair-dialog.component';
 import { EditFairDialogComponent } from './edit-fair-dialog/edit-fair-dialog.component';
 import { FairsRoutingModule } from './fairs-routing.module';
+import { FairPageComponent } from './fair-page/fair-page.component';
 
 
 
@@ -13,7 +14,8 @@ import { FairsRoutingModule } from './fairs-routing.module';
   declarations: [
   AddFairDialogComponent,
   DeleteFairsDialogComponent,
-  EditFairDialogComponent],
+  EditFairDialogComponent,
+  FairPageComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

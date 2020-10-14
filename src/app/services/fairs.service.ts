@@ -19,6 +19,10 @@ export class FairsService {
     return this.http.get(`${this.BACKEND_URL}/api/admin/fairs`);
   }
 
+  getFair(id) {
+    return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/fair`, id);
+  }
+
   addFair(fair) {
     console.log('From Fairs service: ');
     console.log(fair);

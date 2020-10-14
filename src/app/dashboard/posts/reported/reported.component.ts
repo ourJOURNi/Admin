@@ -22,8 +22,8 @@ export class ReportedComponent implements OnInit {
   ngOnInit() {
     this.posts.getReportedComments().subscribe(
       posts => {
-        this.allReportedComments = posts['reportedComments'].reverse();
-        console.log(this.allReportedComments);
+        this.allReportedComments = Object.values(posts).reverse();
+        // console.log(posts);
       }
     );
   }
@@ -41,13 +41,13 @@ export class ReportedComponent implements OnInit {
 
     console.log(data);
 
-    dialogConfig.width = '800px';
-    dialogConfig.height = '800px';
+    dialogConfig.width = '600px';
+    dialogConfig.height = 'auto';
 
     dialogConfig.data = {
       postID: data._id,
       commentID: data.commentID,
-      comment: data.comment,
+      commentContents: data.commentContents,
       reportedUserEmail: data.reportedUserEmail,
       reportedUserName: data.reportedUserName
   };
@@ -59,13 +59,16 @@ export class ReportedComponent implements OnInit {
   openSeenReportedCommentDialog(data) {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.width = '800px';
-    dialogConfig.height = '800px';
+    dialogConfig.width = '600px';
+    dialogConfig.height = 'auto';
     dialogConfig.autoFocus = false;
 
     dialogConfig.data = {
-      id: data._id,
-      comments: data.comments
+      postID: data._id,
+      commentID: data.commentID,
+      commentContents: data.commentContents,
+      reportedUserEmail: data.reportedUserEmail,
+      reportedUserName: data.reportedUserName
   };
 
     this.dialog.open(SeenCommentDialogComponent, dialogConfig);

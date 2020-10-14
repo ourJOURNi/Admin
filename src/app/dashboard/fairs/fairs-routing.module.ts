@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from '../dashboard.component';
+import { FairPageComponent } from './fair-page/fair-page.component';
+import { FairsComponent } from './fairs.component';
 
 const routes: Routes = [
-  { path: 'fairs', loadChildren: () => import('./fairs.module').then(m => m.FairsModule) }
+  { path: 'fair-page/:id', component: FairPageComponent},
 ];
 
 @NgModule({

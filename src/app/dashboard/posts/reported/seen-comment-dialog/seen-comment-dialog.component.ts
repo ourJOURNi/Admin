@@ -11,7 +11,7 @@ export class SeenCommentDialogComponent implements OnInit {
 
   postID;
   commentID;
-  comment;
+  commentContents;
   reportedUserEmail;
   reportedUserName;
 
@@ -24,7 +24,7 @@ export class SeenCommentDialogComponent implements OnInit {
       this.commentID = data.commentID;
       this.reportedUserEmail = data.reportedUserEmail;
       this.reportedUserName = data.reportedUserName;
-      this.comment = data.comment;
+      this.commentContents = data.commentContents;
     }
 
   ngOnInit() {
