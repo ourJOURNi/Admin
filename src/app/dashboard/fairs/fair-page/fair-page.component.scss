@@ -1,12 +1,55 @@
 .top-bar {
-  background: #999;
+  background: #edf3f8;
   height: 40px;
   padding: 8px;
+  position: fixed;
+  width: 100%;
 }
 
 .fair-info{
   height: auto;
-  padding: 30px 20px;
+  padding: 80px 20px;
+
+  h1 {
+    color: #005191;
+  }
+}
+
+.usertype-header{
+  font-size: 2.1em;
+  color: white;
+  background: #faa71b;
+  width: 240px;
+  border-radius: 5px;
+  padding: 0.15em;
+}
+
+.usertype-description {
+  font-size: 1.4em;
+}
+
+.description-button {
+  position: relative;
+  top: -15px;
+  margin-bottom: 40px;
+  padding: 0.38em;
+  color: white;
+  background: #005191;
+  border-radius: 5px;
+  border: none;
+}
+
+.verified {
+  color: green;
+}
+
+mat-expansion-panel {
+  margin-bottom: 20px;
+  background: #edf3f8;
+
+  h3 {
+    color: #005191;
+  }
 }
 
 .partner-logo{

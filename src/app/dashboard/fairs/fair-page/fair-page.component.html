@@ -13,9 +13,11 @@
 
 <!-- Students -->
 <div class="students">
-  <h1>Students</h1>
-  <p>{{fair.studentDescription}}</p>
+  <h1 class="usertype-header">Students</h1>
+  <p class="usertype-description">{{fair.studentDescription}}</p>
+  <button class="description-button">Edit Description</button>
 
+  <!-- Student Roster sorted by School -->
   <mat-accordion>
     <!-- Students Panel -->
     <mat-expansion-panel
@@ -52,23 +54,40 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <div class="lunch">
-    <br>
-    <h3>Lunches</h3>
-    <p>Ham: {{allLunches.length}}</p>
-    <p>Turkey: {{allLunches.length}}</p>
-    <p>Veggie: {{allLunches.length}}</p>
-    <br>
-  </div>
-
   <!-- Student Agenda -->
-  <div class="agenda">
-    <h3>Agenda</h3>
-    <div *ngFor="let item of fair.studentAgenda" class="agenda-item">
-      <h2>{{item.time}}</h2>
-      <p>{{item.time}}</p>
-    </div>
-  </div>
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Students Agenda</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let item of fair.studentAgenda" class="agenda-item">
+        <h2>{{item.time}}</h2>
+        <p>{{item.time}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Student Lunches -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Students Lunches</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Ham: {{allLunches.length}}</p>
+      <p>Turkey: {{allLunches.length}}</p>
+      <p>Veggie: {{allLunches.length}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
 
 
 </div>
@@ -76,9 +95,11 @@
 
 <!-- Chaperones -->
 <div class="chaperones">
-  <h1>Chaperones</h1>
-  <p>{{fair.chaperoneDescription}}</p>
+  <h1 class="usertype-header">Chaperones</h1>
+  <p class="usertype-description">{{fair.chaperoneDescription}}</p>
+  <button class="description-button">Edit Description</button>
 
+  <!-- Chaperone Roster sorted by School -->
   <mat-accordion>
   <!-- Students Panel -->
   <mat-expansion-panel
@@ -114,31 +135,52 @@
   </mat-expansion-panel>
   </mat-accordion>
 
-  <div class="lunch">
-    <br>
-    <h3>Lunches</h3>
-    <p>Ham: {{allLunches.length}}</p>
-    <p>Turkey: {{allLunches.length}}</p>
-    <p>Veggie: {{allLunches.length}}</p>
-    <br>
-  </div>
+  <!-- Chaporone Agenda -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Chaperone Agenda</h3>
 
-  <div class="agenda">
-    <h3>Agenda</h3>
-    <div *ngFor="let item of fair.chaperoneAgenda" class="agenda-item">
-      <h2>{{item.time}}</h2>
-      <p>{{item.time}}</p>
-    </div>
-  </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let item of fair.chaperoneAgenda" class="agenda-item">
+        <h2>{{item.time}}</h2>
+        <p>{{item.time}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Chaporone Lunches -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Chaporone Lunches</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Ham: {{allLunches.length}}</p>
+      <p>Turkey: {{allLunches.length}}</p>
+      <p>Veggie: {{allLunches.length}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+
 </div>
 <mat-divider></mat-divider>
 
 <!-- Partners -->
 <div class="partners">
-  <h1>Partners</h1>
-  <p>{{fair.partnerDescription}}</p>
+  <h2 class="usertype-header">Partners</h2>
+  <p class="usertype-description">{{fair.partnerDescription}}</p>
+  <button class="description-button">Edit Description</button>
+
+  <!-- Partner Roster -->
   <mat-accordion>
-  <!-- Students Panel -->
   <mat-expansion-panel
   (opened)="panelOpenState = true"
   (closed)="panelOpenState = false">
@@ -162,94 +204,152 @@
           <p>{{partner.organization}}</p>
         </mat-panel-title>
       </mat-expansion-panel-header>
-    </mat-expansion-panel>
-  </mat-expansion-panel>
-  </mat-accordion>
-  <div class="lunch">
-    <br>
-    <h3>Lunches</h3>
-    <p>Ham: {{allLunches.length}}</p>
-    <p>Turkey: {{allLunches.length}}</p>
-    <p>Veggie: {{allLunches.length}}</p>
-    <br>
-  </div>
+      <div class="partner-info">
+        <h4 class="verified">Verified: {{partner.verified}}</h4>
+        <h3>Contact Info</h3>
+        <p>Name: {{partner.name}}</p>
+        <p>Email: {{partner.email}}</p>
+        <p>Phone: {{partner.phone}}</p>
+        <p>gender: {{partner.gender}}</p>
+        <p>Lunch: {{partner.lunch}}</p>
+        <p>Colleagues: {{partner.colleagues}}</p>
 
-  <div class="agenda">
-    <h3>Agenda</h3>
-    <div *ngFor="let item of fair.partnerAgenda" class="agenda-item">
-      <h2>{{item.time}}</h2>
-      <p>{{item.time}}</p>
-    </div>
-  </div>
-
-  <div class="faq">
-    <h3>FAQ</h3>
-    <div *ngFor="let item of fair.partnerFAQ" class="agenda-item">
-      <h5>{{item.question}}</h5>
-      <p>{{item.answer}}</p>
-    </div>
-  </div>
-</div>
-<mat-divider></mat-divider>
-
-<!-- Volunteers -->
-<div class="volunteers">
-  <h1>Volunteers</h1>
-  <p>{{fair.volunteerDescription}}</p>
-  <mat-accordion>
-  <!-- Students Panel -->
-  <mat-expansion-panel
-  (opened)="panelOpenState = true"
-  (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title >
-        <h3 style="margin: 30px 0px;">View Students by School</h3>
-
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <!-- Inner Pannels -->
-    <mat-expansion-panel
-    *ngFor="let school of studentsBySchool"
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-
-      <!-- Name of School Header -->
-      <mat-expansion-panel-header>
-        <mat-panel-title style="font-size: 1.4em;">
-          <p>{{school[0].name}} - {{school.length - 1}}</p>
-          <p></p>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- List of Students -->
-      <div *ngFor="let student of school; let i=index" class="student">
-        <div *ngIf="i >= 1" >
-            <p>{{i}}. {{student.name}}, {{student.grade}}, {{student.gender}}, {{student.lunch}} Lunch</p>
-        </div>
+        <h3>Partner Description</h3>
+        <p>{{partner.description}}</p>
       </div>
     </mat-expansion-panel>
   </mat-expansion-panel>
   </mat-accordion>
 
-  <!-- <div class="lunch">
+  <!-- Partner Agenda -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Partner Agenda</h3>
 
-  </div> -->
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let item of fair.partnerAgenda" class="agenda-item">
+        <h2>{{item.time}}</h2>
+        <p>{{item.time}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-  <div class="agenda">
-    <h3>Agenda</h3>
-    <div *ngFor="let item of fair.volunteerAgenda" class="agenda-item">
-      <h5>{{item.time}}</h5>
-      <p>{{item.title}}</p>
-    </div>
+  <!-- Partner Lunches -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Students Lunches</h3>
 
-  </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Ham: {{allLunches.length}}</p>
+      <p>Turkey: {{allLunches.length}}</p>
+      <p>Veggie: {{allLunches.length}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-  <div class="faq">
-    <h3>FAQ</h3>
-    <div *ngFor="let item of fair.volunteerFAQ" class="agenda-item">
-      <h5>{{item.question}}</h5>
-      <p>{{item.answer}}</p>
-    </div>
-  </div>
+  <!-- Partner FAQs -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Partner FAQs</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let item of fair.partnerFAQ" class="agenda-item">
+        <h5>{{item.question}}</h5>
+        <p>{{item.answer}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<mat-divider></mat-divider>
+
+<!-- Volunteers -->
+<div class="volunteers">
+  <h1 class="usertype-header">Volunteers</h1>
+  <p class="usertype-description">{{fair.volunteerDescription}}</p>
+  <button class="description-button">Edit Description</button>
+
+  <!-- Volunteer Roster -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Volunteers</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let volunteer of fair.volunteers" class="agenda-item">
+        <h2>{{volunteer.name}}</h2>
+        <p>{{volunteer.email}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Volunteer Agenda -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Volunteer Agenda</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let item of fair.volunteerAgenda" class="agenda-item">
+        <h2>{{item.time}}</h2>
+        <p>{{item.time}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Volunteer Lunches -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Volunteer Lunches</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Ham: {{allLunches.length}}</p>
+      <p>Turkey: {{allLunches.length}}</p>
+      <p>Veggie: {{allLunches.length}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Volunteer FAQs -->
+  <mat-accordion>
+    <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          <h3 style="margin: 30px 0px;">View Volunteer FAQs</h3>
+
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let item of fair.volunteerFAQ" class="agenda-item">
+        <h5>{{item.question}}</h5>
+        <p>{{item.answer}}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
