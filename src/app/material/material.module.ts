@@ -11,6 +11,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 
 
@@ -30,7 +33,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatDialogModule,
     MatToolbarModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }

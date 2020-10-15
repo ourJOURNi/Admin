@@ -1,6 +1,7 @@
-<div class="top-bar">
+<mat-toolbar class="top-bar">
   <button class="page-button" (click)="back()">Back</button>
-</div>
+  <button class="page-button" (click)="printCSV()">Print CSV</button>
+</mat-toolbar>
 
 <!-- Fair Info -->
 <div class="fair-info">
@@ -19,38 +20,95 @@
 
   <!-- Student Roster sorted by School -->
   <mat-accordion>
-    <!-- Students Panel -->
     <mat-expansion-panel
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
-        <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Students by School</h3>
+        <mat-panel-title>
+          <h2 style="margin: 30px 0px;">View Students by School</h2>
 
         </mat-panel-title>
       </mat-expansion-panel-header>
 
+      <mat-divider style="margin-bottom: 15px;"></mat-divider>
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add School
+        </button>
+        <button>
+          Export CSV
+        </button>
+        <button style="background: #e4405f;">
+          Delete School
+        </button>
+      </mat-toolbar>
+
       <!-- Inner Pannels -->
-      <mat-expansion-panel
+      <mat-expansion-panel class="inner-panel"
       *ngFor="let school of studentsBySchool"
       (opened)="panelOpenState = true"
       (closed)="panelOpenState = false">
 
         <!-- Name of School Header -->
         <mat-expansion-panel-header>
-          <mat-panel-title style="font-size: 1.4em;">
-            <p>{{school[0].name}} - {{school.length - 1}}</p>
-            <p></p>
+          <mat-panel-title style="font-size: 1em; font-weight: 600; color: #333;">
+            <p>{{school[0].name}} &middot; {{school.length - 1}} Students</p>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <!-- List of Students -->
-        <div *ngFor="let student of school; let i=index" class="student">
-          <div *ngIf="i >= 1" >
-              <p>{{i}}. {{student.name}}, {{student.grade}}, {{student.gender}}, {{student.lunch}} Lunch</p>
-          </div>
+        <!-- Individual Student (Non Waitlisted) Panels -->
+        <mat-expansion-panel class="student-panel" *ngFor="let student of school; let i=index">
+          <mat-expansion-panel-header *ngIf="i >= 1 && student.waitlisted == false">
+            <mat-panel-title style="position: relative;">
+              <p class="student">{{student.name}}, {{student.grade}}, {{student.gender}}, {{student.lunch}} Lunch</p>
+
+              <button class="ellipsis"  mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Delete Student</button>
+                <button mat-menu-item>Add to Waitlist</button>
+              </mat-menu>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <h4>Interests</h4>
+          <p>{{student.interests}}</p>
+          <mat-divider></mat-divider>
+          <h4>Questions</h4>
+          <p>{{student.question1}}</p>
+          <p>{{student.question2}}</p>
+          <p>{{student.question3}}</p>
+          <p>{{student.question4}}</p>
+          <p>{{student.question5}}</p>
+
+        </mat-expansion-panel>
+
+        <!-- Waitlist -->
+        <div class="waitlist-wrapper">
+          <h3 class="waitlist-header">Waitlist</h3> <mat-expansion-panel class="student-panel" *ngFor="let student of school; let i=index">
+            <mat-expansion-panel-header *ngIf="i >= 1 && student.waitlisted == true">
+              <mat-panel-title style="position: relative;">
+                <p class="student">{{student.name}}, {{student.grade}}, {{student.gender}}, {{student.lunch}} Lunch</p>
+
+
+                <button class="ellipsis"  mat-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>Delete Student</button>
+                  <button mat-menu-item>Add to Waitlist</button>
+                </mat-menu>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+
         </div>
       </mat-expansion-panel>
+      <!-- Inner Panel End -->
+
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -61,13 +119,37 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Students Agenda</h3>
-
+          <h2 style="margin: 30px 0px;">View Students Agenda</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
+
+      <mat-divider style="margin-bottom: 15px;"></mat-divider>
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add Slot
+        </button>
+        <button>
+          Export CSV
+        </button>
+      </mat-toolbar>
+
       <div *ngFor="let item of fair.studentAgenda" class="agenda-item">
-        <h2>{{item.time}}</h2>
-        <p>{{item.time}}</p>
+        <button mat-button [matMenuTriggerFor]="agendaMenu">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <h2 class="agenda-time">{{item.time}}</h2>
+        <p class="agenda-title">{{item.title}}</p>
+
+
+        <button class="ellipsis"  mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #agendaMenu="matMenu">
+          <button mat-menu-item>Edit Slot</button>
+          <button mat-menu-item>Delete Slot</button>
+        </mat-menu>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -78,18 +160,16 @@
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
-        <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Students Lunches</h3>
-
+        <mat-panel-title>
+          <h2 style="margin: 30px 0px;">View Students Lunches</h2>
+          <mat-divider></mat-divider>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <p>Ham: {{allLunches.length}}</p>
-      <p>Turkey: {{allLunches.length}}</p>
-      <p>Veggie: {{allLunches.length}}</p>
+      <p class="lunch-text">Ham: {{allLunches.length}}</p>
+      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
+      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
     </mat-expansion-panel>
   </mat-accordion>
-
-
 </div>
 <mat-divider></mat-divider>
 
@@ -101,26 +181,38 @@
 
   <!-- Chaperone Roster sorted by School -->
   <mat-accordion>
-  <!-- Students Panel -->
   <mat-expansion-panel
   (opened)="panelOpenState = true"
   (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
-      <mat-panel-title >
-        <h3 style="margin: 30px 0px;">View Chaperones by School</h3>
+      <mat-panel-title>
+        <h2 style="margin: 30px 0px;">View Chaperones by School</h2>
 
       </mat-panel-title>
     </mat-expansion-panel-header>
 
+    <!-- Toolbar w/ Buttons -->
+    <mat-toolbar class="panel-toolbar">
+      <button>
+        Add School
+      </button>
+      <button>
+        Export CSV
+      </button>
+      <button style="background: #e4405f;">
+        Delete School
+      </button>
+    </mat-toolbar>
+
     <!-- Inner Pannels -->
-    <mat-expansion-panel
+    <mat-expansion-panel class="inner-panel"
     *ngFor="let school of chaperonesBySchool"
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false">
 
       <!-- Name of School Header -->
       <mat-expansion-panel-header>
-        <mat-panel-title style="font-size: 1.4em;">
+        <mat-panel-title  style="font-size: 1em; font-weight: 600; color: #333;">
           <p>{{school[0].name}} - {{school.length - 1}}</p>
         </mat-panel-title>
       </mat-expansion-panel-header>
@@ -128,7 +220,7 @@
       <!-- List of Students -->
       <div *ngFor="let chaperone of school; let i=index" class="student">
         <div *ngIf="i >= 1" >
-            <p>{{i}}. {{chaperone.name}}, {{chaperone.gender}}, {{chaperone.lunch}} Lunch - {{chaperone.phone}}</p>
+            <p>{{chaperone.name}}, {{chaperone.gender}}, {{chaperone.lunch}} Lunch - {{chaperone.phone}}</p>
         </div>
       </div>
     </mat-expansion-panel>
@@ -142,13 +234,29 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Chaperone Agenda</h3>
+          <h2 style="margin: 30px 0px;">View Chaperone Agenda</h2>
 
         </mat-panel-title>
       </mat-expansion-panel-header>
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add School
+        </button>
+        <button>
+          Export CSV
+        </button>
+        <button style="background: #e4405f;">
+          Delete School
+        </button>
+      </mat-toolbar>
       <div *ngFor="let item of fair.chaperoneAgenda" class="agenda-item">
-        <h2>{{item.time}}</h2>
-        <p>{{item.time}}</p>
+        <button mat-button [matMenuTriggerFor]="agendaMenu">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <h2 class="agenda-time">{{item.time}}</h2>
+        <p class="agenda-title">{{item.title}}</p>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -160,13 +268,13 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Chaporone Lunches</h3>
+          <h2 style="margin: 30px 0px;">View Chaporone Lunches</h2>
 
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <p>Ham: {{allLunches.length}}</p>
-      <p>Turkey: {{allLunches.length}}</p>
-      <p>Veggie: {{allLunches.length}}</p>
+      <p class="lunch-text">Ham: {{allLunches.length}}</p>
+      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
+      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -186,13 +294,26 @@
   (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title >
-        <h3 style="margin: 30px 0px;">View Partners</h3>
+        <h2 style="margin: 30px 0px;">View Partners</h2>
 
       </mat-panel-title>
     </mat-expansion-panel-header>
 
+    <!-- Toolbar w/ Buttons -->
+    <mat-toolbar class="panel-toolbar">
+      <button>
+        Add School
+      </button>
+      <button>
+        Export CSV
+      </button>
+      <button style="background: #e4405f;">
+        Delete School
+      </button>
+    </mat-toolbar>
+
     <!-- Inner Pannels -->
-    <mat-expansion-panel
+    <mat-expansion-panel class="inner-panel"
     *ngFor="let partner of partners"
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false">
@@ -228,13 +349,28 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Partner Agenda</h3>
-
+          <h2 style="margin: 30px 0px;">View Partner Agenda</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add School
+        </button>
+        <button>
+          Export CSV
+        </button>
+        <button style="background: #e4405f;">
+          Delete School
+        </button>
+      </mat-toolbar>
       <div *ngFor="let item of fair.partnerAgenda" class="agenda-item">
-        <h2>{{item.time}}</h2>
-        <p>{{item.time}}</p>
+        <button mat-button [matMenuTriggerFor]="agendaMenu">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <h2 class="agenda-time">{{item.time}}</h2>
+        <p class="agenda-title">{{item.title}}</p>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -246,13 +382,13 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Students Lunches</h3>
+          <h2 style="margin: 30px 0px;">View Students Lunches</h2>
 
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <p>Ham: {{allLunches.length}}</p>
-      <p>Turkey: {{allLunches.length}}</p>
-      <p>Veggie: {{allLunches.length}}</p>
+      <p class="lunch-text">Ham: {{allLunches.length}}</p>
+      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
+      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -263,12 +399,24 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Partner FAQs</h3>
-
+          <h2 style="margin: 30px 0px;">View Partner FAQs</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div *ngFor="let item of fair.partnerFAQ" class="agenda-item">
-        <h5>{{item.question}}</h5>
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add School
+        </button>
+        <button>
+          Export CSV
+        </button>
+        <button style="background: #e4405f;">
+          Delete School
+        </button>
+      </mat-toolbar>
+      <div *ngFor="let item of fair.partnerFAQ">
+        <h3>{{item.question}}</h3>
         <p>{{item.answer}}</p>
       </div>
     </mat-expansion-panel>
@@ -289,11 +437,23 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Volunteers</h3>
-
+          <h2 style="margin: 30px 0px;">View Volunteers</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div *ngFor="let volunteer of fair.volunteers" class="agenda-item">
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add School
+        </button>
+        <button>
+          Export CSV
+        </button>
+        <button style="background: #e4405f;">
+          Delete School
+        </button>
+      </mat-toolbar>
+      <div *ngFor="let volunteer of fair.volunteers" class="volunteer">
         <h2>{{volunteer.name}}</h2>
         <p>{{volunteer.email}}</p>
       </div>
@@ -307,13 +467,28 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Volunteer Agenda</h3>
-
+          <h2 style="margin: 30px 0px;">View Volunteer Agenda</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add School
+        </button>
+        <button>
+          Export CSV
+        </button>
+        <button style="background: #e4405f;">
+          Delete School
+        </button>
+      </mat-toolbar>
       <div *ngFor="let item of fair.volunteerAgenda" class="agenda-item">
-        <h2>{{item.time}}</h2>
-        <p>{{item.time}}</p>
+        <button mat-button [matMenuTriggerFor]="agendaMenu">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <h2 class="agenda-time">{{item.time}}</h2>
+        <p class="agenda-title">{{item.title}}</p>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -325,13 +500,13 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Volunteer Lunches</h3>
+          <h2 style="margin: 30px 0px;">View Volunteer Lunches</h2>
 
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <p>Ham: {{allLunches.length}}</p>
-      <p>Turkey: {{allLunches.length}}</p>
-      <p>Veggie: {{allLunches.length}}</p>
+      <p class="lunch-text">Ham: {{allLunches.length}}</p>
+      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
+      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -342,12 +517,24 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h3 style="margin: 30px 0px;">View Volunteer FAQs</h3>
-
+          <h2 style="margin: 30px 0px;">View Volunteer FAQs</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div *ngFor="let item of fair.volunteerFAQ" class="agenda-item">
-        <h5>{{item.question}}</h5>
+
+      <!-- Toolbar w/ Buttons -->
+      <mat-toolbar class="panel-toolbar">
+        <button>
+          Add School
+        </button>
+        <button>
+          Export CSV
+        </button>
+        <button style="background: #e4405f;">
+          Delete School
+        </button>
+      </mat-toolbar>
+      <div *ngFor="let item of fair.volunteerFAQ">
+        <h3>{{item.question}}</h3>
         <p>{{item.answer}}</p>
       </div>
     </mat-expansion-panel>

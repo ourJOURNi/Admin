@@ -6,6 +6,26 @@
   width: 100%;
 }
 
+.outer-panel  {
+  border: 1px solid #005191;
+}
+
+.mat-accordion>.mat-expansion-panel-spacing:last-child {
+  margin-bottom: 30px;
+}
+
+.inner-panel > .mat-expansion-indicator, .mat-expansion-indicator:after {
+  color: red !important;
+}
+
+
+
+.inner-panel {
+  border: 2px solid #444;
+  color: #005191;
+  box-shadow: none;
+}
+
 .fair-info{
   height: auto;
   padding: 80px 20px;
@@ -17,11 +37,11 @@
 
 .usertype-header{
   font-size: 2.1em;
-  color: white;
-  background: #faa71b;
-  width: 240px;
-  border-radius: 5px;
-  padding: 0.15em;
+  color: #111;
+}
+
+h2 {
+  color: #555;
 }
 
 .usertype-description {
@@ -43,13 +63,65 @@
   color: green;
 }
 
+
 mat-expansion-panel {
   margin-bottom: 20px;
-  background: #edf3f8;
+  background: rgb(247, 247, 247);
+  box-shadow: none;
+
+  .panel-toolbar {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+
+    button {
+      font-size: 0.8em;
+      color: white;
+      margin-right: 15px;
+      padding: 0.6em 0;
+      width: 120px;
+      border-radius: 5px;
+      border: none;
+      background: #21ce99;
+    }
+  }
 
   h3 {
     color: #005191;
   }
+}
+
+.student-wrapper {
+  position: relative;
+}
+
+.waitlist-header {
+  margin-top: 65px;
+  color: #444;
+}
+
+.waitlisted {
+  margin-top: 25px;
+}
+
+.student {
+  color: #444;
+}
+
+.student-panel {
+  margin-bottom: 8px;
+}
+
+.ellipsis {
+  float: right;
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  z-index: 999;
+  background: none;
+  border: none;
 }
 
 .partner-logo{
@@ -74,3 +146,23 @@ mat-expansion-panel {
   background: rgb(238, 238, 238);
   box-shadow: 1px 1px 10px rgba(0,0,0,0.1)
 }
+
+.agenda-item {
+  height: 50px;
+}
+
+.agenda-time, .agenda-title {
+    display: inline;
+    line-height: 2.5em;
+  }
+
+.agenda-time {
+  margin-right: 8px;
+  padding: 0.3em;
+}
+
+.lunch-text {
+  font-size: 1.7em;
+  margin: 1.2em 0em;
+}
+

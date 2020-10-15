@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
 import { FairsService } from 'src/app/services/fairs.service';
-
-
 
 @Component({
   selector: 'app-fair-page',
@@ -23,6 +22,7 @@ export class FairPageComponent implements OnInit {
   allLunches;
   panelOpenState = false;
   allStudentsClean: any[];
+  @ViewChild(MatMenuTrigger, {static: false}) trigger: MatMenuTrigger;
 
   constructor(
     private router: Router,
@@ -38,11 +38,26 @@ export class FairPageComponent implements OnInit {
       fair => {
       const fairArray = Object.values(fair['fair']);
       const studentsBySchool = Object.values(fair['studentsBySchool']);
+      console.log();
+
       const chaperonesBySchool = Object.values(fair['chaperonesBySchool']);
 
-      for (const fair of fairArray) {
+      // Format Fair Data
+      for (let fair of fairArray) {
         fair['date'] = format( new Date(fair['date']), 'MMMM dd, yyyy');
         fair['time'] = format( new Date(fair['date']), 'hh:mm a');
+
+        // Parse interests JSON string back to an array.
+        // Delete duplicate elements
+        for (let student of fair['students']) {
+          student.interests = JSON.parse(student.interests).filter(onlyUnique);
+
+          function onlyUnique(value, index, self) {
+            return self.indexOf(value) === index;
+          }
+
+
+        }
       }
 
       this.fair = fairArray[0];
@@ -88,6 +103,10 @@ export class FairPageComponent implements OnInit {
       //   this.allFairs = data.reverse();
       // });
     });
+  }
+
+  someMethod() {
+    this.trigger.openMenu();
   }
 
   back() {
