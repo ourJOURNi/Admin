@@ -13,6 +13,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.router.navigate(['dashboard/(open:fairs)']);
+    // this.router.navigate(['dashboard/(open:fairs)']);
   }
 }

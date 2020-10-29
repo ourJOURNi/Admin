@@ -7,15 +7,18 @@ import { FairPageComponent } from '../fair-page/fair-page.component';
 import { FairPageRoutingModule } from './fair-page-routing.module';
 
 
+
 @NgModule({
-  declarations: [
-  FairPageComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
     FairPageRoutingModule
   ],
-  entryComponents: []
+  declarations: [
+],
+  entryComponents: [
+
+  ]
 })
 export class FairPageModule { }

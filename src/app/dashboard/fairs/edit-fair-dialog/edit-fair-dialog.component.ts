@@ -27,6 +27,7 @@ export class EditFairDialogComponent implements OnInit {
   description: string;
   dateCreated: string;
   photo: string;
+  isoDate: string;
 
   constructor(
     private fairs: FairsService,
@@ -44,18 +45,21 @@ export class EditFairDialogComponent implements OnInit {
       this.date = data.date;
       this.dateCreated = data.dateCreated;
       this.time = data.time;
+      this.isoDate = new Date(data.date + ' ' + data.time).toISOString().substring(0, 21);
       this.description = data.description;
      }
 
   ngOnInit() {
+    console.log(this.date);
+    console.log(this.time);
+    console.log(this.isoDate);
+
     this.editFairForm = this.formBuilder.group({
       title: [this.title, Validators.required],
       address: [this.address, Validators.required],
       city: [this.city, Validators.required],
       state: [this.state, Validators.required],
       zip: [ this.zip, Validators.required],
-      date: [ this.date, Validators.required],
-      time: [ this.time, Validators.required],
       summary: [ this.summary, Validators.required],
       description: [ this.description, Validators.required],
      });
@@ -67,6 +71,7 @@ export class EditFairDialogComponent implements OnInit {
 
   update(fair) {
     fair._id = this.id;
+
     this.fairs.updateFair(fair).subscribe(data => {
       this.fairs.getFairs().subscribe(fairs => {
         const fairsArray = Object.values(fairs);

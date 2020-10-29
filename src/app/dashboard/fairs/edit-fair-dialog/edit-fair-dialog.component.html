@@ -39,8 +39,8 @@
           <input
           required
           matInput
+          value="{{isoDate}}"
           placeholder="Date"
-          formControlName="date"
           type="datetime-local">
         </mat-form-field>
         <mat-form-field>
@@ -52,18 +52,9 @@
           formControlName="summary">
           </textarea>
         </mat-form-field>
-        <mat-form-field>
-          <textarea
-          required
-          matInput
-          rows="10"
-          placeholder="description"
-          formControlName="description">
-          </textarea>
-        </mat-form-field>
         <mat-dialog-actions>
-            <button mat-raised-button class="add" type="submit">Edit Fair</button>
-            <button class="mat-raised-button" (click)="close()">Cancel</button>
+            <button mat-raised-button class="page-button" type="submit">Edit Fair</button>
+            <button class="page-button" (click)="close()">Cancel</button>
         </mat-dialog-actions>
   </form>
 </mat-dialog-content>

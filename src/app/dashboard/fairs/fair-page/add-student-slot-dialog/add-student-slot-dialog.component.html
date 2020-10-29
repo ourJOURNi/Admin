@@ -1,0 +1,21 @@
+<form (ngSubmit)="addStudentAgendaItem()" [formGroup]="addAgendaItemForm">
+  <mat-form-field>
+    <input
+    required
+    matInput
+    type="time"
+    placeholder="Time"
+    formControlName="time">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+    required
+    matInput
+    placeholder="Title"
+    formControlName="title">
+  </mat-form-field>
+  <div>
+      <button class="modal-button" type="submit">Add Event</button>
+      <button class="modal-button" (click)="close()">Cancel</button>
+  </div>
+</form>

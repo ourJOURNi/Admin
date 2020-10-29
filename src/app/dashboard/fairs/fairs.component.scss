@@ -1,20 +1,27 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
 .fair-link{
-  width: 300px; height: 150px;
+  width: 400px; height: 150px;
   border-radius: 5px;
-  background: #005191;
+  background: rgb(0,81,145);
+  background: linear-gradient(135deg, rgba(0,81,145,1) 0%, rgba(0,81,145,1) 25%, rgba(0,81,145,1) 50%, rgba(0,81,145,1) 75%, rgba(15,116,195,1) 100%);
   color: white;
   font-size: 1.3em;
   position: relative;
-  padding: 0.2em;
+  padding: 0.6em;
+  margin-bottom: 40px;
+  border: none;
 
   #fair-title {
-    margin: 0; padding: 0;
+    margin: 0; padding: 10px 0;
     position: relative;
     top: 4px;
     left: 10px;
   }
 
-  #fair-date {
+  .fair-date {
     padding: 0; margin: 0;
     position: relative;
     top: 8px;
@@ -24,11 +31,11 @@
 
   button {
     position: absolute;
-    bottom: 8px;
-    right: 10px;
+    bottom: 10px;
+    right: 20px;
     height: 40px;
     width: 90px;
-    border-radius: 5px;
+    border: none;
     background: white;
     color: #005191;
     font-size: 1em;

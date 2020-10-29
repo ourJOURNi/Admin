@@ -1,22 +1,24 @@
 <mat-toolbar class="top-bar">
-  <button class="page-button" (click)="back()">Back</button>
-  <button class="page-button" (click)="printCSV()">Print CSV</button>
+  <button id="back-button" class="page-button" (click)="back()">Back</button>
+  <span class="example-spacer"></span>
+  <button id="print-button" class="page-button" (click)="printCSVDialog()">Print CSV</button>
+  <button id="delete-button" class="page-button" (click)="deleteFair(this.id)">Delete Fair</button>
 </mat-toolbar>
 
 <!-- Fair Info -->
 <div class="fair-info">
   <h1>{{fair.title}}</h1>
-  <h4>{{fair.date}}</h4>
-  <h4>{{fair.address}}, {{fair.city}}, {{fair.state}}, {{fair.zip}}</h4>
-  <p>{{fair.summary}}</p>
+  <h3>{{fair.time}}</h3>
+  <h3>{{fair.date}}</h3>
+  <h3>{{fair.address}}, {{fair.city}}, {{fair.state}}, {{fair.zip}}</h3>
+  <p style="font-size: 1.2em;">{{fair.summary}}</p>
+  <button id="edit-fair-info-button" class="page-button" (click)="editFair(fair)">Edit</button>
 </div>
 <mat-divider></mat-divider>
 
 <!-- Students -->
 <div class="students">
   <h1 class="usertype-header">Students</h1>
-  <p class="usertype-description">{{fair.studentDescription}}</p>
-  <button class="description-button">Edit Description</button>
 
   <!-- Student Roster sorted by School -->
   <mat-accordion>
@@ -34,14 +36,8 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
-          Add School
-        </button>
-        <button>
+        <button (click)="printStudentsDialog()">
           Export CSV
-        </button>
-        <button style="background: #e4405f;">
-          Delete School
         </button>
       </mat-toolbar>
 
@@ -127,28 +123,35 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
+        <button (click)="addStudentSlotDialog()">
           Add Slot
         </button>
-        <button>
+        <button (click)="printStudentsAgendaDialog()">
           Export CSV
+        </button>
+        <button (click)="deleteStudentSlotDialog()"  style="background: #e4405f;">
+          Delete Slot
         </button>
       </mat-toolbar>
 
-      <div *ngFor="let item of fair.studentAgenda" class="agenda-item">
+      <div class="agenda-item" *ngFor="let item of fair.studentAgenda; let i = index" [attr.data-index]="i" >
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
-        <h2 class="agenda-time">{{item.time}}</h2>
-        <p class="agenda-title">{{item.title}}</p>
-
-
-        <button class="ellipsis"  mat-button [matMenuTriggerFor]="menu">
+        <div *ngIf="!item.edit" style="display: inline-block;">
+          <h2 class="agenda-time">{{item.time}}</h2>
+          <p class="agenda-title">{{item.title}}</p>
+        </div>
+        <div *ngIf="item.edit" style="display: inline-block;">
+          <input type="text" name="agenda-time" value="{{item.time}}">
+          <input type="text" name="agenda-title" value="{{item.title}}">
+        </div>
+        <button class="ellipsis"  mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #agendaMenu="matMenu">
-          <button mat-menu-item>Edit Slot</button>
-          <button mat-menu-item>Delete Slot</button>
+          <button mat-menu-item (click)="editAgendaItem(item)">Edit Slot</button>
+          <button mat-menu-item (click)="deleteAgendaItem(this.id, i)">Delete Slot</button>
         </mat-menu>
       </div>
     </mat-expansion-panel>
@@ -162,7 +165,6 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <h2 style="margin: 30px 0px;">View Students Lunches</h2>
-          <mat-divider></mat-divider>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <p class="lunch-text">Ham: {{allLunches.length}}</p>
@@ -176,8 +178,6 @@
 <!-- Chaperones -->
 <div class="chaperones">
   <h1 class="usertype-header">Chaperones</h1>
-  <p class="usertype-description">{{fair.chaperoneDescription}}</p>
-  <button class="description-button">Edit Description</button>
 
   <!-- Chaperone Roster sorted by School -->
   <mat-accordion>
@@ -193,13 +193,13 @@
 
     <!-- Toolbar w/ Buttons -->
     <mat-toolbar class="panel-toolbar">
-      <button>
+      <button (click)="addSchoolDialog()">
         Add School
       </button>
-      <button>
+      <button (click)="printChaperonesDialog()">
         Export CSV
       </button>
-      <button style="background: #e4405f;">
+      <button (click)="deleteSchoolDialog()" style="background: #e4405f;">
         Delete School
       </button>
     </mat-toolbar>
@@ -241,20 +241,24 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
-          Add School
+        <button (click)="addChaperoneSlotDialog()">
+          Add Slot
         </button>
-        <button>
+        <button (click)="printChaperoneAgendaDialog()">
           Export CSV
         </button>
-        <button style="background: #e4405f;">
-          Delete School
+        <button (click)="deleteChaperoneSlotDialog()" style="background: #e4405f;">
+          Delete Slot
         </button>
       </mat-toolbar>
       <div *ngFor="let item of fair.chaperoneAgenda" class="agenda-item">
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
+        <mat-menu #agendaMenu="matMenu">
+          <button mat-menu-item>Edit Slot</button>
+          <button mat-menu-item>Delete Slot</button>
+        </mat-menu>
         <h2 class="agenda-time">{{item.time}}</h2>
         <p class="agenda-title">{{item.title}}</p>
       </div>
@@ -284,8 +288,6 @@
 <!-- Partners -->
 <div class="partners">
   <h2 class="usertype-header">Partners</h2>
-  <p class="usertype-description">{{fair.partnerDescription}}</p>
-  <button class="description-button">Edit Description</button>
 
   <!-- Partner Roster -->
   <mat-accordion>
@@ -301,14 +303,14 @@
 
     <!-- Toolbar w/ Buttons -->
     <mat-toolbar class="panel-toolbar">
-      <button>
-        Add School
+      <button (click)="addPartnerDialog()">
+        Add Partner
       </button>
-      <button>
+      <button (click)="printPartnersDialog()">
         Export CSV
       </button>
-      <button style="background: #e4405f;">
-        Delete School
+      <button (click)="deletePartnerDialog()" style="background: #e4405f;">
+        Delete Partner
       </button>
     </mat-toolbar>
 
@@ -355,20 +357,24 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
-          Add School
+        <button (click)="addPartnerSlotDialog()">
+          Add Slot
         </button>
-        <button>
+        <button (click)="printPartnerAgendaDialog()">
           Export CSV
         </button>
-        <button style="background: #e4405f;">
-          Delete School
+        <button (click)="deletePartnerSlotDialog()" style="background: #e4405f;">
+          Delete Slot
         </button>
       </mat-toolbar>
       <div *ngFor="let item of fair.partnerAgenda" class="agenda-item">
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
+        <mat-menu #agendaMenu="matMenu">
+          <button mat-menu-item>Edit Slot</button>
+          <button mat-menu-item>Delete Slot</button>
+        </mat-menu>
         <h2 class="agenda-time">{{item.time}}</h2>
         <p class="agenda-title">{{item.title}}</p>
       </div>
@@ -382,7 +388,7 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h2 style="margin: 30px 0px;">View Students Lunches</h2>
+          <h2 style="margin: 30px 0px;">View Partners Lunches</h2>
 
         </mat-panel-title>
       </mat-expansion-panel-header>
@@ -405,14 +411,14 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
-          Add School
+        <button (click)="addPartnerFAQDialog()">
+          Add FAQ
         </button>
-        <button>
+        <button (click)="printPartnerFAQDialog()">
           Export CSV
         </button>
-        <button style="background: #e4405f;">
-          Delete School
+        <button (click)="deletePartnerFAQDialog()" style="background: #e4405f;">
+          Delete FAQ
         </button>
       </mat-toolbar>
       <div *ngFor="let item of fair.partnerFAQ">
@@ -427,8 +433,6 @@
 <!-- Volunteers -->
 <div class="volunteers">
   <h1 class="usertype-header">Volunteers</h1>
-  <p class="usertype-description">{{fair.volunteerDescription}}</p>
-  <button class="description-button">Edit Description</button>
 
   <!-- Volunteer Roster -->
   <mat-accordion>
@@ -443,14 +447,14 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
-          Add School
+        <button (click)="addVolunteerDialog()">
+          Add Volunteer
         </button>
-        <button>
+        <button (click)="printVolunteersDialog()">
           Export CSV
         </button>
-        <button style="background: #e4405f;">
-          Delete School
+        <button (click)="deleteVolunteerDialog()" style="background: #e4405f;">
+          Delete Volunteer
         </button>
       </mat-toolbar>
       <div *ngFor="let volunteer of fair.volunteers" class="volunteer">
@@ -473,20 +477,24 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
-          Add School
+        <button (click)="addVolunteerSlotDialog()">
+          Add Slot
         </button>
-        <button>
+        <button (click)="printVolunteerAgendaDialog()">
           Export CSV
         </button>
-        <button style="background: #e4405f;">
-          Delete School
+        <button (click)="deleteVolunteerSlotDialog()" style="background: #e4405f;">
+          Delete Slot
         </button>
       </mat-toolbar>
       <div *ngFor="let item of fair.volunteerAgenda" class="agenda-item">
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
+        <mat-menu #agendaMenu="matMenu">
+          <button mat-menu-item>Edit Slot</button>
+          <button mat-menu-item>Delete Slot</button>
+        </mat-menu>
         <h2 class="agenda-time">{{item.time}}</h2>
         <p class="agenda-title">{{item.title}}</p>
       </div>
@@ -523,14 +531,14 @@
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
-        <button>
-          Add School
+        <button (click)="addVolunteerFAQDialog()">
+          Add FAQ
         </button>
-        <button>
+        <button (click)="printVolunteersFAQDialog()">
           Export CSV
         </button>
-        <button style="background: #e4405f;">
-          Delete School
+        <button (click)="deleteVolunteerFAQDialog()" style="background: #e4405f;">
+          Delete FAQ
         </button>
       </mat-toolbar>
       <div *ngFor="let item of fair.volunteerFAQ">

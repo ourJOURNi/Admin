@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FairsService } from '../../../services/fairs.service';
 import { format } from 'date-fns';
 
-
 @Component({
   selector: 'app-add-fair-dialog',
   templateUrl: './add-fair-dialog.component.html',

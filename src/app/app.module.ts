@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,13 +10,14 @@ import { MaterialModule } from './material/material.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
+import { FairPageModule } from './dashboard/fairs/fair-page/fair-page.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
     ],
   imports: [
     BrowserModule,
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     FlexLayoutModule,
     FormsModule,
     DashboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FairPageModule
   ],
   providers: [
 
