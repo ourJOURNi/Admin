@@ -1,1 +1,17 @@
-<p>add-volunteer-faq-dialog works!</p>
+<form [formGroup]="addVolunteerFAQForm" style="text-align: center;">
+  <h2>Add a Frequently Asked Question</h2>
+  <mat-divider></mat-divider>
+  <input
+    type="text"
+    class="add-faq-question"
+    formControlName="question"
+    placeholder="Question" />
+  <textarea
+    type="text"
+    cols="30" rows="10"
+    class="add-faq-answer"
+    formControlName="answer"
+    placeholder="Answer">
+  </textarea>
+  <button (click)="submitFAQ(this.id)" style="margin: 30px 0px;" class="page-button">Submit</button>
+</form>

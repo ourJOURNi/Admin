@@ -3,7 +3,7 @@ input[type=time] {
   color: #2a2c2d;
   font-size: 14px;
   font-family: helvetica;
-  width: 180px;
+  width: 220px;
 }
 
 /* Wrapper around the hour, minute, second, and am/pm fields as well as
@@ -24,6 +24,7 @@ input[type=time]::-webkit-datetime-edit-text {
 /* Hour */
 input[type=time]::-webkit-datetime-edit-hour-field {
   background-color: #f2f4f5;
+  border: 2px solid #999;
   border-radius: 15%;
   padding: 19px 13px;
   font-size: 2em;
@@ -32,6 +33,7 @@ input[type=time]::-webkit-datetime-edit-hour-field {
 /* Minute */
 input[type=time]::-webkit-datetime-edit-minute-field {
   background-color: #f2f4f5;
+  border: 2px solid #999;
   border-radius: 15%;
   padding: 19px 13px;
   font-size: 2em;
@@ -40,6 +42,7 @@ input[type=time]::-webkit-datetime-edit-minute-field {
 /* AM/PM */
 input[type=time]::-webkit-datetime-edit-ampm-field {
   background-color: #f2f4f5;
+  border: 2px solid #999;
   border-radius: 15%;
   padding: 19px 13px;
   font-size: 2em;
@@ -56,12 +59,7 @@ input[type=time]::-webkit-inner-spin-button {
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
-  font-size: 2em;
-  color: white;
-  background-color: #fab716;
-  filter: invert(100%) sepia(60%) saturate(1000%) hue-rotate(13deg) brightness(95%) contrast(100%);
-  padding: 5px;
-  border-radius: 5px;
+  display: none;
 }
 
 input[type=time]::-webkit-datetime-edit-hour-field:hover,

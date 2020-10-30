@@ -1,1 +1,21 @@
-<p>add-volunteer-slot-dialog works!</p>
+<form [formGroup]="addAgendaItemForm">
+  <mat-form-field>
+    <input
+    required
+    matInput
+    type="time"
+    placeholder="Time"
+    formControlName="time">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+    required
+    matInput
+    placeholder="Title"
+    formControlName="title">
+  </mat-form-field>
+  <br>
+  <mat-dialog-actions>
+    <button class="modal-button" (click)="addVolunteerAgendaItem()">Add Slot</button>
+    <button class="modal-button" (click)="close()">Cancel</button></mat-dialog-actions>
+</form>

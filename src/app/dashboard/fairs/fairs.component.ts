@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FairsService } from '../../services/fairs.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteFairsDialogComponent } from '../fairs/delete-fair-dialog/delete-fair-dialog.component';
@@ -6,6 +6,7 @@ import { AddFairDialogComponent } from '../fairs/add-fair-dialog/add-fair-dialog
 import { EditFairDialogComponent } from '../fairs/edit-fair-dialog/edit-fair-dialog.component';
 import { format } from 'date-fns';
 import { Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,8 +14,10 @@ import { Router } from '@angular/router';
   templateUrl: './fairs.component.html',
   styleUrls: ['./fairs.component.scss']
 })
-export class FairsComponent implements OnInit {
+export class FairsComponent implements OnInit, OnDestroy {
   allFairs = [];
+  fairsSubscription: Subscription;
+  fairsSubject: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -22,8 +25,13 @@ export class FairsComponent implements OnInit {
     private router: Router
     ) { }
 
+  ngOnDestroy(): void {
+    this.fairsSubscription.unsubscribe();
+    this.fairsSubject.unsubscribe();
+  }
+
   ngOnInit() {
-    this.fairs.getFairs().subscribe(
+    this.fairsSubscription = this.fairs.getFairs().subscribe(
       fairs => {
       const fairsArray = Object.values(fairs);
       console.log(fairsArray);
@@ -36,7 +44,7 @@ export class FairsComponent implements OnInit {
       this.fairs.fairsSubject.next(fairsArray.reverse());
 
       // Subscribe to Fairs Subject in Fairs Service for Real time update changes
-      this.fairs.fairsSubject.subscribe(data => {
+      this.fairsSubject = this.fairs.fairsSubject.subscribe(data => {
         this.allFairs = data.reverse();
       });
     });

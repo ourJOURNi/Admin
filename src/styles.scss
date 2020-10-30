@@ -169,17 +169,22 @@ mat-card-content{
   background: #005191;
   color: white;
   margin-right: 20px;
-  margin-top: 50px;
+  margin-top: 0px;
+  margin-bottom: 20px;
   height: 40px;
   width: 100px;
   border-radius: 5px;
   border: none;
-  font-weight: 1em;
+  font-size: 1em;
 }
 
 .mat-form-field-infix {
   margin-bottom: 20px;
   margin-top: 20px;
+}
+
+.mat-form-field {
+  font-size: 1em;
 }
 
 @media only screen and (max-width: 1200px) {

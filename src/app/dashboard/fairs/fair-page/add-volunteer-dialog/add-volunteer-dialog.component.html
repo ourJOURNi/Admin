@@ -1,1 +1,20 @@
-<p>add-volunteer-dialog works!</p>
+<form [formGroup]="addVolunteerForm" style="text-align: center;">
+  <h2>Add a Volunteer</h2>
+  <mat-divider></mat-divider>
+  <input
+    type="text"
+    class="add-volunteer-name"
+    formControlName="name"
+    placeholder="Fullname" />
+  <input
+    type="text"
+    class="add-volunteer-email"
+    formControlName="email"
+    placeholder="Fullname" />
+  <input
+    type="phone"
+    class="add-volunteer-phone"
+    formControlName="phone"
+    placeholder="(xxx) - xxxxx" />
+  <button (click)="submitVolunteer(this.id)" style="margin: 30px 0px;" class="page-button">Submit</button>
+</form>

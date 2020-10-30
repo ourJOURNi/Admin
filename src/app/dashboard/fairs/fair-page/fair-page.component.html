@@ -7,11 +7,12 @@
 
 <!-- Fair Info -->
 <div class="fair-info">
-  <h1>{{fair.title}}</h1>
-  <h3>{{fair.time}}</h3>
-  <h3>{{fair.date}}</h3>
-  <h3>{{fair.address}}, {{fair.city}}, {{fair.state}}, {{fair.zip}}</h3>
-  <p style="font-size: 1.2em;">{{fair.summary}}</p>
+  <h1>{{title}}</h1>
+  <h4>{{fair.time}}</h4>
+  <h4>{{fair.date}}</h4>
+  <h4>{{fair.address}}, {{fair.city}}, {{fair.state}}, {{fair.zip}}</h4>
+  <p style="font-size: 1.2em; width: 750px;
+  line-height: 1.6em;">{{fair.summary}}</p>
   <button id="edit-fair-info-button" class="page-button" (click)="editFair(fair)">Edit</button>
 </div>
 <mat-divider></mat-divider>
@@ -129,30 +130,36 @@
         <button (click)="printStudentsAgendaDialog()">
           Export CSV
         </button>
-        <button (click)="deleteStudentSlotDialog()"  style="background: #e4405f;">
-          Delete Slot
-        </button>
       </mat-toolbar>
 
-      <div class="agenda-item" *ngFor="let item of fair.studentAgenda; let i = index" [attr.data-index]="i" >
+      <div class="agenda-item" *ngFor="let item of studentsAgenda; let i = index" [attr.data-index]="i" >
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
-        <div *ngIf="!item.edit" style="display: inline-block;">
+        <mat-menu #agendaMenu="matMenu">
+          <button mat-menu-item (click)="editStudentAgendaItem(item)">Edit Slot</button>
+          <button mat-menu-item (click)="deleteStudentAgendaItem(this.id, i)">Delete Slot</button>
+        </mat-menu>
+        <div *ngIf="!item.edit" style="display: inline">
           <h2 class="agenda-time">{{item.time}}</h2>
           <p class="agenda-title">{{item.title}}</p>
         </div>
-        <div *ngIf="item.edit" style="display: inline-block;">
-          <input type="text" name="agenda-time" value="{{item.time}}">
-          <input type="text" name="agenda-title" value="{{item.title}}">
+        <div *ngIf="item.edit" style="display: inline;">
+          <form style="display: inline;" [formGroup]="editAgendaForm">
+            <input
+              type="time"
+              class="agenda-time-edit"
+              formControlName="time"
+              value="{{item.time}}">
+            <input
+            type="text"
+            class="agenda-title-edit"
+            placeholder="Enter title here"
+            formControlName="title">
+          </form>
+          <button class="edit-agenda-button" (click)="editStudentAgendaItemFinal(this.id, i)">Edit</button>
+          <button class="cancel-edit-agenda-button" (click)="cancelEditStudentAgendaItem(item)">Cancel</button>
         </div>
-        <button class="ellipsis"  mat-button [matMenuTriggerFor]="agendaMenu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #agendaMenu="matMenu">
-          <button mat-menu-item (click)="editAgendaItem(item)">Edit Slot</button>
-          <button mat-menu-item (click)="deleteAgendaItem(this.id, i)">Delete Slot</button>
-        </mat-menu>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -193,14 +200,8 @@
 
     <!-- Toolbar w/ Buttons -->
     <mat-toolbar class="panel-toolbar">
-      <button (click)="addSchoolDialog()">
-        Add School
-      </button>
       <button (click)="printChaperonesDialog()">
         Export CSV
-      </button>
-      <button (click)="deleteSchoolDialog()" style="background: #e4405f;">
-        Delete School
       </button>
     </mat-toolbar>
 
@@ -234,33 +235,50 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h2 style="margin: 30px 0px;">View Chaperone Agenda</h2>
-
+          <h2 style="margin: 30px 0px;">View Chaperones Agenda</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
+
+      <mat-divider style="margin-bottom: 15px;"></mat-divider>
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
         <button (click)="addChaperoneSlotDialog()">
           Add Slot
         </button>
-        <button (click)="printChaperoneAgendaDialog()">
+        <button (click)="printChaperonesAgendaDialog()">
           Export CSV
         </button>
-        <button (click)="deleteChaperoneSlotDialog()" style="background: #e4405f;">
-          Delete Slot
-        </button>
       </mat-toolbar>
-      <div *ngFor="let item of fair.chaperoneAgenda" class="agenda-item">
+
+      <div class="agenda-item" *ngFor="let item of chaperonesAgenda; let i = index" [attr.data-index]="i" >
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
         <mat-menu #agendaMenu="matMenu">
-          <button mat-menu-item>Edit Slot</button>
-          <button mat-menu-item>Delete Slot</button>
+          <button mat-menu-item (click)="editChaperoneAgendaItem(item)">Edit Slot</button>
+          <button mat-menu-item (click)="deleteChaperoneAgendaItem(this.id, i)">Delete Slot</button>
         </mat-menu>
-        <h2 class="agenda-time">{{item.time}}</h2>
-        <p class="agenda-title">{{item.title}}</p>
+        <div *ngIf="!item.edit" style="display: inline">
+          <h2 class="agenda-time">{{item.time}}</h2>
+          <p class="agenda-title">{{item.title}}</p>
+        </div>
+        <div *ngIf="item.edit" style="display: inline;">
+          <form style="display: inline;" [formGroup]="editAgendaForm">
+            <input
+              type="time"
+              class="agenda-time-edit"
+              formControlName="time"
+              value="{{item.time}}">
+            <input
+            type="text"
+            class="agenda-title-edit"
+            placeholder="Enter title here"
+            formControlName="title">
+          </form>
+          <button class="edit-agenda-button" (click)="editChaperoneAgendaItemFinal(this.id, i)">Edit</button>
+          <button class="cancel-edit-agenda-button" (click)="cancelEditChaperoneAgendaItem(item)">Cancel</button>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -309,9 +327,6 @@
       <button (click)="printPartnersDialog()">
         Export CSV
       </button>
-      <button (click)="deletePartnerDialog()" style="background: #e4405f;">
-        Delete Partner
-      </button>
     </mat-toolbar>
 
     <!-- Inner Pannels -->
@@ -324,12 +339,14 @@
       <mat-expansion-panel-header>
         <mat-panel-title style="font-size: 1.4em;">
           <img class="partner-logo" src="{{partner.logo}}" alt="">
-          <p>{{partner.organization}}</p>
+          <p>{{partner.organization}}
+            <span class="verified" *ngIf="partner.verified">Verified</span>
+            <span class="unverified" *ngIf="!partner.verified">Unverified</span>
+          </p>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="partner-info">
-        <h4 class="verified">Verified: {{partner.verified}}</h4>
-        <h3>Contact Info</h3>
+        <h2>Contact Info</h2>
         <p>Name: {{partner.name}}</p>
         <p>Email: {{partner.email}}</p>
         <p>Phone: {{partner.phone}}</p>
@@ -337,7 +354,7 @@
         <p>Lunch: {{partner.lunch}}</p>
         <p>Colleagues: {{partner.colleagues}}</p>
 
-        <h3>Partner Description</h3>
+        <h2>Partner Description</h2>
         <p>{{partner.description}}</p>
       </div>
     </mat-expansion-panel>
@@ -351,9 +368,11 @@
     (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title >
-          <h2 style="margin: 30px 0px;">View Partner Agenda</h2>
+          <h2 style="margin: 30px 0px;">View Partners Agenda</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
+
+      <mat-divider style="margin-bottom: 15px;"></mat-divider>
 
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
@@ -363,20 +382,36 @@
         <button (click)="printPartnerAgendaDialog()">
           Export CSV
         </button>
-        <button (click)="deletePartnerSlotDialog()" style="background: #e4405f;">
-          Delete Slot
-        </button>
       </mat-toolbar>
-      <div *ngFor="let item of fair.partnerAgenda" class="agenda-item">
+
+      <div class="agenda-item" *ngFor="let item of partnersAgenda; let i = index" [attr.data-index]="i" >
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
         <mat-menu #agendaMenu="matMenu">
-          <button mat-menu-item>Edit Slot</button>
-          <button mat-menu-item>Delete Slot</button>
+          <button mat-menu-item (click)="editPartnerAgendaItem(item)">Edit Slot</button>
+          <button mat-menu-item (click)="deletePartnerAgendaItem(this.id, i)">Delete Slot</button>
         </mat-menu>
-        <h2 class="agenda-time">{{item.time}}</h2>
-        <p class="agenda-title">{{item.title}}</p>
+        <div *ngIf="!item.edit" style="display: inline">
+          <h2 class="agenda-time">{{item.time}}</h2>
+          <p class="agenda-title">{{item.title}}</p>
+        </div>
+        <div *ngIf="item.edit" style="display: inline;">
+          <form style="display: inline;" [formGroup]="editAgendaForm">
+            <input
+              type="time"
+              class="agenda-time-edit"
+              formControlName="time"
+              value="{{item.time}}">
+            <input
+            type="text"
+            class="agenda-title-edit"
+            placeholder="Enter title here"
+            formControlName="title">
+          </form>
+          <button class="edit-agenda-button" (click)="editPartnerAgendaItemFinal(this.id, i)">Edit</button>
+          <button class="cancel-edit-agenda-button" (click)="cancelEditPartnerAgendaItem(item)">Cancel</button>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -417,13 +452,37 @@
         <button (click)="printPartnerFAQDialog()">
           Export CSV
         </button>
-        <button (click)="deletePartnerFAQDialog()" style="background: #e4405f;">
-          Delete FAQ
-        </button>
       </mat-toolbar>
-      <div *ngFor="let item of fair.partnerFAQ">
-        <h3>{{item.question}}</h3>
-        <p>{{item.answer}}</p>
+      <div *ngFor="let item of partnersFAQ; let i = index">
+        <div *ngIf="!item.edit">
+          <h3 class="faq-question">
+            <button mat-button style="display: inline;" [matMenuTriggerFor]="agendaMenu">
+            <mat-icon>edit</mat-icon>
+            </button>
+            <mat-menu #agendaMenu="matMenu">
+              <button mat-menu-item (click)="editPartnerQuestion(item)">Edit Question</button>
+              <button mat-menu-item (click)="deletePartnerQuestion(this.id, i)">Delete Question</button>
+            </mat-menu>
+          {{item.question}}</h3>
+          <p class="faq-answer">{{item.answer}}</p>
+        </div>
+        <div *ngIf="item.edit">
+          <!-- Edit Mode -->
+          <form style="display: inline;" [formGroup]="editPartnerQuestionForm">
+            <input
+              type="text"
+              class="faq-question-edit"
+              formControlName="question">
+            <textarea
+              cols="30" rows="10"
+              type="text"
+              class="faq-answer-edit"
+              formControlName="answer">
+            </textarea>
+            <button class="faq-edit-button" (click)="editPartnerQuestionFinal(this.id, i)">Edit</button>
+            <button class="faq-cancel-button" (click)="cancelEditQuestion(item)">Cancel</button>
+          </form>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -453,13 +512,45 @@
         <button (click)="printVolunteersDialog()">
           Export CSV
         </button>
-        <button (click)="deleteVolunteerDialog()" style="background: #e4405f;">
-          Delete Volunteer
-        </button>
       </mat-toolbar>
-      <div *ngFor="let volunteer of fair.volunteers" class="volunteer">
-        <h2>{{volunteer.name}}</h2>
-        <p>{{volunteer.email}}</p>
+      <div *ngFor="let volunteer of volunteers; let i = index" class="volunteer">
+        <div *ngIf="!volunteer.edit">
+          <h2>
+            <button mat-button [matMenuTriggerFor]="agendaMenu">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <mat-menu #agendaMenu="matMenu">
+            <button mat-menu-item (click)="editVolunteer(volunteer)">Edit Slot</button>
+            <button mat-menu-item (click)="deleteVolunteer(this.id, i)">Delete Slot</button>
+          </mat-menu>
+          {{volunteer.name}}
+        </h2>
+          <p>{{volunteer.phone}}</p>
+          <p>{{volunteer.email}}</p>
+        </div>
+        <div *ngIf="volunteer.edit">
+          <!-- Edit Mode -->
+          <form style="display: inline;" [formGroup]="editVolunteerForm">
+            <input
+              type="text"
+              class="add-volunteer-name"
+              formControlName="name"
+              placeholder="Fullname" />
+            <input
+              type="email"
+              class="add-volunteer-email"
+              formControlName="email"
+              placeholder="Email" />
+            <input
+              type="phone"
+              class="add-volunteer-phone"
+              formControlName="phone"
+              maxlength="10"
+              placeholder="(xxx) - xxxxx" />
+            <button class="volunteer-edit-button" (click)="editVolunteerFinal(this.id, i)">Edit</button>
+            <button class="volunteer-cancel-button" (click)="cancelEditVolunteer(volunteer)">Cancel</button>
+          </form>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -475,6 +566,8 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
+      <mat-divider style="margin-bottom: 15px;"></mat-divider>
+
       <!-- Toolbar w/ Buttons -->
       <mat-toolbar class="panel-toolbar">
         <button (click)="addVolunteerSlotDialog()">
@@ -483,20 +576,36 @@
         <button (click)="printVolunteerAgendaDialog()">
           Export CSV
         </button>
-        <button (click)="deleteVolunteerSlotDialog()" style="background: #e4405f;">
-          Delete Slot
-        </button>
       </mat-toolbar>
-      <div *ngFor="let item of fair.volunteerAgenda" class="agenda-item">
+
+      <div class="agenda-item" *ngFor="let item of volunteersAgenda; let i = index" [attr.data-index]="i" >
         <button mat-button [matMenuTriggerFor]="agendaMenu">
           <mat-icon>edit</mat-icon>
         </button>
         <mat-menu #agendaMenu="matMenu">
-          <button mat-menu-item>Edit Slot</button>
-          <button mat-menu-item>Delete Slot</button>
+          <button mat-menu-item (click)="editVolunteerAgendaItem(item)">Edit Slot</button>
+          <button mat-menu-item (click)="deleteVolunteerAgendaItem(this.id, i)">Delete Slot</button>
         </mat-menu>
-        <h2 class="agenda-time">{{item.time}}</h2>
-        <p class="agenda-title">{{item.title}}</p>
+        <div *ngIf="!item.edit" style="display: inline">
+          <h2 class="agenda-time">{{item.time}}</h2>
+          <p class="agenda-title">{{item.title}}</p>
+        </div>
+        <div *ngIf="item.edit" style="display: inline;">
+          <form style="display: inline;" [formGroup]="editAgendaForm">
+            <input
+              type="time"
+              class="agenda-time-edit"
+              formControlName="time"
+              value="{{item.time}}">
+            <input
+            type="text"
+            class="agenda-title-edit"
+            placeholder="Enter title here"
+            formControlName="title">
+          </form>
+          <button class="edit-agenda-button" (click)="editVolunteerAgendaItemFinal(this.id, i)">Edit</button>
+          <button class="cancel-edit-agenda-button" (click)="cancelEditVolunteerAgendaItem(item)">Cancel</button>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -537,13 +646,37 @@
         <button (click)="printVolunteersFAQDialog()">
           Export CSV
         </button>
-        <button (click)="deleteVolunteerFAQDialog()" style="background: #e4405f;">
-          Delete FAQ
-        </button>
       </mat-toolbar>
-      <div *ngFor="let item of fair.volunteerFAQ">
-        <h3>{{item.question}}</h3>
-        <p>{{item.answer}}</p>
+      <div *ngFor="let item of volunteersFAQ; let i = index">
+        <div *ngIf="!item.edit">
+          <h3 class="faq-question">
+            <button mat-button style="display: inline;" [matMenuTriggerFor]="agendaMenu">
+            <mat-icon>edit</mat-icon>
+            </button>
+            <mat-menu #agendaMenu="matMenu">
+              <button mat-menu-item (click)="editVolunteerQuestion(item)">Edit Question</button>
+              <button mat-menu-item (click)="deleteVolunteerQuestion(this.id, i)">Delete Question</button>
+            </mat-menu>
+          {{item.question}}</h3>
+          <p class="faq-answer">{{item.answer}}</p>
+        </div>
+        <div *ngIf="item.edit">
+          <!-- Edit Mode -->
+          <form style="display: inline;" [formGroup]="editVolunteerQuestionForm">
+            <input
+              type="text"
+              class="faq-question-edit"
+              formControlName="question">
+            <textarea
+              cols="30" rows="10"
+              type="text"
+              class="faq-answer-edit"
+              formControlName="answer">
+            </textarea>
+            <button class="faq-edit-button" (click)="editVolunteerQuestionFinal(this.id, i)">Edit</button>
+            <button class="faq-cancel-button" (click)="cancelEditQuestion(item)">Cancel</button>
+          </form>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

@@ -1,7 +1,7 @@
 .top-bar {
   background: #005191;
   height: 60px;
-  padding: 20px 300px;
+  padding: 20px 10px;
   position: fixed;
   width: 100%;
   top: 0;
@@ -57,8 +57,9 @@
   margin-bottom: 40px;
 }
 
-h2 {
-  color: #555;
+h4 {
+  color: #333;
+  margin: 5px 0;
 }
 
 .usertype-description {
@@ -149,6 +150,23 @@ mat-expansion-panel {
   margin: 15px;
 }
 
+.verified{
+  font-size: 0.7em;
+  color: green;
+}
+
+.unverified{
+  font-size: 0.7em;
+  color: red;
+}
+
+.partner-info {
+  p {
+    color: #222;
+    font-size: 1.3em;
+  }
+}
+
 .fair-info{
   margin-top: 50px;
 }
@@ -165,7 +183,20 @@ mat-expansion-panel {
 .partners,
 .volunteers {
   height: auto;
-  padding: 70px 300px;
+  padding: 70px 20px;
+}
+
+@media screen and (min-width: 860px) {
+  .fair-info,
+  .students,
+  .chaperones,
+  .partners,
+  .volunteers {
+    padding: 70px 100px;
+  }
+  .top-bar {
+    padding: 20px 90px;
+  }
 }
 
 .agenda,
@@ -178,21 +209,216 @@ mat-expansion-panel {
 }
 
 .agenda-item {
-  height: 50px;
+  height: 65px;
 }
 
-.agenda-time, .agenda-title {
+.edit-button {
+  margin-left: 40px;
+  margin-right: 40px;
+  color: white;
+  background: #005191;
+  height: 30px;
+  width: 30px;
+  border-radius: 5px;
+}
+
+.agenda-time-edit,
+.agenda-title-edit {
+  margin-right: 8px;
+  padding: 7px 5px;
+  font-size: 1.4em;
+}
+
+.edit-agenda-button {
+  background: #005191;
+  color: white;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.cancel-edit-agenda-button {
+  background: #999;
+  color: #222;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+}
+
+input[type=time] {
+  border: none;
+  color: #2a2c2d;
+  font-size: 14px;
+  font-family: helvetica;
+  width: 150px;
+  height: 50px;
+  background: none;
+}
+
+/* Wrapper around the hour, minute, second, and am/pm fields as well as
+the up and down buttons and the 'X' button */
+input[type=time]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+}
+
+/* The space between the fields - between hour and minute, the minute and
+second, second and am/pm */
+input[type=time]::-webkit-datetime-edit-text {
+  padding: 10px 4px;
+}
+
+/* The naming convention for the hour, minute, second, and am/pm field is
+`-webkit-datetime-edit-{field}-field` */
+
+/* Hour */
+input[type=time]::-webkit-datetime-edit-hour-field {
+  background-color: #f2f4f5;
+  border: 2px solid #999;
+  border-radius: 15%;
+  padding: 19px 13px;
+  font-size: 2em;
+}
+
+/* Minute */
+input[type=time]::-webkit-datetime-edit-minute-field {
+  background-color: #f2f4f5;
+  border: 2px solid #999;
+  border-radius: 15%;
+  padding: 19px 13px;
+  font-size: 2em;
+}
+
+/* AM/PM */
+input[type=time]::-webkit-datetime-edit-ampm-field {
+  background-color: #f2f4f5;
+  border: 2px solid #999;
+  border-radius: 15%;
+  padding: 19px 13px;
+  font-size: 2em;
+}
+
+/* 'X' button for resetting/clearing time */
+input[type=time]::-webkit-clear-button {
+  display: none;
+}
+
+input[type=time]::-webkit-datetime-edit-hour-field:hover,
+input[type=time]::-webkit-datetime-edit-minute-field:hover,
+input[type=time]::-webkit-datetime-edit-ampm-field:hover {
+  background: #005191;
+  color: white;
+  border: 2px solid #fab716;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.agenda-title {
     display: inline;
     line-height: 2.5em;
   }
 
 .agenda-time {
+  display: inline-block;
   margin-right: 8px;
   padding: 0.3em;
+  font-size: 1.4em;
+  font-weight: 700;
+  width: 100px;
+  color: #005191;
+}
+
+.agenda-title {
+  margin-right: 8px;
+  padding: 0.3em;
+  font-size: 1.4em;
+  font-weight: 400;
 }
 
 .lunch-text {
   font-size: 1.7em;
   margin: 1.2em 0em;
+}
+
+.faq-question{
+  font-size: 1.4em;
+  margin-top: 25px;
+}
+
+.faq-answer{
+  font-size: 1.3em;
+  margin-left: 70px;
+  margin-bottom: 30px;
+  width: 80%;
+  line-height: 1.5em;
+  position: relative;
+  top: -20px;
+}
+
+.faq-question-edit {
+  display: block;
+  width: 100%;
+  padding: 0.3em;
+  margin-bottom: 20px;
+  font-size: 1.3em;
+}
+
+.faq-answer-edit {
+  display: block;
+  width: 100%;
+  padding: 0.3em;
+  margin-bottom: 20px;
+  font-size: 1.3em;
+}
+
+.volunteer {
+  margin-bottom: 40px;
+
+  h2{
+    color: #005191;
+  }
+  p {
+    position: relative;
+    left: 67px;
+    top: -15px;
+    font-size: 1.2em;
+  }
+}
+
+.faq-edit-button,
+.volunteer-edit-button{
+  background: #005191;
+  color: white;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 20px;
+  margin-bottom: 50px;
+}
+
+.faq-cancel-button,
+.volunteer-cancel-button{
+  background: #999;
+  color: #222;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 100px;
+}
+
+.add-volunteer-name,
+.add-volunteer-email,
+.add-volunteer-phone {
+  display: block;
+  height: 30px;
+  padding: 5px 5px;
+  margin: 8px 0;
 }
 

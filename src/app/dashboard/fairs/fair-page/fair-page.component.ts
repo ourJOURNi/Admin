@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatMenuTrigger } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
@@ -33,139 +35,263 @@ import { PrintVolunteerFaqDialogComponent } from './print-volunteer-faq-dialog/p
 import { DeleteVolunteerFaqDialogComponent } from './delete-volunteer-faq-dialog/delete-volunteer-faq-dialog.component';
 import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.component';
 import { EditFairDialogComponent } from '../edit-fair-dialog/edit-fair-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-fair-page',
   templateUrl: './fair-page.component.html',
   styleUrls: ['./fair-page.component.scss']
 })
-export class FairPageComponent implements OnInit {
+export class FairPageComponent implements OnInit, OnDestroy {
   id: string;
   fair;
-  studentsBySchool;
-  chaperonesBySchool;
+  title: any;
+
+
   chaperones;
   partners;
   volunteers;
   allStudents;
+  allStudentsClean: any[];
+
+  studentsBySchool;
+  chaperonesBySchool;
+
   allLunches;
   panelOpenState = false;
   edit = false;
-  allStudentsClean: any[];
   @ViewChild(MatMenuTrigger, {static: false}) trigger: MatMenuTrigger;
+
+  editAgendaForm: FormGroup;
+  editPartnerQuestionForm: FormGroup;
+  editVolunteerQuestionForm: FormGroup;
+
+  fairSubscription: Subscription;
+
+  studentsAgenda;
+  chaperonesAgenda;
+  volunteersAgenda;
+  partnersAgenda;
+
+  volunteersFAQ: any[];
+  partnersFAQ: any[];
+  faqQuestion: any;
+  faqAnswer: any;
+  time: any;
+  date: any;
+  address: any;
+  city: any;
+  state: any;
+  zip: any;
+  summary: any;
+  editVolunteerForm: FormGroup;
 
   constructor(
     private router: Router,
+    private formBuilder: FormBuilder,
     private fairs: FairsService,
     public dialog: MatDialog,
-    private activatedRoute: ActivatedRoute) { }
+    private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute) {
+
+      const id  = this.activatedRoute.snapshot.paramMap.get('id');
+      this.id = id;
+      this.fairSubscription = this.fairs.getFair(id).subscribe(
+        fair => {
+        this.fair = fair['fair'];
+        this.title = this.fair.title;
+        this.time = this.fair.time;
+        this.date = this.fair.date;
+        this.address = this.fair.address;
+        this.city = this.fair.city;
+        this.state = this.fair.state;
+        this.zip = this.fair.zip;
+        this.summary = this.fair.summary;
+
+        this.fairs.studentAgenda$.next(this.fair['studentAgenda']);
+        this.fairs.chaperoneAgenda$.next(this.fair['chaperoneAgenda']);
+        this.fairs.volunteerAgenda$.next(this.fair['volunteerAgenda']);
+        this.fairs.partnerAgenda$.next(this.fair['partnerAgenda']);
+        this.fairs.partnerFAQ$.next(this.fair[
+          'partnerFAQ']);
+        this.fairs.volunteerFAQ$.next(this.fair[
+          'volunteerFAQ']);
+        this.fairs.partners$.next(this.fair[
+          'partners']);
+        this.fairs.volunteers$.next(this.fair[
+          'volunteers']);
+
+        this.fairs.studentAgenda$.subscribe(
+          data => {
+            this.studentsAgenda = data;
+          }
+        );
+        this.fairs.chaperoneAgenda$.subscribe(
+          data => {
+            this.chaperonesAgenda = data;
+          }
+        );
+        this.fairs.volunteerAgenda$.subscribe(
+          data => {
+            this.volunteersAgenda = data;
+          }
+        );
+        this.fairs.partnerAgenda$.subscribe(
+          data => {
+            this.partnersAgenda = data;
+          }
+        );
+        this.fairs.volunteerFAQ$.subscribe(
+          data => {
+            this.volunteersFAQ = data;
+          }
+        );
+        this.fairs.partnerFAQ$.subscribe(
+          data => {
+            this.partnersFAQ = data;
+          }
+        );
+        this.fairs.volunteers$.subscribe(
+          data => {
+            this.volunteers = data;
+          }
+        );
+        this.fairs.partners$.subscribe(
+          data => {
+            this.partners = data;
+          }
+        );
+
+        this.fair.date = format( new Date(this.fair.date), 'MMMM dd, yyyy');
+        this.fair.time = format( new Date(this.fair.date), 'hh:mm a');
+
+        const studentsBySchool = Object.values(fair['studentsBySchool']);
+        console.log();
+        const chaperonesBySchool = Object.values(fair['chaperonesBySchool']);
+
+
+        this.studentsBySchool = studentsBySchool;
+        this.chaperonesBySchool = chaperonesBySchool;
+
+        // console.log(this.fair);
+        // console.log('Students sorted by each school - Chaperones & Students\n');
+        // console.log(studentsBySchool);
+        // console.log('Chaperones sorted by each school - Chaperones & Students\n');
+        // console.log(chaperonesBySchool);
+        // console.log('Partners\n');
+        // console.log(this.partners);
+
+        // console.log('All students combined');
+        let allStudents = [].concat.apply([], studentsBySchool);
+        let allStudentsClean = [];
+
+        allStudents.filter( student => {
+          if (student.grade) {
+            allStudentsClean.push(student);
+          }
+        });
+        // console.log(allStudentsClean);
+        this.allStudentsClean = allStudentsClean;
+
+        // console.log('All lunches fron all schools combined combined');
+        let allLunches = [];
+        allStudents.filter( student => {
+          if (student.lunch) {
+            allLunches.push(student.lunch);
+          }
+        });
+        // console.log(allLunches);
+        this.allLunches = allLunches;
+
+        // Add an edit property to all the agenda objects
+        for (let item of this.fair['studentAgenda']) {
+          if (item) {
+            item.edit = false;
+          }
+        }
+        for (let item of this.fair['chaperoneAgenda']) {
+          if (item) {
+            item.edit = false;
+          }
+        }
+        for (let item of this.fair['volunteerAgenda']) {
+          if (item) {
+            item.edit = false;
+          }
+        }
+        for (let item of this.fair['partnerAgenda']) {
+          if (item) {
+            item.edit = false;
+          }
+        }
+
+        // FAQS
+        for (let item of this.fair['partnerFAQ']) {
+          if (item) {
+            item.edit = false;
+          }
+        }
+        for (let item of this.fair['volunteerFAQ']) {
+          if (item) {
+            item.edit = false;
+          }
+        }
+
+        for (let volunteer of this.fair['volunteers']) {
+          if (volunteer) {
+            volunteer.edit = false;
+          }
+        }
+        for (let partner of this.fair['partners']) {
+          if (partner) {
+            partner.edit = false;
+          }
+        }
+      });
+
+
+    }
+
+
+  ngOnDestroy(): void {
+    this.fairSubscription.unsubscribe();
+  }
 
   ngOnInit() {
-    const id  = this.activatedRoute.snapshot.paramMap.get('id');
-    this.id = id;
-
-    this.fairs.getFair(id).subscribe(
-      fair => {
-      this.fair = fair['fair'];
-      this.partners = this.fair.partners;
-      this.fair.date = format( new Date(this.fair.date), 'MMMM dd, yyyy');
-      this.fair.time = format( new Date(this.fair.date), 'hh:mm a');
-
-      const fairArray = Object.values(fair['fair']);
-      const studentsBySchool = Object.values(fair['studentsBySchool']);
-      console.log();
-      const chaperonesBySchool = Object.values(fair['chaperonesBySchool']);
-
-
-      this.studentsBySchool = studentsBySchool;
-      this.chaperonesBySchool = chaperonesBySchool;
-
-      // console.log(this.fair);
-      // console.log('Students sorted by each school - Chaperones & Students\n');
-      // console.log(studentsBySchool);
-      // console.log('Chaperones sorted by each school - Chaperones & Students\n');
-      // console.log(chaperonesBySchool);
-      // console.log('Partners\n');
-      // console.log(this.partners);
-
-      // console.log('All students combined');
-      let allStudents = [].concat.apply([], studentsBySchool);
-      let allStudentsClean = [];
-
-      allStudents.filter( student => {
-        if (student.grade) {
-          allStudentsClean.push(student);
-        }
-      });
-      // console.log(allStudentsClean);
-      this.allStudentsClean = allStudentsClean;
-
-      // console.log('All lunches fron all schools combined combined');
-      let allLunches = [];
-      allStudents.filter( student => {
-        if (student.lunch) {
-          allLunches.push(student.lunch);
-        }
-      });
-      // console.log(allLunches);
-      this.allLunches = allLunches;
-
-      // Add an edit property to all the agenda objects
-      for (let item of this.fair['studentAgenda']) {
-        if (item) {
-          item.edit = false;
-        }
-      }
-      for (let item of this.fair['chaperoneAgenda']) {
-        if (item) {
-          item.edit = false;
-        }
-      }
-      for (let item of this.fair['volunteerAgenda']) {
-        if (item) {
-          item.edit = false;
-        }
-      }
-      for (let item of this.fair['partnerAgenda']) {
-        if (item) {
-          item.edit = false;
-        }
-      }
 
 
 
-      // this.fairs.fairsSubject.next(fairsArray.reverse());
+    this.editAgendaForm = this.formBuilder.group({
+      time: [''],
+      title: [''],
+    });
 
-      // // Subscribe to Fairs Subject in Fairs Service for Real time update changes
-      // this.fairs.fairsSubject.subscribe(data => {
-      //   this.allFairs = data.reverse();
-      // });
+    this.editPartnerQuestionForm = this.formBuilder.group({
+      question: [''],
+      answer: [''],
+    });
+
+    this.editVolunteerQuestionForm = this.formBuilder.group({
+      question: [''],
+      answer: [''],
+    });
+
+    this.editVolunteerForm = this.formBuilder.group({
+      name: [''],
+      email: [''],
+      phone: [''],
     });
   }
 
-  back() {
+back() {
     console.log('Attempting navigation to fairs');
     this.router.navigate(['dashboard']);
   }
 
-  editAgendaItem(item) {
-    item.edit = true;
-    console.log('Attempting to Edit');
-  }
-
-  deleteAgendaItem(id, index) {
-    return this.fairs.deleteStudentAgendaItem(id, index).subscribe();
-  }
-
-  addAgendaItem(time, amOrPm, title) {
-    const formattedTime = time + '' + amOrPm;
-    return this.fairs.deleteStudentAgendaItem(formattedTime, title).subscribe();
-  }
-
     // Student Dialogs
-  printCSVDialog(): void {
+printCSVDialog(): void {
       const dialogRef = this.dialog.open(PrintDialogComponent, {
-        width: '250px',
+        width: '450px',
         // data: {name: this.name, animal: this.animal}
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -174,12 +300,12 @@ export class FairPageComponent implements OnInit {
       });
   }
 
-  deleteFair(id) {
+deleteFair(id) {
     console.log('deleting fair');
     this.fairs.deleteFair(id).subscribe();
   }
 
-  editFair(data) {
+editFair(data) {
     const dialogConfig = new MatDialogConfig();
     console.log(data);
 
@@ -207,24 +333,7 @@ export class FairPageComponent implements OnInit {
   }
 
   // Student Dialogs
-  addSchoolDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    this.dialog.open(AddSchoolDialogComponent);
-  }
-
-  deleteSchoolDialog(): void {
-    const dialogRef = this.dialog.open(DeleteSchoolDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
-
-  printStudentsDialog(): void {
+printStudentsDialog(): void {
     const dialogRef = this.dialog.open(PrintStudentsDialogComponent, {
       width: '500px',
       data: this.studentsBySchool
@@ -236,11 +345,80 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  addStudentSlotDialog(): void {
+editStudentAgendaItem(item) {
+    item.edit = true;
+    console.log('Attempting to Edit');
+    console.log(item.time);
+
+    this.editAgendaForm.get('time').setValue(item.time);
+    this.editAgendaForm.get('title').setValue(item.title);
+  }
+
+cancelEditStudentAgendaItem(item) {
+    item.edit = false;
+    console.log('Cancelling Edit');
+  }
+
+deleteStudentAgendaItem(id, index) {
+    this.fairs.deleteStudentAgendaItem(id, index).subscribe(
+      data => {
+        this.fairs.studentAgenda$.next(Object.values(data));
+        this.snackBar.open('You have Deleted an Agenda Item', 'Close', {
+          duration: 2000});
+      });
+    return;
+  }
+
+editStudentAgendaItemFinal(id, index) {
+  const timeValue = this.editAgendaForm.controls.time.value;
+  const title = this.editAgendaForm.controls.title.value;
+  let formattedTime = null;
+
+  // Add AM or PM to time value
+  function onTimeChange(time) {
+    const timeSplit = time.split(':');
+    let hours = time.split(':');
+    let minutes = time.split(':');
+    let meridian = time.split(':');
+    hours = timeSplit[0];
+    minutes = timeSplit[1];
+    if (hours > 12) {
+        meridian = 'PM';
+        hours -= 12;
+      } else if (hours < 12) {
+        meridian = 'AM';
+        if (hours === 0) {
+          hours = 12;
+        }
+      } else {
+        meridian = 'PM';
+      }
+
+    formattedTime = hours + ':' + minutes + ' ' + meridian;
+  }
+  onTimeChange(timeValue);
+  if (!timeValue) {
+    console.log('There was no time value!');
+  }
+  if (!title) {
+    console.log('There was no title!');
+  }
+  if (title && timeValue) {
+    return this.fairs.editStudentAgendaItem(id, index, formattedTime, title).subscribe(
+      data => {
+        this.fairs.studentAgenda$.next(Object.values(data));
+        this.snackBar.open('You have Editted an Agenda Item', 'Close', {
+          duration: 2000});
+      });
+  }
+  }
+
+addStudentSlotDialog(data): void {
     const dialogRef = this.dialog.open(AddStudentSlotDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '450px',
+      data: {id: this.id}
     });
+
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -248,9 +426,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  printStudentsAgendaDialog(): void {
+printStudentsAgendaDialog(): void {
     const dialogRef = this.dialog.open(PrintStudentAgendaDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -260,9 +438,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  deleteStudentSlotDialog(): void {
+deleteStudentSlotDialog(): void {
     const dialogRef = this.dialog.open(DeleteStudentSlotDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -273,9 +451,9 @@ export class FairPageComponent implements OnInit {
   }
 
   // Chaperone Dialogs
-  printChaperonesDialog(): void {
+printChaperonesDialog(): void {
     const dialogRef = this.dialog.open(PrintChaperonesDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -285,10 +463,74 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  addChaperoneSlotDialog(): void {
+editChaperoneAgendaItem(item) {
+    item.edit = true;
+    console.log('Attempting to Edit');
+  }
+
+cancelEditChaperoneAgendaItem(item) {
+    item.edit = false;
+    console.log('Cancelling Edit');
+  }
+
+deleteChaperoneAgendaItem(id, index) {
+    this.fairs.deleteStudentAgendaItem(id, index).subscribe(
+      data => {
+        this.fairs.studentAgenda$.next(Object.values(data));
+        this.snackBar.open('You have Deleted an Agenda Item', 'Close', {
+          duration: 2000});
+      });
+    return;
+  }
+
+editChaperoneAgendaItemFinal(id, index) {
+  const timeValue = this.editAgendaForm.controls.time.value;
+  const title = this.editAgendaForm.controls.title.value;
+  let formattedTime = null;
+
+  // Add AM or PM to time value
+  function onTimeChange(time) {
+    const timeSplit = time.split(':');
+    let hours = time.split(':');
+    let minutes = time.split(':');
+    let meridian = time.split(':');
+    hours = timeSplit[0];
+    minutes = timeSplit[1];
+    if (hours > 12) {
+        meridian = 'PM';
+        hours -= 12;
+      } else if (hours < 12) {
+        meridian = 'AM';
+        if (hours === 0) {
+          hours = 12;
+        }
+      } else {
+        meridian = 'PM';
+      }
+
+    formattedTime = hours + ':' + minutes + ' ' + meridian;
+  }
+  onTimeChange(timeValue);
+  if (!timeValue) {
+    console.log('There was no time value!');
+  }
+  if (!title) {
+    console.log('There was no title!');
+  }
+  if (title && timeValue) {
+    return this.fairs.editChaperoneAgendaItem(id, index, formattedTime, title).subscribe(
+      data => {
+        this.fairs.chaperoneAgenda$.next(Object.values(data));
+        this.snackBar.open('You have Editted an Agenda Item', 'Close', {
+          duration: 2000});
+      });
+  }
+  }
+
+addChaperoneSlotDialog(): void {
     const dialogRef = this.dialog.open(AddChaperoneSlotDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '450px',
+      data: {id: this.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -297,9 +539,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  printChaperoneAgendaDialog(): void {
+printChaperonesAgendaDialog(): void {
     const dialogRef = this.dialog.open(PrintChaperonesDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -309,9 +551,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  deleteChaperoneSlotDialog(): void {
+deleteChaperoneSlotDialog(): void {
     const dialogRef = this.dialog.open(DeleteChaperoneSlotDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -322,10 +564,10 @@ export class FairPageComponent implements OnInit {
   }
 
   // Partner Dialogs
-  addPartnerDialog(): void {
+addPartnerDialog(): void {
     const dialogRef = this.dialog.open(AddPartnerDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '450px',
+      data: {id: this.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -333,10 +575,9 @@ export class FairPageComponent implements OnInit {
       // this.animal = result;
     });
   }
-
-  printPartnersDialog(): void {
+printPartnersDialog(): void {
     const dialogRef = this.dialog.open(PrintPartnersDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -346,9 +587,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  deletePartnerDialog(): void {
+deletePartnerDialog(): void {
     const dialogRef = this.dialog.open(DeletePartnerDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -358,10 +599,74 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  addPartnerSlotDialog(): void {
+editPartnerAgendaItem(item) {
+    item.edit = true;
+    console.log('Attempting to Edit');
+  }
+
+cancelEditPartnerAgendaItem(item) {
+    item.edit = false;
+    console.log('Cancelling Edit');
+  }
+
+deletePartnerAgendaItem(id, index) {
+    this.fairs.deleteStudentAgendaItem(id, index).subscribe(
+      data => {
+        this.fairs.studentAgenda$.next(Object.values(data));
+        this.snackBar.open('You have Deleted an Agenda Item', 'Close', {
+          duration: 2000});
+      });
+    return;
+  }
+
+editPartnerAgendaItemFinal(id, index) {
+  const timeValue = this.editAgendaForm.controls.time.value;
+  const title = this.editAgendaForm.controls.title.value;
+  let formattedTime = null;
+
+  // Add AM or PM to time value
+  function onTimeChange(time) {
+    const timeSplit = time.split(':');
+    let hours = time.split(':');
+    let minutes = time.split(':');
+    let meridian = time.split(':');
+    hours = timeSplit[0];
+    minutes = timeSplit[1];
+    if (hours > 12) {
+        meridian = 'PM';
+        hours -= 12;
+      } else if (hours < 12) {
+        meridian = 'AM';
+        if (hours === 0) {
+          hours = 12;
+        }
+      } else {
+        meridian = 'PM';
+      }
+
+    formattedTime = hours + ':' + minutes + ' ' + meridian;
+  }
+  onTimeChange(timeValue);
+  if (!timeValue) {
+    console.log('There was no time value!');
+  }
+  if (!title) {
+    console.log('There was no title!');
+  }
+  if (title && timeValue) {
+    return this.fairs.editPartnerAgendaItem(id, index, formattedTime, title).subscribe(
+      data => {
+        this.fairs.partnerAgenda$.next(Object.values(data));
+        this.snackBar.open('You have Editted an Agenda Item', 'Close', {
+          duration: 2000});
+      });
+  }
+  }
+
+addPartnerSlotDialog(): void {
     const dialogRef = this.dialog.open(AddPartnerSlotDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '450px',
+      data: {id: this.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -370,9 +675,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  printPartnerAgendaDialog(): void {
+printPartnerAgendaDialog(): void {
     const dialogRef = this.dialog.open(PrintPartnerAgendaDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -382,9 +687,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  deletePartnerSlotDialog(): void {
+deletePartnerSlotDialog(): void {
     const dialogRef = this.dialog.open(DeletePartnerSlotDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -394,10 +699,10 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  addPartnerFAQDialog(): void {
+addPartnerFAQDialog(): void {
     const dialogRef = this.dialog.open(AddPartnerFaqDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '450px',
+      data: {id: this.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -406,9 +711,48 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  printPartnerFAQDialog(): void {
+editPartnerQuestion(item) {
+    console.log('Attempting to edit partner question');
+    item.edit = true;
+    this.editPartnerQuestionForm.get('question').setValue(item.question);
+    this.editPartnerQuestionForm.get('answer').setValue(item.answer);
+  }
+
+deletePartnerQuestion(id, index) {
+    console.log('Attempting to delete partner question');
+    this.fairs.deletePartnerFAQ(id, index).subscribe(
+      data => {
+        this.fairs.partnerFAQ$.next(Object.values(data));
+        this.snackBar.open('You have Deleted an FAQ', 'Close', {
+          duration: 2000});
+      });
+    return;
+  }
+
+editPartnerQuestionFinal(id, index) {
+    console.log('Attempting to edit partner question FINAL');
+    const question = this.editPartnerQuestionForm.controls.question.value;
+    const answer = this.editPartnerQuestionForm.controls.answer.value;
+
+    console.log(question);
+    console.log(answer);
+
+    return this.fairs.editPartnerFAQ(id, index, question, answer).subscribe(
+      data => {
+        this.fairs.partnerFAQ$.next(Object.values(data));
+        this.snackBar.open('You have Editted an FAQ', 'Close', {
+          duration: 2000});
+      });
+  }
+
+cancelEditQuestion(item) {
+    console.log('Attempting to cancel edit question');
+    item.edit = false;
+  }
+
+printPartnerFAQDialog(): void {
     const dialogRef = this.dialog.open(PrintPartnerFaqDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -418,9 +762,9 @@ export class FairPageComponent implements OnInit {
     });
   }
 
-  deletePartnerFAQDialog(): void {
+deletePartnerFAQDialog(): void {
     const dialogRef = this.dialog.open(DeletePartnerFaqDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -431,10 +775,11 @@ export class FairPageComponent implements OnInit {
   }
 
   // Volunteer Dialogs
+
   addVolunteerDialog(): void {
     const dialogRef = this.dialog.open(AddVolunteerDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '450px',
+      data: {id: this.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -443,9 +788,44 @@ export class FairPageComponent implements OnInit {
     });
   }
 
+  editVolunteer(volunteer): void {
+    console.log('Attempting to EDIT Volunteer');
+    volunteer.edit = true;
+    let name = this.editVolunteerForm.get('name').setValue(volunteer.name);
+    let email = this.editVolunteerForm.get('email').setValue(volunteer.email);
+    let phone = this.editVolunteerForm.get('phone').setValue(volunteer.phone);
+
+  }
+
+  editVolunteerFinal(id, index) {
+    let name = this.editVolunteerForm.get('name').value;
+    let email = this.editVolunteerForm.get('email').value;
+    let phone = this.editVolunteerForm.get('phone').value;
+    this.fairs.editVolunteer(id, index, name, email, phone).subscribe(
+      data => {
+        this.fairs.volunteers$.next(Object.values(data));
+      }
+    );
+  }
+
+  cancelEditVolunteer(volunteer) {
+    console.log('Attempting to cancel edit volunteer');
+    volunteer.edit = false;
+
+  }
+
+  deleteVolunteer(id, index): void {
+    console.log('Attempting to DELETE Volunteer');
+    this.fairs.deleteVolunteer(id, index).subscribe(
+      data => {
+        this.fairs.volunteers$.next(Object.values(data));
+      }
+    );
+  }
+
   printVolunteersDialog(): void {
     const dialogRef = this.dialog.open(PrintVolunteersDialogComponent, {
-      width: '250px',
+      width: '450px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -456,87 +836,186 @@ export class FairPageComponent implements OnInit {
   }
 
   deleteVolunteerDialog(): void {
-    const dialogRef = this.dialog.open(DeleteVolunteerDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+      const dialogRef = this.dialog.open(DeleteVolunteerDialogComponent, {
+        width: '450px',
+        // data: {name: this.name, animal: this.animal}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
+
+  editVolunteerAgendaItem(item) {
+      item.edit = true;
+      console.log('Attempting to Edit');
+
+    }
+
+  cancelEditVolunteerAgendaItem(item) {
+      item.edit = false;
+      console.log('Cancelling Edit');
+    }
+
+  deleteVolunteerAgendaItem(id, index) {
+      this.fairs.deleteVolunteerAgendaItem(id, index).subscribe(
+        data => {
+          this.fairs.volunteerAgenda$.next(Object.values(data));
+          this.snackBar.open('You have Deleted an Agenda Item', 'Close', {
+            duration: 2000});
+        });
+      return;
+    }
+
+  editVolunteerAgendaItemFinal(id, index) {
+    const timeValue = this.editAgendaForm.controls.time.value;
+    const title = this.editAgendaForm.controls.title.value;
+    let formattedTime = null;
+
+    // Add AM or PM to time value
+    function onTimeChange(time) {
+      const timeSplit = time.split(':');
+      let hours = time.split(':');
+      let minutes = time.split(':');
+      let meridian = time.split(':');
+      hours = timeSplit[0];
+      minutes = timeSplit[1];
+      if (hours > 12) {
+          meridian = 'PM';
+          hours -= 12;
+        } else if (hours < 12) {
+          meridian = 'AM';
+          if (hours === 0) {
+            hours = 12;
+          }
+        } else {
+          meridian = 'PM';
+        }
+
+      formattedTime = hours + ':' + minutes + ' ' + meridian;
+    }
+    onTimeChange(timeValue);
+    if (!timeValue) {
+      console.log('There was no time value!');
+    }
+    if (!title) {
+      console.log('There was no title!');
+    }
+    if (title && timeValue) {
+      return this.fairs.editVolunteerAgendaItem(id, index, formattedTime, title).subscribe(
+        data => {
+          this.fairs.volunteerAgenda$.next(Object.values(data));
+          this.snackBar.open('You have Editted an Agenda Item', 'Close', {
+            duration: 2000});
+        });
+    }
+    }
 
   addVolunteerSlotDialog(): void {
-    const dialogRef = this.dialog.open(AddVolunteerSlotDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+      const dialogRef = this.dialog.open(AddVolunteerSlotDialogComponent, {
+        width: '450px',
+        data: {id: this.id}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
 
   printVolunteerAgendaDialog(): void {
-    const dialogRef = this.dialog.open(PrintVolunteerAgendaDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+      const dialogRef = this.dialog.open(PrintVolunteerAgendaDialogComponent, {
+        width: '450px',
+        // data: {name: this.name, animal: this.animal}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
 
   deleteVolunteerSlotDialog(): void {
-    const dialogRef = this.dialog.open(DeleteVolunteerDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+      const dialogRef = this.dialog.open(DeleteVolunteerDialogComponent, {
+        width: '450px',
+        // data: {name: this.name, animal: this.animal}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
 
   addVolunteerFAQDialog(): void {
-    const dialogRef = this.dialog.open(AddVolunteerFaqDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+      const dialogRef = this.dialog.open(AddVolunteerFaqDialogComponent, {
+        width: '450px',
+        data: {id: this.id}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
+
+  editVolunteerQuestion(item) {
+    console.log('Attempting to edit partner question');
+    item.edit = true;
+    this.editVolunteerQuestionForm.get('question').setValue(item.question);
+    this.editVolunteerQuestionForm.get('answer').setValue(item.answer);
+    }
+
+  deleteVolunteerQuestion(id, index) {
+    console.log('Attempting to delete partner question');
+    this.fairs.deleteVolunteerFAQ(id, index).subscribe(
+      data => {
+        this.fairs.volunteerFAQ$.next(Object.values(data));
+        this.snackBar.open('You have Deleted an FAQ', 'Close', {
+        duration: 2000});
+        });
+    return;
   }
+
+  editVolunteerQuestionFinal(id, index) {
+      console.log('Attempting to edit volunteer question FINAL');
+      const question = this.editVolunteerQuestionForm.controls.question.value;
+      const answer = this.editVolunteerQuestionForm.controls.answer.value;
+
+      console.log(question);
+      console.log(answer);
+
+      return this.fairs.editVolunteerFAQ(id, index, question, answer).subscribe(
+        data => {
+          this.fairs.volunteerFAQ$.next(Object.values(data));
+          this.snackBar.open('You have Editted an FAQ', 'Close', {
+            duration: 2000});
+        });
+    }
 
   printVolunteersFAQDialog(): void {
-    const dialogRef = this.dialog.open(PrintVolunteerFaqDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+      const dialogRef = this.dialog.open(PrintVolunteerFaqDialogComponent, {
+        width: '450px',
+        // data: {name: this.name, animal: this.animal}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
 
   deleteVolunteerFAQDialog(): void {
-    const dialogRef = this.dialog.open(DeleteVolunteerFaqDialogComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
+      const dialogRef = this.dialog.open(DeleteVolunteerFaqDialogComponent, {
+        width: '450px',
+        // data: {name: this.name, animal: this.animal}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
 
 }
