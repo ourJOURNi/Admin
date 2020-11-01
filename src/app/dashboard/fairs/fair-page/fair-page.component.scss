@@ -43,12 +43,19 @@
   color: red !important;
 }
 
+.divider {
+  margin-bottom: 40px;
+}
 
 
 .inner-panel {
-  border: 2px solid #444;
-  color: #005191;
-  box-shadow: none;
+  background: white;
+  width: 80%;
+  margin-bottom: 30px;
+  border: 1.5px solid #005191;
+  border-radius: 5px;
+  padding: 12px;
+  box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
 }
 
 .usertype-header{
@@ -81,11 +88,19 @@ h4 {
   color: green;
 }
 
+.mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
+  margin-right: 16px;
+  color: #005191;
+  font-size: 0.8em;
+  box-shadow: none;
+}
+
 
 mat-expansion-panel {
-  margin-bottom: 20px;
-  background: rgb(247, 247, 247);
+  background: none;
   box-shadow: none;
+  border: 2px solid #005191;
+  margin-bottom: 30px;
 
   .panel-toolbar {
     position: relative;
@@ -186,6 +201,10 @@ mat-expansion-panel {
   padding: 70px 20px;
 }
 
+.volunteers {
+  margin-bottom: 100px;
+}
+
 @media screen and (min-width: 860px) {
   .fair-info,
   .students,
@@ -209,10 +228,10 @@ mat-expansion-panel {
 }
 
 .agenda-item {
-  height: 65px;height: 65px;
+  height: 65px;
   background: white;
   margin-bottom: 27px;
-  border: 1.5px solid #005191;
+  border: 2.5px solid #005191;
   border-radius: 5px;
   padding: 12px;
   box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
@@ -391,18 +410,23 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .faq-question-edit {
   display: block;
-  width: 100%;
-  padding: 0.3em;
+  width: 80%;
+  height: 40px;
+  padding: 0.8em;
   margin-bottom: 20px;
   font-size: 1.3em;
+  border-radius: 5px;
 }
 
 .faq-answer-edit {
   display: block;
-  width: 100%;
-  padding: 0.3em;
+  width: 80%;
+  padding: 0.8em;
   margin-bottom: 20px;
-  font-size: 1.3em;
+  font-size: 1.35em;
+  border-radius: 5px;
+  border: 2px solid #333;
+  line-height: 1.5em;
 }
 
 .volunteer {
@@ -426,35 +450,45 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 
-.faq-edit-button,
-.volunteer-edit-button{
+.faq-edit-button{
   background: #005191;
   color: white;
-  width: 60px;
-  height: 30px;
+  width: 80px;
+  height: 40px;
   border-radius: 5px;
   border: none;
   margin-right: 20px;
   margin-bottom: 50px;
 }
+.volunteer-edit-button{
+  background: #005191;
+  color: white;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 20px;
+  margin-left: 33px;
+  margin-bottom: 50px;
+}
 
 .faq-cancel-button,
 .volunteer-cancel-button{
-  background: #999;
+  background: rgb(214, 214, 214);
   color: #222;
-  width: 60px;
-  height: 30px;
+  width: 80px;
+  height: 40px;
   border-radius: 5px;
   border: none;
   margin-bottom: 100px;
 }
 
-.add-volunteer-name,
-.add-volunteer-email,
-.add-volunteer-phone {
+.add-volunteer-input {
   display: block;
-  height: 30px;
-  padding: 5px 5px;
-  margin: 8px 0;
+  height: 40px;
+  padding: 5px 15px;
+  font-size: 1.3em;
+  margin: 35px auto;
+  width: 400px;
 }
 

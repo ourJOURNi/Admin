@@ -819,6 +819,8 @@ deletePartnerFAQDialog(): void {
     this.fairs.deleteVolunteer(id, index).subscribe(
       data => {
         this.fairs.volunteers$.next(Object.values(data));
+        this.snackBar.open('You have Deleted a Volunteer', 'Close', {
+          duration: 2000});
       }
     );
   }
@@ -834,18 +836,6 @@ deletePartnerFAQDialog(): void {
       // this.animal = result;
     });
   }
-
-  deleteVolunteerDialog(): void {
-      const dialogRef = this.dialog.open(DeleteVolunteerDialogComponent, {
-        width: '450px',
-        // data: {name: this.name, animal: this.animal}
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        // this.animal = result;
-      });
-    }
 
   editVolunteerAgendaItem(item) {
       item.edit = true;

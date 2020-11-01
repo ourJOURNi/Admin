@@ -454,7 +454,7 @@
         </button>
       </mat-toolbar>
       <div *ngFor="let item of partnersFAQ; let i = index">
-        <div *ngIf="!item.edit">
+        <div *ngIf="!item.edit" class="faq-wrapper">
           <h3 class="faq-question">
             <button mat-button style="display: inline;" [matMenuTriggerFor]="agendaMenu">
             <mat-icon>edit</mat-icon>
@@ -534,17 +534,17 @@
           <form style="display: inline;" [formGroup]="editVolunteerForm">
             <input
               type="text"
-              class="add-volunteer-name"
+              class="add-volunteer-input"
               formControlName="name"
               placeholder="Fullname" />
             <input
               type="email"
-              class="add-volunteer-email"
+              class="add-volunteer-input"
               formControlName="email"
               placeholder="Email" />
             <input
               type="phone"
-              class="add-volunteer-phone"
+              class="add-volunteer-input"
               formControlName="phone"
               maxlength="10"
               placeholder="(xxx) - xxxxx" />
@@ -655,14 +655,15 @@
             <mat-icon>edit</mat-icon>
             </button>
             <mat-menu #agendaMenu="matMenu">
-              <button mat-menu-item (click)="editVolunteerQuestion(item)">Edit Question</button>
-              <button mat-menu-item (click)="deleteVolunteerQuestion(this.id, i)">Delete Question</button>
+              <button mat-menu-item (click)="editVolunteerQuestion(item)">Edit Volunteer</button>
+              <button mat-menu-item (click)="deleteVolunteerQuestion(this.id, i)">Delete Volunteer</button>
             </mat-menu>
           {{item.question}}</h3>
           <p class="faq-answer">{{item.answer}}</p>
         </div>
         <div *ngIf="item.edit">
           <!-- Edit Mode -->
+          <h3 style="margin-top: 30px; margin-bottom: 30px;">Edit FAQ</h3>
           <form style="display: inline;" [formGroup]="editVolunteerQuestionForm">
             <input
               type="text"
@@ -676,6 +677,7 @@
             </textarea>
             <button class="faq-edit-button" (click)="editVolunteerQuestionFinal(this.id, i)">Edit</button>
             <button class="faq-cancel-button" (click)="cancelEditQuestion(item)">Cancel</button>
+            <mat-divider class="divider"></mat-divider>
           </form>
         </div>
       </div>
