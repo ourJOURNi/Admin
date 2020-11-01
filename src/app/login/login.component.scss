@@ -8,14 +8,92 @@
   padding: 65px;
 }
 
+img {
+  height: 80px;
+  margin: 15px 0 30px 0;
+  opacity: 0;
+  animation: slide-up 500ms ease-in forwards;
+}
+
+h1 {
+  border-bottom: 3px solid #005191;
+  padding-bottom: 35px;
+  font-family: Helvetica;
+  font-size: 2.5em;
+  color: #444;
+  opacity: 0;
+  animation: slide-up 500ms ease-in 500ms forwards;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 button {
   margin: 0 auto;
   position: relative;
   top: 50px;
   color: white;
+  padding: 2px 58px;
   background: #005191;
+  font-size: 1.2em;
 }
 
 form {
   margin-top: 50px;
+}
+
+// mat-icon-stepper selected color change
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #333!important;
+}
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #005191!important;
+  opacity: 0.25!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #005191!important;
+  opacity: 1!important;
+}
+
+// mat-input error outline color
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+  color: red!important;
+  opacity: 0.8!important;
+}
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+  caret-color: #333!important;
+}
+
+// mat-input error carent color
+::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+  caret-color: #333!important;
+}
+
+// mat-label normal state style
+::ng-deep .mat-form-field-label {
+  color: rgba(0,0,0,.6)!important;
+  // color: $mainColor!important;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #333!important;
+}
+
+// mat-label error style
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: #333!important;
 }
