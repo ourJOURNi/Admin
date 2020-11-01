@@ -65,8 +65,12 @@
 }
 
 h4 {
-  color: #333;
-  margin: 5px 0;
+  color: #005191;
+  margin: 11px 0;
+
+  span {
+    margin-right: 10px;
+  }
 }
 
 .usertype-description {
@@ -196,6 +200,7 @@ mat-expansion-panel {
   background: #005191;
   color: white;
   margin: 40px auto 0px auto;
+  font-size: 1.2em;
 }
 
 .fair-info,

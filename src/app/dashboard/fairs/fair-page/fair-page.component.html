@@ -7,10 +7,10 @@
 
 <!-- Fair Info -->
 <div class="fair-info">
-  <h1>{{title}}</h1>
-  <h4>{{fair.time}}</h4>
-  <h4>{{fair.date}}</h4>
-  <h4>{{fair.address}}, {{fair.city}}, {{fair.state}}, {{fair.zip}}</h4>
+  <h1 style="margin-bottom: 50px;">{{title}}</h1>
+  <h4><span>&middot;</span>{{fair.time}}</h4>
+  <h4><span>&middot;</span>{{fair.date}}</h4>
+  <h4><span>&middot;</span>{{fair.address}}, {{fair.city}}, {{fair.state}}, {{fair.zip}}</h4>
   <p style="font-size: 1.2em; width: 750px;
   line-height: 1.6em;">{{fair.summary}}</p>
   <button id="edit-fair-info-button" class="page-button" (click)="editFair(fair)">Edit</button>
