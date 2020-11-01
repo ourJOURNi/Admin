@@ -339,14 +339,14 @@
       <mat-expansion-panel-header>
         <mat-panel-title style="font-size: 1.4em;">
           <img class="partner-logo" src="{{partner.logo}}" alt="">
-          <p>{{partner.organization}}
-            <span class="verified" *ngIf="partner.verified">Verified</span>
-            <span class="unverified" *ngIf="!partner.verified">Unverified</span>
-          </p>
+          <span class="verified" *ngIf="partner.verified">Verified</span>
+          <span class="unverified" *ngIf="!partner.verified">Unverified</span>
+          <p>{{partner.organization}}</p>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="partner-info">
-        <h2>Contact Info</h2>
+        <mat-slide-toggle>Slide me!</mat-slide-toggle>
+        <h2 style="margin: 25px 0;">Contact Info</h2>
         <p>Name: {{partner.name}}</p>
         <p>Email: {{partner.email}}</p>
         <p>Phone: {{partner.phone}}</p>
@@ -354,8 +354,8 @@
         <p>Lunch: {{partner.lunch}}</p>
         <p>Colleagues: {{partner.colleagues}}</p>
 
-        <h2>Partner Description</h2>
-        <p>{{partner.description}}</p>
+        <h2 style="margin: 25px 0;">Partner Description</h2>
+        <p style="line-height: 1.5em;">{{partner.description}}</p>
       </div>
     </mat-expansion-panel>
   </mat-expansion-panel>

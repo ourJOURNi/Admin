@@ -168,11 +168,17 @@ mat-expansion-panel {
 .verified{
   font-size: 0.7em;
   color: green;
+  position: relative;
+  top: 22px;
+  width: 90px;
 }
 
 .unverified{
   font-size: 0.7em;
   color: red;
+  position: relative;
+  top: 22px;
+  width: 90px;
 }
 
 .partner-info {
@@ -231,7 +237,7 @@ mat-expansion-panel {
   height: 65px;
   background: white;
   margin-bottom: 27px;
-  border: 2.5px solid #005191;
+  border: 2.5px solid #999;
   border-radius: 5px;
   padding: 12px;
   box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
@@ -376,7 +382,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-size: 1.7em;
   background: white;
   width: 200px;
-  border: 1.5px solid #005191;
+  border: 2px solid #333;
   border-radius: 5px;
   padding: 12px;
   box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
@@ -386,7 +392,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background: white;
   width: 80%;
   margin-bottom: 30px;
-  border: 1.5px solid #005191;
+  border: 2px solid #333;
   border-radius: 5px;
   padding: 12px;
   box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
