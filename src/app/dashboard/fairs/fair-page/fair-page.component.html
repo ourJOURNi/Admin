@@ -527,6 +527,7 @@
         </h2>
           <p>{{volunteer.phone}}</p>
           <p>{{volunteer.email}}</p>
+          <p>{{volunteer.email}}</p>
         </div>
         <div *ngIf="volunteer.edit">
           <!-- Edit Mode -->
@@ -648,7 +649,7 @@
         </button>
       </mat-toolbar>
       <div *ngFor="let item of volunteersFAQ; let i = index">
-        <div *ngIf="!item.edit">
+        <div *ngIf="!item.edit" class="faq-wrapper">
           <h3 class="faq-question">
             <button mat-button style="display: inline;" [matMenuTriggerFor]="agendaMenu">
             <mat-icon>edit</mat-icon>

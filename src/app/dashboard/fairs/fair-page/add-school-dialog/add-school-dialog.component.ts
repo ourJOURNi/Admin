@@ -16,8 +16,4 @@ export class AddSchoolDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  addSchool() {
-    this.fairs.addSchool('School').subscribe();
-  }
-
 }
