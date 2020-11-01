@@ -36,6 +36,7 @@ import { DeleteVolunteerFaqDialogComponent } from './delete-volunteer-faq-dialog
 import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.component';
 import { EditFairDialogComponent } from '../edit-fair-dialog/edit-fair-dialog.component';
 import { Subscription } from 'rxjs';
+import { DeleteFairsDialogComponent } from '../delete-fair-dialog/delete-fair-dialog.component';
 
 @Component({
   selector: 'app-fair-page',
@@ -302,7 +303,16 @@ printCSVDialog(): void {
 
 deleteFair(id) {
     console.log('deleting fair');
-    this.fairs.deleteFair(id).subscribe();
+    const dialogRef = this.dialog.open(DeleteFairsDialogComponent, {
+      width: '450px',
+      data: {
+        id: this.id,
+        title: this.title
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 editFair(data) {

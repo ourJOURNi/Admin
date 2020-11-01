@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { FairsService } from '../../../services/fairs.service';
 import { format } from 'date-fns';
 
@@ -26,19 +26,12 @@ export class DeleteFairsDialogComponent implements OnInit {
 
   constructor(
     private fairs: FairsService,
+    private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<DeleteFairsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
 
       this.id = data.id;
       this.title = data.title;
-      this.date = data.date;
-      this.address = data.address;
-      this.city = data.city;
-      this.state = data.state;
-      this.zip = data.zip;
-      this.dateCreated = data.dateCreated;
-      this.description = data.description;
-      this.photo = data.photo;
     }
 
   ngOnInit() {
@@ -55,6 +48,8 @@ export class DeleteFairsDialogComponent implements OnInit {
         }
 
         this.fairs.fairsSubject.next(fairsArray.reverse());
+        this.snackBar.open('You have Deleted this Fair', 'Close', {
+          duration: 2000});
         this.dialogRef.close();
 
       });
