@@ -16,7 +16,6 @@
           </mat-card-header>
 
           <mat-card-content>
-            <img mat-card-image src="../../../assets/logo-2.png">
               <p><span>Company Name:</span> {{event.organizer}}</p>
               <p><span>Date:</span> {{event.date}}</p>
               <p><span>Time:</span> {{event.time}}</p>
@@ -27,6 +26,19 @@
               <p><span>Zip:</span> {{event.zip}}</p>
               <p><span>Description:</span><br><br> {{event.description}}</p>
           </mat-card-content>
+
+          <mat-accordion>
+            <mat-expansion-panel
+             (opened)="panelOpenState = true"
+             (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+               <mat-panel-title>
+                 <h2 style="margin: 30px 0px;">Event Photo</h2>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <img mat-card-image src="../../../assets/logo-2.png">
+            </mat-expansion-panel>
+           </mat-accordion>
             <mat-card-actions>
               <button class="card-button" (click)="openEditEventDialog(event)">Edit</button>
               <button class="delete-button" (click)="openDeleteDialog(event)">Delete</button>

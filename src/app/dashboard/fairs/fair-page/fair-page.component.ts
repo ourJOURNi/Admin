@@ -463,8 +463,8 @@ deleteStudentSlotDialog(): void {
   // Chaperone Dialogs
 printChaperonesDialog(): void {
     const dialogRef = this.dialog.open(PrintChaperonesDialogComponent, {
-      width: '450px',
-      // data: {name: this.name, animal: this.animal}
+      width: '500px',
+      data: this.chaperonesBySchool
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -587,8 +587,8 @@ addPartnerDialog(): void {
   }
 printPartnersDialog(): void {
     const dialogRef = this.dialog.open(PrintPartnersDialogComponent, {
-      width: '450px',
-      // data: {name: this.name, animal: this.animal}
+      width: '500px',
+      data: this.partners
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -837,8 +837,8 @@ deletePartnerFAQDialog(): void {
 
   printVolunteersDialog(): void {
     const dialogRef = this.dialog.open(PrintVolunteersDialogComponent, {
-      width: '450px',
-      // data: {name: this.name, animal: this.animal}
+      width: '500px',
+      data: this.volunteers
     });
 
     dialogRef.afterClosed().subscribe(result => {

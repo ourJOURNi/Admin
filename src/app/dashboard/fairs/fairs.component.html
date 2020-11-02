@@ -6,8 +6,8 @@
 <div class="container">
   <div *ngFor="let fair of allFairs" class="fair-link">
     <h3 id="fair-title">{{fair.title}}</h3>
-    <h4 class="fair-date">{{fair.date}}</h4>
-    <h4 class="fair-date">{{fair.time}}</h4>
+    <h5 class="fair-date">{{fair.date}}</h5>
+    <h5 class="fair-date">{{fair.time}}</h5>
     <button (click)="fairPage(fair._id)">View</button>
   </div>
   <!-- <mat-card *ngFor="let fair of allFairs">

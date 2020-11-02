@@ -222,10 +222,22 @@ mat-expansion-panel {
   .chaperones,
   .partners,
   .volunteers {
-    padding: 70px 300px;
+    padding: 70px 100px;
   }
   .top-bar {
-    padding: 20px 290px;
+    padding: 20px 90px;
+  }
+}
+@media screen and (max-width: 870px) {
+  .fair-info,
+  .students,
+  .chaperones,
+  .partners,
+  .volunteers {
+    padding: 70px 30px;
+  }
+  .top-bar {
+    padding: 20px 29px;
   }
 }
 
