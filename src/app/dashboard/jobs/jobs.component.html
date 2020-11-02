@@ -1,12 +1,11 @@
     <mat-toolbar>
       <mat-toolbar-row>
-        <h3 class="page-header">Jobs: {{allJobs.length}}</h3>
+        <h3 class="page-header"><span>Jobs: {{allJobs.length}}</span>  - View, Edit, and Delete all Jobs on the FYF App.</h3>
         <span class="spacer"></span>
         <button class="page-button" (click)="openAddJobDialog()">Add</button>
       </mat-toolbar-row>
     </mat-toolbar>
     <div class="container">
-      <h4 class="page-description">View, Edit, and Delete all Jobs on the FYF App.</h4>
       <form>
         <mat-form-field class="search">
           <mat-label>Search for Job</mat-label>
@@ -15,16 +14,19 @@
       </form>
         <mat-card *ngFor="let job of allJobs">
             <mat-card-header>
-              <img mat-card-avatar class="pictures" src="{{job.companyLogo}}" alt="Job Logo">
-                <mat-card-title>{{job.title}}</mat-card-title>
-                <mat-card-subtitle>{{job.companyEmail}}</mat-card-subtitle>
-                <mat-card-subtitle>{{job.date}}</mat-card-subtitle>
+              <img mat-card-avatar class="pictures">
+              <!-- <img mat-card-avatar class="pictures" src="{{job.companyLogo}}" alt="Job Logo"> -->
+              <mat-card-title>{{job.title}}</mat-card-title>
+              <mat-card-subtitle>{{job.companyEmail}}</mat-card-subtitle>
+              <mat-card-subtitle>{{job.date}}</mat-card-subtitle>
               </mat-card-header>
 
               <mat-card-content>
-                  <p style="color: green;">{{job.rateOfPay}}/hr</p>
-                  <p>Summary: {{job.summary}}</p>
-                  <p>Full Job Description: {{job.fullJobDescription}}</p>
+                  <p class="rate-of-pay">{{job.rateOfPay}} /hr</p>
+                  <h4 style="margin-top: 20px;">Summary:</h4>
+                  <p>{{job.summary}}</p>
+                  <h4>Full Job Description: </h4>
+                  <p>{{job.fullJobDescription}}</p>
                 </mat-card-content>
                 <mat-card-actions>
                   <button class="card-button" (click)="openEditDialog(job)">Edit</button>

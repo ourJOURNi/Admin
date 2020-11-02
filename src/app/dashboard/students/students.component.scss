@@ -2,8 +2,28 @@ img {
   height: 40px;
   width: 40px;
   border-radius: 50px;
+  position: relative;
+  top: -10px;
 }
 
 h1 {
   margin-left: 50px;
+}
+
+p {
+  line-height: 0.6em;
+  font-size: 1em;
+}
+
+span:first-child {
+  width: 100px;
+  display: inline-block;
+  font-weight: 700;
+  color: #005191;
+}
+
+span {
+  width: 70px;
+  display: inline-block;
+  font-weight: 700;
 }

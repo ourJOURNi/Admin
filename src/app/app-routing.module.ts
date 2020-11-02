@@ -20,7 +20,7 @@ import { FairPageComponent } from './dashboard/fairs/fair-page/fair-page.compone
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
-    { path: '', component: FairsComponent, outlet: 'open'},
+    { path: '', component: StudentsComponent, outlet: 'open'},
     { path: 'fairs', component: FairsComponent, outlet: 'open'},
     { path: 'jobs', component: JobsComponent, outlet: 'open'},
     { path: 'students', component: StudentsComponent,  outlet: 'open' },

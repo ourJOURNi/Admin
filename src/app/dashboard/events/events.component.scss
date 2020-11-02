@@ -3,6 +3,13 @@ mat-grid-tile {
   align-items: flex-start !important;
 }
 
+span:first-child {
+  width: 100px;
+  display: inline-block;
+  font-weight: 700;
+  color: #005191;
+}
+
 span {
   font-weight: 600;
 }

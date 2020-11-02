@@ -4,6 +4,10 @@ html, body { height: 100%; }
 
 body { margin: 0; font-family: Helvetica, Arial, sans-serif; }
 
+h4 {
+  color: #005191;
+}
+
 .page-description {
   margin: 40px 0px 40px 20px;
 }
@@ -14,10 +18,54 @@ mat-form-field {
 }
 
 mat-card {
-  margin: 40px 20px;
-  padding: 20px;
-  width: 600px;
-  box-shadow: 1px 1px 20px rgba(0,0,0,0.15);
+  margin-bottom: 100px;
+  background: white;
+  width: 80%;
+  border: 1.5px solid #005191;
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+  padding: 5px 19px 27px 33px;
+}
+
+.mat-card {
+  padding: 5px 19px 27px 33px;
+}
+
+.mat-card-actions {
+  padding: 6em 0em;
+}
+
+.mat-card-content, .mat-card-subtitle {
+  font-size: 1.05em;
+  line-height: 1.55em;
+}
+
+.mat-card-content>:first-child, .mat-card>:first-child {
+  margin-top: 30px;
+}
+
+.mat-card-header {
+    display: flex;
+    flex-direction: row;
+    margin: 48px 0px;
+    position: relative;
+    top: 30px;
+}
+
+.rate-of-pay {
+  font-size: 0.85em;
+  font-weight: 700;
+  margin-top: 20px;
+  background-color: white;
+  border: 1px solid #21ce99;
+  width: 50px;
+  padding: 0.1em 0.7em;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  position: relative;
+  top: 10px;
+  color: #21ce99;
+
 }
 
 mat-toolbar {
@@ -28,8 +76,14 @@ mat-toolbar {
 }
 
 .search {
-  width: 600px;
-  margin-left: 20px;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+
+.mat-form-field-flex {
+  font-size: 1.2em;
+  padding-bottom: 1em;
 }
 
 .float-left {
@@ -43,15 +97,6 @@ mat-toolbar {
   background: lightblue;
 }
 
-mat-card-content{
-  background: rgba(240,240,240, 0.4);
-  padding: 40px;
-
-  p {
-    width: 400px;
-  }
-}
-
 .card-button {
   color: #005191;
   border: 1px solid #005191;
@@ -61,14 +106,27 @@ mat-card-content{
   margin-left: 10px;
   margin-bottom: 10px;
   font-size: 0.7em;
+  width: 100px;
+}
+
+.delete-button {
+  color: #e4405f;
+  border: 1px solid #e4405f;
+  border-radius: 5px;
+  height: 25px;
+  background: white;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 0.7em;
+  width: 100px;
 }
 
 .add-button{
   background: #21ce99;
   color: white;
   font-weight: 600;
-  font-size: 1.3em;
-  width: 140px;
+  font-size: 0.65em;
+  width: 100px;
   margin-left: 10px;
   height: 40px;
   border-radius: 5px;
@@ -77,21 +135,10 @@ mat-card-content{
   right: 300px;
 }
 
-.delete-button {
-  color: #e4405f;
-  border: 1px solid #e4405f;
-  font-weight: 600;
-  font-size: 1.3em;
-  width: 140px;
-  margin-left: 10px;
-  height: 40px;
-  border-radius: 5px;
-  border: none;
-}
-
 .pictures{
   height: 50px; width: 50px;
   border-radius: 50px;
+  background: lightgreen;
 }
 
 .danger {
@@ -103,8 +150,8 @@ mat-card-content{
   background: #005191;
   color: white;
   font-weight: 600;
-  font-size: 1.3em;
-  width: 140px;
+  font-size: 0.65em;
+  width: 100px;
   margin-left: 10px;
   height: 40px;
   border-radius: 5px;
@@ -145,8 +192,7 @@ mat-card-content{
 }
 
 .container {
-  padding-top: 50px;
-  height: auto;
+  padding: 5em 2em;
 }
 
 .spacer {
@@ -179,8 +225,7 @@ mat-card-content{
 }
 
 .mat-form-field-infix {
-  margin-bottom: 20px;
-  margin-top: 20px;
+
 }
 
 .mat-form-field {
@@ -189,7 +234,7 @@ mat-card-content{
 
 @media only screen and (max-width: 1200px) {
   .spacer {
-    flex: 0.7 0.7 auto;
+    flex: 0.2 0.2 auto;
   }
 }
 
@@ -206,6 +251,6 @@ mat-card-content{
 }
 
 .page-header {
-  color: #005191;
+  color: #333;
 }
 

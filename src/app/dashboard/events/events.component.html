@@ -1,10 +1,9 @@
 <mat-toolbar>
-    <h3 class="page-header">Events: {{allEvents.length}}</h3>
+    <h3 class="page-header"><span>Events: {{allEvents.length}}</span> - View, Delete, and Edit all Events on the FYF App.</h3>
     <span class="spacer"></span>
     <button class="page-button" (click)="openAddEventsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
-  <h4 class="page-description">View, Delete, and Edit all Events on the FYF App.</h4>
   <form>
     <mat-form-field class="search">
       <mat-label>Search for Event</mat-label>
