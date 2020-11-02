@@ -1,7 +1,6 @@
 <mat-toolbar class="top-bar">
   <button id="back-button" class="page-button" (click)="back()">Back</button>
   <span class="example-spacer"></span>
-  <button id="print-button" class="page-button" (click)="printCSVDialog()">Print CSV</button>
   <button id="delete-button" class="page-button" (click)="deleteFair(this.id)">Delete Fair</button>
 </mat-toolbar>
 
@@ -331,7 +330,7 @@
 
     <!-- Inner Pannels -->
     <mat-expansion-panel class="inner-panel"
-    *ngFor="let partner of partners"
+    *ngFor="let partner of partners; let i = index;"
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false">
 
@@ -345,7 +344,11 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="partner-info">
-        <mat-slide-toggle>Slide me!</mat-slide-toggle>
+        <form [formGroup]="partnerSlider">
+          <mat-slide-toggle ngDefaultControl
+          (change)="onChecked($event, partner, i)"
+          [checked]="partner.verified">Verfiy</mat-slide-toggle>
+        </form>
         <h2 style="margin: 25px 0;">Contact Info</h2>
         <p>Name: {{partner.name}}</p>
         <p>Email: {{partner.email}}</p>

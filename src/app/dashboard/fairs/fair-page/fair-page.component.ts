@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatMenuTrigger } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -66,6 +66,8 @@ export class FairPageComponent implements OnInit, OnDestroy {
   editAgendaForm: FormGroup;
   editPartnerQuestionForm: FormGroup;
   editVolunteerQuestionForm: FormGroup;
+  partnerSlider: FormGroup;
+  activate = new FormControl();
 
   fairSubscription: Subscription;
 
@@ -282,11 +284,38 @@ export class FairPageComponent implements OnInit, OnDestroy {
       email: [''],
       phone: [''],
     });
+
+    this.partnerSlider = this.formBuilder.group({
+      verified: ['', Validators.requiredTrue]
+    });
   }
 
 back() {
     console.log('Attempting navigation to fairs');
     this.router.navigate(['dashboard']);
+  }
+  onChecked(event, partner, i) {
+    console.log(event);
+    console.log(i);
+    if (event.checked) {
+      console.log('Partner is Verified');
+      this.fairs.verifyPartner(i, this.id).subscribe(
+        data => {
+
+        }
+      );
+      return partner.verified = true;
+    }
+    if (!event.checked) {
+      console.log('Partner is NOT Verified');
+      this.fairs.unverifyPartner(i, this.id).subscribe(
+        data => {
+
+        }
+      );
+      return partner.verified = false;
+    }
+
   }
 
     // Student Dialogs

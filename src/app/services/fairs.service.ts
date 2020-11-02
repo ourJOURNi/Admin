@@ -157,6 +157,16 @@ export class FairsService {
     return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/edit-partner-faq`, {id, index, question, answer});
   }
 
+  verifyPartner(index, id) {
+    console.log('Attempting to edit FAQ');
+    return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/verify-partner`, {index, id});
+  }
+
+  unverifyPartner(index, id) {
+    console.log('Attempting to edit FAQ');
+    return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/unverify-partner`, {index, id});
+  }
+
 
 
 
