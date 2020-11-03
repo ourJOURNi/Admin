@@ -17,6 +17,11 @@
 
 }
 
+.mat-slide-toggle {
+  font-size: 1.5em;
+  margin: 1em 0em;
+}
+
 #delete-button{
   color: white;
   background: #e4405f;
@@ -50,7 +55,6 @@
 
 .inner-panel {
   background: white;
-  width: 80%;
   margin-bottom: 30px;
   border: 1.5px solid #005191;
   border-radius: 5px;
@@ -207,7 +211,8 @@ mat-expansion-panel {
 .students,
 .chaperones,
 .partners,
-.volunteers {
+.volunteers,
+.lunch {
   height: auto;
   padding: 70px 20px;
 }
@@ -221,7 +226,8 @@ mat-expansion-panel {
   .students,
   .chaperones,
   .partners,
-  .volunteers {
+  .volunteers,
+  .lunch {
     padding: 70px 100px;
   }
   .top-bar {
@@ -233,7 +239,8 @@ mat-expansion-panel {
   .students,
   .chaperones,
   .partners,
-  .volunteers {
+  .volunteers,
+  .lunch {
     padding: 70px 30px;
   }
   .top-bar {
@@ -242,8 +249,7 @@ mat-expansion-panel {
 }
 
 .agenda,
-.faq,
-.lunch {
+.faq {
   margin: 40px 0;
   padding: 0.8em;
   background: rgb(238, 238, 238);
@@ -513,5 +519,18 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-size: 1.3em;
   margin: 35px auto;
   width: 400px;
+}
+
+.lunch-description {
+  font-size: 1.2em;
+  position: relative;
+  top: -15px;
+  color: #666;
+}
+
+.lunch {
+  h2 {
+  color: #005191
+  }
 }
 

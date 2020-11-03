@@ -162,22 +162,6 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-
-  <!-- Student Lunches -->
-  <mat-accordion>
-    <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <h2 style="margin: 30px 0px;">View Students Lunches</h2>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p class="lunch-text">Ham: {{allLunches.length}}</p>
-      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
-      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
-    </mat-expansion-panel>
-  </mat-accordion>
 </div>
 <mat-divider></mat-divider>
 
@@ -282,23 +266,6 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <!-- Chaporone Lunches -->
-  <mat-accordion>
-    <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title >
-          <h2 style="margin: 30px 0px;">View Chaporone Lunches</h2>
-
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p class="lunch-text">Ham: {{allLunches.length}}</p>
-      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
-      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
-    </mat-expansion-panel>
-  </mat-accordion>
-
 </div>
 <mat-divider></mat-divider>
 
@@ -347,7 +314,7 @@
         <form [formGroup]="partnerSlider">
           <mat-slide-toggle ngDefaultControl
           (change)="onChecked($event, partner, i)"
-          [checked]="partner.verified">Verfiy</mat-slide-toggle>
+          [checked]="partner.verified">Verify</mat-slide-toggle>
         </form>
         <h2 style="margin: 25px 0;">Contact Info</h2>
         <p>Name: {{partner.name}}</p>
@@ -416,23 +383,6 @@
           <button class="cancel-edit-agenda-button" (click)="cancelEditPartnerAgendaItem(item)">Cancel</button>
         </div>
       </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <!-- Partner Lunches -->
-  <mat-accordion>
-    <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title >
-          <h2 style="margin: 30px 0px;">View Partners Lunches</h2>
-
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p class="lunch-text">Ham: {{allLunches.length}}</p>
-      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
-      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -614,23 +564,6 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <!-- Volunteer Lunches -->
-  <mat-accordion>
-    <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title >
-          <h2 style="margin: 30px 0px;">View Volunteer Lunches</h2>
-
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p class="lunch-text">Ham: {{allLunches.length}}</p>
-      <p class="lunch-text">Turkey: {{allLunches.length}}</p>
-      <p class="lunch-text">Veggie: {{allLunches.length}}</p>
-    </mat-expansion-panel>
-  </mat-accordion>
-
   <!-- Volunteer FAQs -->
   <mat-accordion>
     <mat-expansion-panel
@@ -687,3 +620,14 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+<mat-divider></mat-divider>
+
+<!-- Lunch -->
+<div class="lunch" style="margin-bottom: 200px;">
+  <h1 class="usertype-header">Lunch</h1>
+  <p class="lunch-description">Total lunches combined between Students, Chaperones, Volunteers, and Partners.</p>
+  <h2>Ham: {{this.hamLunches}}</h2>
+  <h2>Turkey: {{this.turkeyLunches}}</h2>
+  <h2>Veggie: {{this.veggieLunches}}</h2>
+</div>
+<mat-divider></mat-divider>

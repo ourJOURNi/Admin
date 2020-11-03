@@ -66,6 +66,7 @@ export class FairPageComponent implements OnInit, OnDestroy {
   editAgendaForm: FormGroup;
   editPartnerQuestionForm: FormGroup;
   editVolunteerQuestionForm: FormGroup;
+  editVolunteerForm: FormGroup;
   partnerSlider: FormGroup;
   activate = new FormControl();
 
@@ -87,7 +88,15 @@ export class FairPageComponent implements OnInit, OnDestroy {
   state: any;
   zip: any;
   summary: any;
-  editVolunteerForm: FormGroup;
+
+  allStudentLunches: any[];
+  allChaporoneLunches: any[];
+  allPartnerLunches: any[];
+  allVolunteerLunches: any[];
+
+  hamLunches;
+  turkeyLunches;
+  veggieLunches;
 
   constructor(
     private router: Router,
@@ -176,16 +185,8 @@ export class FairPageComponent implements OnInit, OnDestroy {
         this.studentsBySchool = studentsBySchool;
         this.chaperonesBySchool = chaperonesBySchool;
 
-        // console.log(this.fair);
-        // console.log('Students sorted by each school - Chaperones & Students\n');
-        // console.log(studentsBySchool);
-        // console.log('Chaperones sorted by each school - Chaperones & Students\n');
-        // console.log(chaperonesBySchool);
-        // console.log('Partners\n');
-        // console.log(this.partners);
-
-        // console.log('All students combined');
         let allStudents = [].concat.apply([], studentsBySchool);
+        let allSChaporones = [].concat.apply([], chaperonesBySchool);
         let allStudentsClean = [];
 
         allStudents.filter( student => {
@@ -193,18 +194,64 @@ export class FairPageComponent implements OnInit, OnDestroy {
             allStudentsClean.push(student);
           }
         });
-        // console.log(allStudentsClean);
+
         this.allStudentsClean = allStudentsClean;
 
         // console.log('All lunches fron all schools combined combined');
-        let allLunches = [];
-        allStudents.filter( student => {
-          if (student.lunch) {
-            allLunches.push(student.lunch);
+        let allStudentLunches = [];
+        let allChaporoneLunches = [];
+        let allPartnerLunches = [];
+        let allVolunteerLunches = [];
+
+        this.partners.filter( partner => {
+          if (partner.lunch) {
+            allPartnerLunches.push(partner.lunch);
           }
         });
-        // console.log(allLunches);
-        this.allLunches = allLunches;
+        this.volunteers.filter( volunteer => {
+          if (volunteer.lunch) {
+            allVolunteerLunches.push(volunteer.lunch);
+          }
+        });
+
+        allStudents.filter( student => {
+          if (student.lunch) {
+            allStudentLunches.push(student.lunch);
+          }
+        });
+        allSChaporones.filter( student => {
+          if (student.lunch) {
+            allChaporoneLunches.push(student.lunch);
+          }
+        });
+
+        this.allLunches = allStudentLunches.concat(allChaporoneLunches, allPartnerLunches, allVolunteerLunches);
+        let hamLunches = [];
+        let turkeyLunches = [];
+        let veggieLunches = [];
+
+        // tslint:disable-next-line: forin
+        for (const lunch of this.allLunches) {
+
+          if (lunch === 'Ham') {
+            hamLunches.push(lunch);
+          }
+          if (lunch === 'Turkey') {
+            turkeyLunches.push(lunch);
+          }
+          if (lunch === 'Veggie') {
+            veggieLunches.push(lunch);
+
+          }
+        }
+
+
+        this.hamLunches = hamLunches.length;
+        this.turkeyLunches = turkeyLunches.length;
+        this.veggieLunches = veggieLunches.length;
+
+
+
 
         // Add an edit property to all the agenda objects
         for (let item of this.fair['studentAgenda']) {
