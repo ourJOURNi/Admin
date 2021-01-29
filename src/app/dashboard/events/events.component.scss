@@ -1,12 +1,16 @@
 mat-grid-tile {
   justify-content: flex-start !important ;
   align-items: flex-start !important;
+  margin-bottom: 12px;
+  color: #005191;
+  font-size: 1.5em;
 }
 
-span:first-child {
-  width: 100px;
-  display: inline-block;
-  font-weight: 700;
-  color: #005191;
-}
+
+// span:first-child {
+//   width: 100px;
+//   display: inline-block;
+//   font-weight: 700;
+//   color: #005191;
+// }
 

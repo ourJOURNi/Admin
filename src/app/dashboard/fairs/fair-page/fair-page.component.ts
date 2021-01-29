@@ -178,7 +178,7 @@ export class FairPageComponent implements OnInit, OnDestroy {
         this.fair.time = format( new Date(this.fair.date), 'hh:mm a');
 
         const studentsBySchool = Object.values(fair['studentsBySchool']);
-        console.log();
+        console.log(studentsBySchool);
         const chaperonesBySchool = Object.values(fair['chaperonesBySchool']);
 
 

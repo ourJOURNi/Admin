@@ -107,7 +107,7 @@ h4 {
 mat-expansion-panel {
   background: none;
   box-shadow: none;
-  border: 2px solid #005191;
+  // border: 2px solid #005191;
   margin-bottom: 30px;
 
   .panel-toolbar {
@@ -151,6 +151,7 @@ mat-expansion-panel {
 
 .student {
   color: #444;
+  font-size: 1.33em;
 }
 
 .student-panel {
@@ -306,7 +307,7 @@ mat-expansion-panel {
 mat-icon {
   background: #005191;
   color: white;
-  padding: 0.5em;
+  padding: 0.15em;
   border-radius: 5px;
 }
 

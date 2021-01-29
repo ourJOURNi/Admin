@@ -26,8 +26,6 @@ export class FairsComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnDestroy(): void {
-    this.fairsSubscription.unsubscribe();
-    this.fairsSubject.unsubscribe();
   }
 
   ngOnInit() {
