@@ -83,5 +83,9 @@ export class JobsComponent implements OnInit {
     this.dialog.open(EditJobDialogComponent, dialogConfig);
 
   }
+  test() {
+    console.log('This is a test');
+
+  }
 
 }

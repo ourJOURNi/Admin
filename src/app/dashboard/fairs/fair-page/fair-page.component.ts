@@ -499,7 +499,7 @@ editStudentAgendaItemFinal(id, index) {
   }
   }
 
-addStudentSlotDialog(data): void {
+addStudentSlotDialog(): void {
     const dialogRef = this.dialog.open(AddStudentSlotDialogComponent, {
       width: '450px',
       data: {id: this.id}

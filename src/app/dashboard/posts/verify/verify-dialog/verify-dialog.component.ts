@@ -40,6 +40,9 @@ export class VerifyDialogComponent implements OnInit {
 
     console.log('This post has been verified and added to Post Collection');
   }
+  close() {
+    this.dialogRef.close();
+  }
 
 
 

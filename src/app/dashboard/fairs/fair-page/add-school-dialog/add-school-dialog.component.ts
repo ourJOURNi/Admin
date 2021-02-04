@@ -16,4 +16,9 @@ export class AddSchoolDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  addSchool() {
+    console.log('Adding School');
+
+  }
+
 }

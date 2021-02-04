@@ -5,10 +5,19 @@
 }
 
 mat-sidenav {
+  h1 {
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    margin-top: 20px;
+
+  }
   width: 209px;
-  box-shadow: inset -10px 1px 20px rgba(0,0,0,0.15);
+  // box-shadow: inset -10px 1px 100px rgba(0,0,0,0.1);
   font-size: 1.3em;
-  color: #005191;
+  color: white;
+  // background: #0055a5;
 
   .mat-list-item-content{
     padding: 11px 27px;;
@@ -22,13 +31,12 @@ mat-sidenav {
     position: relative;
     top: 100px;
     left: 20px;
-    background: rgba(81,0,0,0.05)
+    background: rgba(81,0,0,0.35)
   }
 
   span {
     width: 150px;
     position: relative;
-    right: 20px;
   }
 
   .sidenav-icon {
@@ -44,7 +52,6 @@ mat-sidenav {
   a {
     padding-left: 0px;
     font-size: 0.9em;
-    color: #005191;
   }
 }
 
@@ -53,7 +60,7 @@ mat-nav-list {
 }
 
 .active {
-  color: #005191;
+  color: #faa71b;
   font-weight: 800;
 }
 

@@ -95,4 +95,8 @@ export class EventsComponent implements OnInit {
     this.dialog.open(EditEventDialogComponent, dialogConfig);
 
   }
+  test() {
+    console.log('This is a test');
+
+  }
 }

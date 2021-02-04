@@ -85,5 +85,8 @@ export class MentorsComponent implements OnInit {
       this.dialog.open(EditMentorDialogComponent, dialogConfig);
 
     }
+    test() {
+      console.log('This is a test');
 
+    }
 }
