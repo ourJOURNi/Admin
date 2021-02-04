@@ -19,15 +19,18 @@
       </mat-card-header>
 
       <mat-card-content>
-        <p style="font-size: 1.1em; font-weight: 800;">
+        <p style="font-size: 1.1em; font-weight: 800; color: #0055a5;">
           {{post.title}}
+        </p>
+        <p *ngFor="let tag of post.hashtags" style="font-size: 0.9em; display: inline-block; margin-right: 5px;     color: #777;">
+          #{{tag}},
         </p>
         <p style="font-size: 1em; white-space: pre-wrap;">{{post.post}}
         </p>
         </mat-card-content>
         <mat-card-actions>
-          <button class="card-button" style="width: 100px;" (click)="verifyYesDialog(post)">Yes</button>
-          <button class="delete-button" style="width: 100px;" (click)="verifyNoDialog(post)">No</button>
+          <button class="card-button" style="width: 100px;" (click)="verifyYesDialog(post)">Verify</button>
+          <button class="delete-button" style="width: 100px;" (click)="verifyNoDialog(post)">Deny</button>
         </mat-card-actions>
 </mat-card>
 </div>

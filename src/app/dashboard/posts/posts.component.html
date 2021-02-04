@@ -26,6 +26,9 @@
             <p style="font-size: 1em; color: #005191">
               {{post.title}}
             </p>
+            <p *ngFor="let tag of post.hashtags" style="font-size: 0.9em; display: inline-block; margin-right: 5px; color: #777;">
+              #{{tag}},
+            </p>
               <p style="font-size: 1em;">
                 {{post.post}}
               </p>

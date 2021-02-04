@@ -36,6 +36,9 @@ export class VerifyComponent implements OnInit {
               for (const unverified of this.allUnverifiedPosts) {
                 unverified.date = format( new Date(unverified.date), 'MMMM dd, yyyy hh:mm a');
               }
+
+              console.log(unverifiedPosts);
+
             }
           );
         }
