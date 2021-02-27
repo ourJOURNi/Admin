@@ -2,13 +2,16 @@
 
 import 'zone.js/dist/zone-error';
 
-const ip = '3.138.106.181';
-const baseUrl = `http://${ip}:3000`;
-const fairsUrl = `http://${ip}:4000`;
+const adminApi = 'admin.findyourfuturesem.org/';
+const fairsApi = `fairs.findyourfuturesem.org/`;
+
+const baseUrl = `https://${adminApi}`;
+const fairsUrl = `https://${fairsApi}`;
+
 
 export const environment = {
-  production: false,
-  url: baseUrl,
-  fairsUrl: fairsUrl
+  production: true,
+  url: adminApi,
+  fairsUrl: fairsApi
 };
 
