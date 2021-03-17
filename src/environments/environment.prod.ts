@@ -11,7 +11,7 @@ const fairsUrl = `https://${fairsApi}`;
 
 export const environment = {
   production: true,
-  url: adminApi,
+  url: baseUrl,
   fairsUrl: fairsApi
 };
 
