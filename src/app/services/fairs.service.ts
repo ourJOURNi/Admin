@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class FairsService {
   FAIRS_BACKEND_URL = environment.fairsUrl;
+  BACKEND_URL = environment.url;
   fairsSubject = new BehaviorSubject([]);
 
   volunteers$ = new BehaviorSubject([]);
@@ -30,22 +31,22 @@ export class FairsService {
     ) { }
 
   getFairs() {
-    return this.http.get(`${this.FAIRS_BACKEND_URL}/api/admin/fairs`);
+    return this.http.get(`${this.BACKEND_URL}/api/admin/fairs`);
   }
 
   getFair(id) {
-    return this.http.post(`${this.FAIRS_BACKEND_URL}/api/admin/fairs/fair`, {_id: id});
+    return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/fair`, {_id: id});
   }
 
   addFair(fair) {
     console.log('From Fairs service: ');
     console.log(fair);
-    return this.http.post(`${this.FAIRS_BACKEND_URL}/api/admin/fairs/add-fair`, fair);
+    return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/add-fair`, fair);
   }
 
   deleteFair(id) {
     this.router.navigate(['dashboard']);
-    return this.http.delete(`${this.FAIRS_BACKEND_URL}/api/admin/fairs/delete-fair/${id}`);
+    return this.http.delete(`${this.BACKEND_URL}/api/admin/fairs/delete-fair/${id}`);
   }
 
   updateFair(fair) {

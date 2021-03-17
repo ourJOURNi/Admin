@@ -2,8 +2,8 @@
 
 import 'zone.js/dist/zone-error';
 
-const adminApi = 'admin.findyourfuturesem.org/';
-const fairsApi = `fairs.findyourfuturesem.org/`;
+const adminApi = 'admin.findyourfuturesem.org';
+const fairsApi = `fairs.findyourfuturesem.org`;
 
 const baseUrl = `https://${adminApi}`;
 const fairsUrl = `https://${fairsApi}`;
