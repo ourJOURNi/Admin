@@ -2,13 +2,13 @@
   <h3 class="page-header"><span>Users: {{allStudents.length}}</span>  - View all Users on the FYF App.</h3>
 </mat-toolbar>
 <div class="container">
-  <form>
+  <!-- <form>
     <mat-form-field class="search">
       <mat-label>Search for User</mat-label>
       <input (keyup.enter)="test()" matInput placeholder="Find by Name">
     </mat-form-field>
-  </form>
-  <mat-card *ngFor="let student of allStudents" style="padding: 5px 19px 27px 33px;">
+  </form> -->
+  <mat-card *ngFor="let student of allStudents" style="padding: 5px 19px 27px 33px;  padding: 2em;box-shadow: 1px 10px 26px rgba(0,0,0,0.05);">
       <mat-card-header>
         <mat-card-title>{{student.fullName}}</mat-card-title>
         <img mat-card-avatar class="pictures" src="{{student.profilePicture}}" alt="Profile">
@@ -17,10 +17,11 @@
           <p><span>Gender: </span> {{student.gender}}</p>
           <p><span>School: </span> {{student.school}}</p>
           <p><span>Grade: </span> {{student.grade}}</p>
+          <!-- TODO -->
+          <!-- Add Phone Number to Student account? -->
+          <!-- <p><span>Phone: </span> {{student.phone}}</p> -->
           <p><span>Email: </span> {{student.email}}</p>
-          <p><span>DOB: </span> {{student.dob}}</p>
-          <p><span>City: </span> {{student.city}}</p>
-          <p><span>State: </span> {{student.state}}</p>
+          <p><span>Age: </span> {{student.dob}}</p>
           </mat-card-content>
           <mat-card-actions>
             <button class="card-button" (click)="openEditDialog(student)">Edit</button>

@@ -1,7 +1,8 @@
-.example-spacer {
-  flex: 1 1 auto;
+body {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+   background: #f4f5f8;
 }
-
 .fair-link{
   width: 400px; height: 150px;
   border-radius: 5px;
@@ -48,7 +49,9 @@ span {
 }
 
 .container {
-  margin: 60px 25px;
+  background: #f4f5f8;
+  height: 83vh;
+  padding: 5em 2em;
 }
 
 mat-card {

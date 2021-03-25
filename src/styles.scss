@@ -2,10 +2,22 @@
 
 html, body { height: 100%; }
 
-body { margin: 0; font-family: Helvetica, Arial, sans-serif; }
-
+body {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+   background: #f4f5f8;
+}
+p {
+  white-space: pre-wrap;
+}
+.mat-list-base .mat-list-item {
+  color: white;
+}
 h4 {
-  color: #005191;
+  color: #0055a5;
+}
+button {
+  border: none;
 }
 
 .page-description {
@@ -15,22 +27,16 @@ h4 {
 mat-form-field {
   display: block;
   width: 100%;
+  box-shadow: 1px 10px 26px rgba(0,0,0,0.05);
 }
 
 mat-card {
   margin-bottom: 100px;
-  background: white;
-  width: 80%;
-  border: 1.5px solid #005191;
+  width: 800px;
+  // border: 1.5px solid #0055a5;
   border-radius: 5px;
-  box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
-  padding: 5px 19px 27px 33px;
+  padding: 3em;
 }
-
-.mat-card {
-  padding: 5px 19px 27px 33px;
-}
-
 .mat-card-actions {
   padding: 6em 0em;
 }
@@ -43,6 +49,9 @@ mat-card {
 .mat-card-content>:first-child, .mat-card>:first-child {
   margin-top: 30px;
 }
+.mat-card-header-text {
+  margin: 8px 0;
+}
 
 .mat-card-header {
     display: flex;
@@ -53,18 +62,16 @@ mat-card {
 }
 
 .rate-of-pay {
-  font-size: 0.85em;
+  font-size: 0.75em;
   font-weight: 700;
-  margin-top: 20px;
-  background-color: white;
+  background-color: #21ce99;
   border: 1px solid #21ce99;
   width: 50px;
+  display: inline;
   padding: 0.1em 0.7em;
   margin-bottom: 30px;
   border-radius: 5px;
-  position: relative;
-  top: 10px;
-  color: #21ce99;
+  color: white;
 
 }
 
@@ -98,11 +105,10 @@ mat-toolbar {
 }
 
 .card-button {
-  color: #005191;
-  border: 1px solid #005191;
+  color: white;
   border-radius: 5px;
   height: 25px;
-  background: white;
+  background: #0055a5;
   margin-left: 10px;
   margin-bottom: 10px;
   font-size: 0.7em;
@@ -110,17 +116,15 @@ mat-toolbar {
 }
 
 .delete-button {
-  color: #e4405f;
-  border: 1px solid #e4405f;
+  color: white;
   border-radius: 5px;
   height: 25px;
-  background: white;
+  background: #e4405f;
   margin-left: 10px;
   margin-bottom: 10px;
   font-size: 0.7em;
   width: 100px;
 }
-
 .add-button{
   background: #21ce99;
   color: white;
@@ -131,8 +135,6 @@ mat-toolbar {
   height: 40px;
   border-radius: 5px;
   border: none;
-  position: absolute;
-  right: 300px;
 }
 
 .pictures{
@@ -147,7 +149,7 @@ mat-toolbar {
 }
 
 .page-button {
-  background: #005191;
+  background: #0055a5;
   color: white;
   font-weight: 600;
   font-size: 0.65em;
@@ -196,7 +198,7 @@ mat-toolbar {
 }
 
 .spacer {
-  flex: 0.8 0.8 auto;
+  flex: 0.7 0.7 auto;
 }
 
 .mat-form-field-label {
@@ -212,7 +214,7 @@ mat-toolbar {
 }
 
 .modal-button{
-  background: #005191;
+  background: #0055a5;
   color: white;
   margin-right: 20px;
   margin-top: 0px;

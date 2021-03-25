@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.router.navigate(['dashboard/(open:fairs)']);
+    // let activeLink = document.getElementById('active-link');
+    // activeLink.style.color = '#faa71b';
   }
 }

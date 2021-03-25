@@ -3,6 +3,7 @@ import { StudentsService } from '../../services/students.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteStudentDialogComponent } from './delete-student-dialog/delete-dialog.component';
 import { EditStudentDialogComponent } from './edit-student-dialog/edit-student-dialog.component';
+import { differenceInYears } from 'date-fns';
 
 
 @Component({
@@ -23,6 +24,11 @@ export class StudentsComponent implements OnInit {
 
         // Turn Object to Array to be used with Behvavior Subject
         const studentsArray = Object.values(students);
+        studentsArray.forEach(student => {
+          student.dob = differenceInYears(
+            Date.now(),
+            new Date(student.dob)
+          )})
         this.students.studentsSubject.next(studentsArray);
 
         // Subscribe to Jobs Subject in Jobs Service for Real time update changes

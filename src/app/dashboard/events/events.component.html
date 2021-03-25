@@ -1,22 +1,37 @@
 <mat-toolbar>
     <h3 class="page-header"><span>Events: {{allEvents.length}}</span> - View, Delete, and Edit all Events on the FYF App.</h3>
     <span class="spacer"></span>
-    <button class="page-button" (click)="openAddEventsDialog()">Add</button>
+    <button class="add-button" (click)="openAddEventsDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
-  <form>
+  <!-- <form>
     <mat-form-field class="search">
       <mat-label>Search for Event</mat-label>
       <input (keyup.enter)="test()" matInput placeholder="Find by Event Title">
     </mat-form-field>
-  </form>
-    <mat-card *ngFor="let event of allEvents">
+  </form> -->
+    <mat-card style="box-shadow: 1px 10px 26px rgba(0,0,0,0.05); padding: 2em;" *ngFor="let event of allEvents">
         <mat-card-header>
-            <mat-card-title>{{event.title}}</mat-card-title>
+            <mat-card-title style="position: relative; right: 16px; color: #faa71b">{{event.title}}</mat-card-title>
           </mat-card-header>
 
-          <mat-card-content>
-              <p><span>Company Name:</span> {{event.organizer}}</p>
+          <mat-accordion>
+            <mat-expansion-panel>
+            <!-- <mat-expansion-panel
+             (opened)="panelOpenState = true"
+             (closed)="panelOpenState = false"> -->
+              <mat-expansion-panel-header>
+               <mat-panel-title>
+                 <h2 style="margin: 30px 0px;">Event Photo</h2>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <img style="width: 335px; margin-left: 8px;" src="{{event.photo}}">
+            <button class="card-button" (click)="openImageCropper(event)">Edit</button>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <mat-card-content style="margin-top: 24px;">
+              <p><span>Company:</span> {{event.organizer}}</p>
               <p><span>Date:</span> {{event.date}}</p>
               <p><span>Time:</span> {{event.time}}</p>
               <p><span>Address 1:</span> {{event.addressOne}},</p>
@@ -24,21 +39,10 @@
               <p><span>City:</span> {{event.city}},</p>
               <p><span>State:</span> {{event.state}},</p>
               <p><span>Zip:</span> {{event.zip}}</p>
-              <p><span>Description:</span><br> {{event.description}}</p>
+              <p><span>Description:</span>
+              <p>{{event.description}}</p>
 
-              <mat-accordion>
-              <mat-expansion-panel>
-              <!-- <mat-expansion-panel
-               (opened)="panelOpenState = true"
-               (closed)="panelOpenState = false"> -->
-                <mat-expansion-panel-header>
-                 <mat-panel-title>
-                   <h2 style="margin: 30px 0px;">Event Photo</h2>
-                  </mat-panel-title>
-              </mat-expansion-panel-header>
-              <img mat-card-image src="../../../assets/logo-2.png">
-              </mat-expansion-panel>
-              </mat-accordion>
+
           </mat-card-content>
             <mat-card-actions>
               <button class="card-button" (click)="openEditEventDialog(event)">Edit</button>

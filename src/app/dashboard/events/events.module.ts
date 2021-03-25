@@ -8,12 +8,14 @@ import { DeleteEventDialogComponent } from '../events/delete-event-dialog/delete
 import { EditEventDialogComponent } from '../events/edit-event-dialog/edit-event-dialog.component';
 
 import { EventsRoutingModule } from './events-routing.module';
+import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 
 @NgModule({
   declarations: [
     AddEventDialogComponent,
     DeleteEventDialogComponent,
-    EditEventDialogComponent],
+    EditEventDialogComponent,
+    ImageCropperComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -23,6 +25,7 @@ import { EventsRoutingModule } from './events-routing.module';
   entryComponents: [
     DeleteEventDialogComponent,
     AddEventDialogComponent,
-    EditEventDialogComponent]
+    EditEventDialogComponent,
+    ImageCropperComponent]
 })
 export class EventsModule { }

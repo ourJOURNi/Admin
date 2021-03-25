@@ -1,28 +1,29 @@
 <mat-toolbar>
     <h3 class="page-header"><span>Mentors: {{allMentors.length}}</span>  - View, Add, Delete, and Edit all Mentors on the FYF App.</h3>
     <span class="spacer"></span>
-    <button class="page-button" (click)="openAddMentorDialog()">Add</button>
+    <button class="add-button" (click)="openAddMentorDialog()">Add</button>
 </mat-toolbar>
 <div class="container">
-  <form>
+  <!-- <form>
     <mat-form-field class="search">
       <mat-label>Search for Mentor</mat-label>
       <input (keyup.enter)="test()" matInput placeholder="Find by Mentor Name">
     </mat-form-field>
-  </form>
-    <mat-card *ngFor="let mentor of allMentors">
+  </form> -->
+    <mat-card style="box-shadow: 1px 10px 26px rgba(0,0,0,0.05); padding: 2em;" *ngFor="let mentor of allMentors">
         <mat-card-header>
           <img mat-card-avatar class="pictures" src="{{mentor.photo}}" alt="Mentor Photo">
             <mat-card-title>{{mentor.name}}</mat-card-title>
-            <mat-card-subtitle>{{mentor.email}}</mat-card-subtitle>
-            <mat-card-subtitle>{{mentor.title}}</mat-card-subtitle>
           </mat-card-header>
 
           <mat-card-content>
-              <p>{{mentor.city}}, {{mentor.state}}</p>
-              <p>{{mentor.summary}}</p>
-              <p>{{mentor.description}}</p>
-            </mat-card-content>
+            <p><span>Email: </span> {{mentor.email}}</p>
+            <p><span>Phone: </span> {{mentor.phone}}</p>
+            <p><span>Location: </span> {{mentor.city}}, {{mentor.state}}</p>
+            <p><span>Title: </span> {{mentor.title}}</p>
+            <p><span>Description: </span></p>
+            <p>{{mentor.description}}</p>
+          </mat-card-content>
             <mat-card-actions>
               <button class="card-button" (click)="openEditMentorDialog(mentor)">Edit</button>
               <button class="delete-button" (click)="openDeleteDialog(mentor)">Delete</button>

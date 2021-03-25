@@ -16,6 +16,7 @@
         <mat-form-field>
           <input
           matInput
+          type="email"
           placeholder="Company Email"
           formControlName="companyEmail">
         </mat-form-field>
@@ -27,6 +28,7 @@
           name="companyLogo"
           formControlName="companyLogo"
           (change)="getFormData($event)">
+          <img class="job-logo-selection" src="{{ uploadedLogoURL }}" alt="Company Logo">
         </div>
         <mat-form-field>
           <input

@@ -11,7 +11,7 @@ h1 {
 }
 
 p {
-  line-height: 0.6em;
+  line-height: 1.3em;
   font-size: 1em;
 }
 
@@ -26,4 +26,13 @@ span {
   width: 70px;
   display: inline-block;
   font-weight: 700;
+}
+.container {
+  background: #f4f5f8;
+  height: auto;
+  padding: 6em 2em;
+}
+
+mat-card {
+  box-shadow: 1px 10px 26px rgba(0,0,0,0.05);
 }

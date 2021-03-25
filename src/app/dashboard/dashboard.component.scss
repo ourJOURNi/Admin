@@ -6,7 +6,7 @@
 
 mat-sidenav {
   h1 {
-    color: white;
+    color: #0055a5;
     width: 100%;
     text-align: center;
     font-size: 1em;
@@ -17,10 +17,11 @@ mat-sidenav {
   // box-shadow: inset -10px 1px 100px rgba(0,0,0,0.1);
   font-size: 1.3em;
   color: white;
-  // background: #0055a5;
+  background: #0055a5;
 
   .mat-list-item-content{
-    padding: 11px 27px;;
+    padding: 11px 27px;
+    color: white;
   }
 
   img {
@@ -33,28 +34,28 @@ mat-sidenav {
     left: 20px;
     background: rgba(81,0,0,0.35)
   }
-
   span {
     width: 150px;
     position: relative;
   }
-
-  .sidenav-icon {
-    height: 40px;
+  .fairs {
+    padding: 0.6em 0.3em;
+    border-radius: 5px;
+    border: 2px solid #faa71b;
+    background: #a2885d6b;
   }
-
-  #sidenav-divider {
-    height: 0px;
-    border-bottom: 3px solid #005191;
-    box-shadow: inset -1px 1px 5px rgba(0,0,0,0.15);
-  }
-
-  a {
-    padding-left: 0px;
-    font-size: 0.9em;
+  .logout {
+    position: relative;
+    top: 100px;
+    padding: 0.6em 0.3em;
+    border-radius: 5px;
+    border: 2px solid #e3405f;
+    background: #e3405f6b;
   }
 }
-
+// .mat-list-base .mat-list-item {
+//   color: white;
+// }
 mat-nav-list {
   margin-top: 25px;
 }

@@ -4,8 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EventsService } from '../../../services/events.service';
 import { format } from 'date-fns';
 
-
-
 @Component({
   selector: 'app-edit-event-dialog',
   templateUrl: './edit-event-dialog.component.html',

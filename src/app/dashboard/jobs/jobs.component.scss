@@ -2,5 +2,13 @@ span:first-child {
   width: 100px;
   display: inline-block;
   font-weight: 700;
-  color: #005191;
+  color: #0055a5;
+}
+.container {
+  background: #f4f5f8;
+  height: auto;
+  padding: 6em 2em;
+}
+mat-card {
+  box-shadow: 1px 10px 26px rgba(0,0,0,0.05);
 }

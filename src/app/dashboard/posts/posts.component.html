@@ -2,19 +2,19 @@
   <mat-toolbar-row>
     <h3 class="page-header"><span>Posts: {{allPosts.length}}</span>  - View and Delete all Posts on the FYF App</h3>
     <span class="spacer"></span>
-    <button class="page-button" (click)="verifyPage()">Verify ( {{ unverifiedPost.length }} )</button>
-    <button class="page-button" (click)="reportedPage()">Reported ( {{ reportedPost.length }} )</button>
+    <button class="add-button" (click)="verifyPage()">Verify ( {{ unverifiedPost.length }} )</button>
+    <button class="add-button" (click)="reportedPage()">Reported ( {{ reportedPost.length }} )</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet name="posts"></router-outlet>
 <div class="container">
-  <form>
+  <!-- <form>
     <mat-form-field class="search">
       <mat-label>Search for Post</mat-label>
       <input (keyup.enter)="test()" matInput placeholder="Find by Student Name">
     </mat-form-field>
-  </form>
-    <mat-card *ngFor="let post of allPosts">
+  </form> -->
+    <mat-card style="box-shadow: 1px 10px 26px rgba(0,0,0,0.05); padding: 2em;" *ngFor="let post of allPosts">
         <mat-card-header>
           <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
             <mat-card-title>{{post.creatorName}}</mat-card-title>

@@ -74,6 +74,7 @@ export class JobsComponent implements OnInit {
       id: data._id,
       title: data.title,
       companyName: data.companyName,
+      companyLogo: data.companyLogo,
       companyEmail: data.companyEmail,
       summary: data.summary,
       fullJobDescription: data.fullJobDescription,
@@ -81,10 +82,6 @@ export class JobsComponent implements OnInit {
   };
 
     this.dialog.open(EditJobDialogComponent, dialogConfig);
-
-  }
-  test() {
-    console.log('This is a test');
 
   }
 

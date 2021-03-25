@@ -34,6 +34,8 @@ export class EditJobDialogComponent implements OnInit {
       this.title = data.title;
       this.companyName = data.companyName;
       this.companyEmail = data.companyEmail;
+      this.uploadedLogoURL = data.companyLogo;
+      this.companyLogo = data.companyLogo;
       this.summary = data.summary;
       this.fullJobDescription = data.fullJobDescription;
       this.rateOfPay = data.rateOfPay;
@@ -48,7 +50,7 @@ export class EditJobDialogComponent implements OnInit {
       title: [this.title, Validators.required],
       companyName: [this.companyName, Validators.required],
       companyEmail: [this.companyEmail, [Validators.required, Validators.email]],
-      companyLogo: [this.companyLogo],
+      companyLogo: [],
       summary: [this.summary, Validators.required],
       fullJobDescription: [this.fullJobDescription, Validators.required],
       rateOfPay: [this.rateOfPay, Validators.required],
@@ -74,7 +76,7 @@ export class EditJobDialogComponent implements OnInit {
     if (formElement) {
       reader.readAsDataURL(event.target.files[0]);
     }
-    
+
   }
 
   close() {
@@ -83,29 +85,33 @@ export class EditJobDialogComponent implements OnInit {
 
   update(job) {
     job._id = this.id;
-    this.jobs.updateJob(job).subscribe(data => {
-      this.jobs.getJobs().subscribe(data => {
-        let jobsArray = Object.values(data);
-        this.jobs.jobsSubject.next(jobsArray);
+    console.log(job);
+    if(!this.formData) {
+      console.log('There was no FormData!');
+      job.companyLogo = this.uploadedLogoURL;
+      this.jobs.updateJob(job).subscribe(data => {
+        this.jobs.getJobs().subscribe(data => {
+          console.log(data);
+          let jobsArray = Object.values(data).reverse();
+          this.jobs.jobsSubject.next(jobsArray);
+        });
       });
-    });
-
-    const formElement = document.querySelectorAll('form');
-    formElement.forEach(form => {
-      if (form.id === 'edit-job-form') {
-        console.log('Got form: ', form);
-        this.formData = new FormData(form);
-        // this.formData.append('oldLogoKey', this.awsPrefix);
-      }
-    });
-
-    if (this.logoUploaded == true) {
-      this.jobs.uploadLogo(this.formData.get('companyLogo')).subscribe( data => {
+    } else {
+      this.jobs.uploadLogo(this.formData).subscribe(data => {
         console.log('Logo upload result: ', data);
         console.log('Logo upload done');
-      })
-    }
+        job.companyLogo = data['objectUrl'];
 
+        console.log('Adding job...');
+        this.jobs.updateJob(job).subscribe(data => {
+          this.jobs.getJobs().subscribe(data => {
+            console.log(data);
+            let jobsArray = Object.values(data).reverse();
+            this.jobs.jobsSubject.next(jobsArray);
+          });
+        });
+      });
+    }
     this.dialogRef.close();
   }
 

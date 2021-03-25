@@ -5,6 +5,7 @@ import { DeleteEventDialogComponent } from '../events/delete-event-dialog/delete
 import { AddEventDialogComponent } from '../events/add-event-dialog/add-event-dialog.component';
 import { EditEventDialogComponent } from '../events/edit-event-dialog/edit-event-dialog.component';
 import { format } from 'date-fns';
+import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class EventsComponent implements OnInit {
       });
     });
   }
+  // TODO Crop Event Flyer
 
   openDeleteDialog(data) {
     const dialogConfig = new MatDialogConfig();
@@ -61,7 +63,6 @@ export class EventsComponent implements OnInit {
 
     this.dialog.open(DeleteEventDialogComponent, dialogConfig);
   }
-
   openAddEventsDialog() {
     const dialogConfig = new MatDialogConfig();
 
@@ -70,7 +71,6 @@ export class EventsComponent implements OnInit {
     this.dialog.open(AddEventDialogComponent, dialogConfig);
 
   }
-
   openEditEventDialog(data) {
     console.log(data);
     const dialogConfig = new MatDialogConfig();
@@ -95,8 +95,17 @@ export class EventsComponent implements OnInit {
     this.dialog.open(EditEventDialogComponent, dialogConfig);
 
   }
-  test() {
-    console.log('This is a test');
-
+  openImageCropper(data) {
+    console.log(data);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '700px';
+    dialogConfig.height = '700px';
+    // TODO
+    // Pass in Event Photo
+    dialogConfig.data = {
+      photo: data.photo
+    }
+    this.dialog.open(ImageCropperComponent, dialogConfig);
   }
 }

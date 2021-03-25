@@ -37,12 +37,16 @@
       placeholder="Zip"
       formControlName="zip">
     </mat-form-field>
-    <mat-form-field>
-        <input
-        matInput
-        placeholder="Photo"
-        formControlName="photo">
-      </mat-form-field>
+    <div>
+      <label>Mentor Photo</label>
+      <input
+      type="file"
+      accept="image/jpeg, image/png"
+      name="photo"
+      formControlName="photo"
+      (change)="getFormData($event)">
+      <img class="job-logo-selection" src="{{uploadedMentorPhotoURL}}" alt="Mentor Photo">
+    </div>
       <mat-form-field>
         <input
         matInput

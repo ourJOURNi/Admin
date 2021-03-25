@@ -28,7 +28,7 @@ export class AddJobDialogComponent implements OnInit {
       title: ['this is a title', Validators.required],
       companyName: ['company name', Validators.required],
       companyEmail: ['eddie@gmail.com', [Validators.required, Validators.email]],
-      companyLogo: [],
+      companyLogo: [''],
       summary: ['this is a summary', Validators.required],
       fullJobDescription: ['this is a full description of the job', Validators.required],
       rateOfPay: ['10', Validators.required],
@@ -45,7 +45,7 @@ export class AddJobDialogComponent implements OnInit {
         this.logoUploaded = true;
       }
     });
-    
+
     let reader = new FileReader();
 
     if (formElement) {
@@ -67,16 +67,16 @@ export class AddJobDialogComponent implements OnInit {
         this.uploadedLogoURL = data['objectUrl'];
 
         console.log('Adding job...');
-        console.log(job);
         this.jobs.addJob(job, this.uploadedLogoURL).subscribe(data => {
           this.jobs.getJobs().subscribe(data => {
+            console.log(data);
             let jobsArray = Object.values(data).reverse();
             this.jobs.jobsSubject.next(jobsArray);
           });
         });
       });
     } else {
-      // Add job without logo 
+      // Add job without logo
       console.log('Adding job...');
       console.log(job);
       this.jobs.addJob(job, null).subscribe(data => {
@@ -86,7 +86,7 @@ export class AddJobDialogComponent implements OnInit {
         });
       });
     }
-      
+
     this.close()
   }
 

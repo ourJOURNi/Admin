@@ -1,10 +1,11 @@
 <mat-toolbar>
-  <h3 class="page-header">Fairs: {{allFairs.length}}</h3>
+  <h3 class="page-header">Fairs: {{allFairs.length}} - View, Edit, and Delete all Fairs on the FYF App.</h3>
+  <div class="spacer"></div>
   <button class="add-button" (click)="openAddFairsDialog()">Add</button>
 </mat-toolbar>
 
 <div class="container">
-  <div *ngFor="let fair of allFairs" class="fair-link">
+  <div style="box-shadow: 1px 10px 26px rgba(0,0,0,0.05); padding: 2em;" *ngFor="let fair of allFairs" class="fair-link">
     <h3 id="fair-title">{{fair.title}}</h3>
     <h5 class="fair-date">{{fair.date}}</h5>
     <h5 class="fair-date">{{fair.time}}</h5>

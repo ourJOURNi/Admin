@@ -3,28 +3,24 @@
     <mat-sidenav mode="side" opened>
       <!-- <img id="logo" src="../../assets/logo-2.png" alt="Logo">
       <mat-divider id="sidenav-divider"></mat-divider> -->
-      <h1 style="color: white">Admin</h1>
-      <mat-nav-list>
+      <div style="text-align: center; position: relative; top: 24px;">
+        <img height="50" src="../../assets/fyf-white-icon.svg">
+      </div>
+      <mat-nav-list style="position: relative; top: 20px;">
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['jobs'] } }]">
-            <!-- <img class="sidenav-icon" src="../../assets/jobs-icon.svg" alt=""> -->
             <span>Jobs</span></a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['students'] } }]">
-            <!-- <img class="sidenav-icon" src="../../assets/profile-icon.svg" alt=""> -->
             <span>Users</span></a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['mentors'] } }]">
-            <!-- <img class="sidenav-icon" src="../../assets/mentors-icon.svg" alt=""> -->
             <span>Mentors</span></a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['posts'] } }]">
-            <!-- <img class="sidenav-icon" src="../../assets/posts-info.svg" alt=""> -->
             <span>Posts</span></a>
           <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['events'] } }]">
-            <!-- <img class="sidenav-icon" src="../../assets/events-icon.svg" alt=""> -->
             <span>Events</span></a>
-          <a mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['fairs'] } }]">
-            <!-- <img class="sidenav-icon" src="../../assets/jobs-icon.svg" alt=""> -->
-            <span>Fairs</span></a>
-          <a  class="logout-link" mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['logout'] } }]">
-            Logout</a>
+          <a id="active-link" mat-list-item routerLinkActive="active"  [routerLink]="[ { outlets: { open: ['fairs'] } }]">
+            <span class="fairs">Fairs</span></a>
+          <a mat-list-item [routerLink]="[ { outlets: { open: ['logout'] } }]">
+            <span class="logout">Logout</span></a>
        </mat-nav-list>
     </mat-sidenav>
 

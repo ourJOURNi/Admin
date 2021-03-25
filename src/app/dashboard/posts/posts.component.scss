@@ -4,3 +4,11 @@ span:first-child {
   font-weight: 700;
   color: #005191;
 }
+.container {
+  background: #f4f5f8;
+  height: auto;
+  padding: 6em 2em;
+}
+mat-card {
+  box-shadow: 1px 10px 26px rgba(0,0,0,0.05);
+}

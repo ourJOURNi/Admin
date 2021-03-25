@@ -1,0 +1,14 @@
+<p style="color: #333; font-weight: 600;">Please crop your photo to get the highest quality. You can zoom in and out to make sure you get the best fit within the frame.</p>
+<!-- Selected Image -->
+<img [src]="imageDestination" class="img-preview">
+<!-- Image Container -->
+<div class="img-container">
+<img #image [src]="uploadedPhotoURL" crossorigin>
+</div>
+<!-- Buttons -->
+<button class="card-button" (click)="crop(imageDestination)">
+Crop</button>
+<button class="delete-button" (click)="cancel()">
+Cancel
+</button>
+
