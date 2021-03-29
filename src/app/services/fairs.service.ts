@@ -5,7 +5,6 @@ import { tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -46,7 +45,7 @@ export class FairsService {
 
   deleteFair(id) {
     this.router.navigate(['dashboard']);
-    return this.http.delete(`${this.BACKEND_URL}/api/admin/fairs/delete-fair/${id}`);
+    return this.http.post(`${this.BACKEND_URL}/api/admin/fairs/delete-fair`, {id});
   }
 
   updateFair(fair) {

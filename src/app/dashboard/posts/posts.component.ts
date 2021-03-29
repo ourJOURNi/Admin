@@ -77,12 +77,10 @@ export class PostsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '400px';
 
     dialogConfig.data = {
       id: data._id,
-      creatorEmail: data.creatorEmail,
-      creatorName: data.creatorName,
-      post: data.post
   };
 
     this.dialog.open(DeletePostDialogComponent, dialogConfig);
@@ -90,6 +88,8 @@ export class PostsComponent implements OnInit {
 
   openFollowersDialog(data) {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '800px';
+    dialogConfig.height = '800px';
 
     dialogConfig.data = {
       id: data._id,

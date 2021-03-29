@@ -35,19 +35,10 @@ export class MentorsComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
 
       dialogConfig.disableClose = true;
+      dialogConfig.width = '400px';
 
       dialogConfig.data = {
         id: data._id,
-        name: data.name,
-        email: data.email,
-        address: data.address,
-        city: data.city,
-        state: data.state,
-        zip: data.zip,
-        phone: data.phone,
-        title: data.title,
-        description: data.description,
-        photo: data.photo
     };
 
       this.dialog.open(DeleteMentorDialogComponent, dialogConfig);
@@ -57,6 +48,7 @@ export class MentorsComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
 
       dialogConfig.disableClose = true;
+      dialogConfig.width = '800px';
 
       this.dialog.open(AddMentorDialogComponent, dialogConfig);
 
@@ -67,6 +59,7 @@ export class MentorsComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
 
       dialogConfig.disableClose = true;
+      dialogConfig.width = '800px';
 
       dialogConfig.data = {
         id: data._id,

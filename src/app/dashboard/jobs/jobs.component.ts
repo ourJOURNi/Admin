@@ -41,15 +41,9 @@ export class JobsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
-
+    dialogConfig.width = '400px';
     dialogConfig.data = {
       id: data._id,
-      title: data.title,
-      companyName: data.companyName,
-      companyEmail: data.companyEmail,
-      summary: data.summary,
-      fullJobDescription: data.fullJobDescription,
-      rateOfPay: data.rateOfPay
   };
 
     this.dialog.open(DeleteDialogComponent, dialogConfig);
@@ -59,6 +53,7 @@ export class JobsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '800px';
 
     this.dialog.open(AddJobDialogComponent, dialogConfig);
 
@@ -69,6 +64,7 @@ export class JobsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '800px';
 
     dialogConfig.data = {
       id: data._id,

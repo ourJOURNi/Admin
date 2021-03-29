@@ -45,6 +45,7 @@ export class EventsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '400px';
 
     dialogConfig.data = {
       id: data._id,
@@ -65,7 +66,7 @@ export class EventsComponent implements OnInit {
   }
   openAddEventsDialog() {
     const dialogConfig = new MatDialogConfig();
-
+    dialogConfig.width = '800px';
     dialogConfig.disableClose = true;
 
     this.dialog.open(AddEventDialogComponent, dialogConfig);
@@ -76,6 +77,7 @@ export class EventsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '800px';
 
     dialogConfig.data = {
       id: data._id,
@@ -99,8 +101,8 @@ export class EventsComponent implements OnInit {
     console.log(data);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    dialogConfig.width = '700px';
-    dialogConfig.height = '700px';
+    dialogConfig.width = '900px';
+    dialogConfig.height = '900px';
     // TODO
     // Pass in Event Photo
     dialogConfig.data = {

@@ -13,24 +13,14 @@ export class DeleteFairsDialogComponent implements OnInit {
 
   id: string;
   title: string;
-  date: string;
-  time: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  description: string;
-  summary: string;
-  dateCreated: string;
-  photo: string;
 
   constructor(
     private fairs: FairsService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<DeleteFairsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
-
-      this.id = data.id;
+      console.log(data);
+      this.id = data._id;
       this.title = data.title;
     }
 

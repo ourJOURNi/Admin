@@ -47,10 +47,11 @@ export class StudentsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '400px';
+
 
     dialogConfig.data = {
       id: student._id,
-      fullName: student.fullName
   };
 
     this.dialog.open(DeleteStudentDialogComponent, dialogConfig);
@@ -61,6 +62,7 @@ export class StudentsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '800px';
 
     dialogConfig.data = {
       fullName: data.fullName,

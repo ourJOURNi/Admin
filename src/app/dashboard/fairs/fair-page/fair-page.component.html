@@ -1,6 +1,8 @@
 <mat-toolbar class="top-bar">
-  <button id="back-button" class="page-button" (click)="back()">Back</button>
+  <img height="40" src="../../../../assets/fyf-white-icon.svg" alt="" srcset="">
+  <h2 style="color: white; position: relative; left: 10px;">Fair Page</h2>
   <span class="example-spacer"></span>
+  <button id="back-button" class="page-button" (click)="back()">Back</button>
   <button id="delete-button" class="page-button" (click)="deleteFair(this.id)">Delete Fair</button>
 </mat-toolbar>
 
@@ -11,12 +13,18 @@
     <h4><span>&middot;</span>{{fair.time}}</h4>
     <h4><span>&middot;</span>{{fair.date}}</h4>
     <h4><span>&middot;</span>{{fair.address}}, {{fair.city}}, {{fair.state}}, {{fair.zip}}</h4>
-    <p style="font-size: 1.2em; width: 750px;
-    line-height: 1.6em;">{{fair.summary}}</p>
-    <button id="edit-fair-info-button" class="page-button" (click)="editFair(fair)">Edit</button>
+    <p style="font-size: 1.1em;
+    line-height: 1.5em;">{{fair.summary}}</p>
+  <button id="edit-fair-info-button" class="page-button" (click)="editFair(fair)">Edit</button>
   </div>
-  <mat-divider></mat-divider>
-
+  <!-- Lunch -->
+  <div style="box-shadow: 1px 10px 16px rgba(0,0,0,0.05);" class="lunch">
+    <h1 class="usertype-header">Lunch</h1>
+    <p class="lunch-description">Total lunches combined between Students, Chaperones, Volunteers, and Partners.</p>
+    <h2>Ham: {{this.hamLunches}}</h2>
+    <h2>Turkey: {{this.turkeyLunches}}</h2>
+    <h2>Veggie: {{this.veggieLunches}}</h2>
+  </div>
   <!-- Students -->
   <div class="students">
     <h1 class="usertype-header">Students</h1>
@@ -70,10 +78,10 @@
                 </mat-menu>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-divider></mat-divider>
+
             <h4>Interests</h4>
             <p>{{student.interests}}</p>
-            <mat-divider></mat-divider>
+
             <h4>Questions</h4>
             <p>{{student.question1}}</p>
             <p>{{student.question2}}</p>
@@ -108,7 +116,6 @@
 
       </mat-expansion-panel>
     </mat-accordion>
-
     <!-- Student Agenda -->
     <mat-accordion>
       <mat-expansion-panel style="box-shadow: 1px 10px 16px rgba(0,0,0,0.05);"
@@ -164,8 +171,6 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <mat-divider></mat-divider>
-
   <!-- Chaperones -->
   <div class="chaperones">
     <h1 class="usertype-header">Chaperones</h1>
@@ -269,8 +274,6 @@
     </mat-accordion>
 
   </div>
-  <mat-divider></mat-divider>
-
   <!-- Partners -->
   <div class="partners">
     <h2 class="usertype-header">Partners</h2>
@@ -446,10 +449,8 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <mat-divider></mat-divider>
-
   <!-- Volunteers -->
-  <div class="volunteers">
+  <div class="volunteers" style="margin-bottom: 100px">
     <h1 class="usertype-header">Volunteers</h1>
 
     <!-- Volunteer Roster -->
@@ -629,16 +630,5 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <mat-divider></mat-divider>
-
-  <!-- Lunch -->
-  <div style="box-shadow: 1px 10px 16px rgba(0,0,0,0.05);" class="lunch" style="margin-bottom: 200px;">
-    <h1 class="usertype-header">Lunch</h1>
-    <p class="lunch-description">Total lunches combined between Students, Chaperones, Volunteers, and Partners.</p>
-    <h2>Ham: {{this.hamLunches}}</h2>
-    <h2>Turkey: {{this.turkeyLunches}}</h2>
-    <h2>Veggie: {{this.veggieLunches}}</h2>
-  </div>
-  <mat-divider></mat-divider>
-
+  <div style="margin-top: 100px; height: 100px;"></div>
 </div>

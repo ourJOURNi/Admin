@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
 import { FairsService } from 'src/app/services/fairs.service';
 
-import { DeleteSchoolDialogComponent } from './delete-school-dialog/delete-school-dialog.component';
 import { PrintDialogComponent } from './print-dialog/print-dialog.component';
 import { PrintStudentsDialogComponent } from './print-students-dialog/print-students-dialog.component';
 import { AddStudentSlotDialogComponent } from './add-student-slot-dialog/add-student-slot-dialog.component';
@@ -33,7 +32,6 @@ import { PrintVolunteerAgendaDialogComponent } from './print-volunteer-agenda-di
 import { AddVolunteerFaqDialogComponent } from './add-volunteer-faq-dialog/add-volunteer-faq-dialog.component';
 import { PrintVolunteerFaqDialogComponent } from './print-volunteer-faq-dialog/print-volunteer-faq-dialog.component';
 import { DeleteVolunteerFaqDialogComponent } from './delete-volunteer-faq-dialog/delete-volunteer-faq-dialog.component';
-import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.component';
 import { EditFairDialogComponent } from '../edit-fair-dialog/edit-fair-dialog.component';
 import { Subscription } from 'rxjs';
 import { DeleteFairsDialogComponent } from '../delete-fair-dialog/delete-fair-dialog.component';
@@ -47,7 +45,6 @@ export class FairPageComponent implements OnInit, OnDestroy {
   id: string;
   fair;
   title: any;
-
 
   chaperones;
   partners;
@@ -174,8 +171,8 @@ export class FairPageComponent implements OnInit, OnDestroy {
           }
         );
 
+        console.log(this.fair.time);
         this.fair.date = format( new Date(this.fair.date), 'MMMM dd, yyyy');
-        this.fair.time = format( new Date(this.fair.date), 'hh:mm a');
 
         const studentsBySchool = Object.values(fair['studentsBySchool']);
         console.log(studentsBySchool);
@@ -308,9 +305,6 @@ export class FairPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-
-
     this.editAgendaForm = this.formBuilder.group({
       time: [''],
       title: [''],
@@ -364,38 +358,33 @@ back() {
     }
 
   }
-
     // Student Dialogs
 printCSVDialog(): void {
       const dialogRef = this.dialog.open(PrintDialogComponent, {
-        width: '450px',
+        width: '400px',
         // data: {name: this.name, animal: this.animal}
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         // this.animal = result;
       });
-  }
-
-deleteFair(id) {
+}
+deleteFair() {
     console.log('deleting fair');
     const dialogRef = this.dialog.open(DeleteFairsDialogComponent, {
-      width: '450px',
+      width: '400px',
       data: {
         id: this.id,
-        title: this.title
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-  }
-
+}
 editFair(data) {
     const dialogConfig = new MatDialogConfig();
     console.log(data);
-
-
+    dialogConfig.width = '800px';
     dialogConfig.data = {
       id:  data._id,
       title: data.title,
@@ -1002,7 +991,7 @@ deletePartnerFAQDialog(): void {
 
   printVolunteerAgendaDialog(): void {
       const dialogRef = this.dialog.open(PrintVolunteerAgendaDialogComponent, {
-        width: '450px',
+        width: '400px',
         // data: {name: this.name, animal: this.animal}
       });
 
@@ -1014,7 +1003,7 @@ deletePartnerFAQDialog(): void {
 
   deleteVolunteerSlotDialog(): void {
       const dialogRef = this.dialog.open(DeleteVolunteerDialogComponent, {
-        width: '450px',
+        width: '400px',
         // data: {name: this.name, animal: this.animal}
       });
 
@@ -1026,7 +1015,7 @@ deletePartnerFAQDialog(): void {
 
   addVolunteerFAQDialog(): void {
       const dialogRef = this.dialog.open(AddVolunteerFaqDialogComponent, {
-        width: '450px',
+        width: '800px',
         data: {id: this.id}
       });
 

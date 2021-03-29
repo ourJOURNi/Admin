@@ -6,7 +6,7 @@ import { AddFairDialogComponent } from '../fairs/add-fair-dialog/add-fair-dialog
 import { EditFairDialogComponent } from '../fairs/edit-fair-dialog/edit-fair-dialog.component';
 import { format } from 'date-fns';
 import { Router } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,6 +15,7 @@ import { Subject, Subscription } from 'rxjs';
   styleUrls: ['./fairs.component.scss']
 })
 export class FairsComponent implements OnInit, OnDestroy {
+  id: string;
   allFairs = [];
   fairsSubscription: Subscription;
   fairsSubject: Subscription;
@@ -36,7 +37,6 @@ export class FairsComponent implements OnInit, OnDestroy {
 
       for (const fair of fairsArray) {
         fair.date = format( new Date(fair.date), 'MMMM dd, yyyy');
-        fair.time = format( new Date(fair.date), 'hh:mm a');
       }
 
       this.fairs.fairsSubject.next(fairsArray.reverse());
@@ -52,33 +52,24 @@ export class FairsComponent implements OnInit, OnDestroy {
     this.router.navigate(['fair-page', id]);
   }
 
-  openDeleteFairsDialog(data) {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-
-    dialogConfig.data = {
-      id: data._id,
-      title: data.title,
-      organizer: data.organizer,
-      addressOne: data.addressOne,
-      addressTwo: data.addressTwo,
-      city: data.city,
-      state: data.state,
-      zip: data.zip,
-      description: data.description,
-      date: data.date,
-      time: data.time,
-      photo: data.photo
-  };
-
-    this.dialog.open(DeleteFairsDialogComponent, dialogConfig);
-  }
+  deleteFair(id) {
+    console.log('deleting fair');
+    const dialogRef = this.dialog.open(DeleteFairsDialogComponent, {
+      width: '400px',
+      data: {
+        _id: id,
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+}
 
   openAddFairsDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '800px';
 
     this.dialog.open(AddFairDialogComponent, dialogConfig);
 
@@ -89,6 +80,7 @@ export class FairsComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
+    dialogConfig.width = '800px';
 
     dialogConfig.data = {
       id: data._id,
