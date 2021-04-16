@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Edit Event</h2>
 <mat-dialog-content>
-  <form [formGroup]="editEventForm" (ngSubmit)="update(this.editEventForm.value)">
+  <form [formGroup]="editEventForm" id="add-event-form" (ngSubmit)="update(this.editEventForm.value)">
       <mat-form-field>
           <input
           required
@@ -58,13 +58,19 @@
           formControlName="date"
           type="datetime-local">
         </mat-form-field>
-        <mat-form-field>
+        <div id="event-photo-group">
+          <label>Photo</label>
           <input
           required
-          matInput
-          placeholder="Photo"
-          formControlName="photo">
-        </mat-form-field>
+          type="file"
+          (change)="getFormData($event)"
+          accept="image/jpeg, image/png"
+          name="eventPhoto"
+          (change)="getFormData($event)">
+          <label>Photo</label><br>
+          <canvas *ngIf="!photoUploaded" id="default-photo-wrapper"></canvas>
+          <img width="" *ngIf="photoUploaded" class="event-photo-selection" src="{{ uploadedLogoURL }}" alt="Event Photo">
+        </div>
         <mat-form-field>
           <textarea
           required
@@ -75,7 +81,7 @@
           </textarea>
         </mat-form-field>
         <mat-dialog-actions>
-            <button class="page-button" type="submit">Edit Job</button>
+            <button class="page-button" type="submit">Edit Event</button>
             <button class="page-danger-button" (click)="close()">Cancel</button>
         </mat-dialog-actions>
   </form>

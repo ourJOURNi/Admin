@@ -13,7 +13,7 @@ export class EditMentorDialogComponent implements OnInit {
   editMentorForm: FormGroup;
   formData: FormData;
   mentorPhotoUploaded = false;
-  uploadedMentorPhotoURL: string | ArrayBuffer;
+  uploadedMentorPhotoURL;
 
   id: string;
   name: string;
@@ -67,7 +67,7 @@ export class EditMentorDialogComponent implements OnInit {
   getFormData(event) {
     const formElement = document.querySelectorAll('form');
     formElement.forEach(form => {
-      if (form.id === 'edit-job-form') {
+      if (form.id === 'edit-mentor-form') {
         console.log('Got form: ', form);
         this.formData = new FormData(form);
         this.mentorPhotoUploaded = true
@@ -88,18 +88,33 @@ export class EditMentorDialogComponent implements OnInit {
 
   update(mentor) {
     mentor._id = this.id;
+    console.log(mentor);
     if(!this.formData) {
       console.log('There was no FormData!');
       mentor.photo = this.uploadedMentorPhotoURL;
       this.mentors.updateMentor(mentor).subscribe(data => {
         this.mentors.getMentors().subscribe(data => {
-          let mentorsArray = Object.values(data);
+          console.log(data);
+          let mentorsArray = Object.values(data).reverse();
           this.mentors.mentorsSubject.next(mentorsArray);
         });
       });
-    }
+    } else {
+      this.mentors.uploadPhoto(this.formData).subscribe(data => {
+        console.log('Logo upload result: ', data);
+        console.log('Logo upload done');
+        mentor.photo = data['objectUrl'];
 
+        console.log('Adding mentor...');
+        this.mentors.updateMentor(mentor).subscribe(data => {
+          this.mentors.getMentors().subscribe(data => {
+            console.log(data);
+            let mentorsArray = Object.values(data).reverse();
+            this.mentors.mentorsSubject.next(mentorsArray);
+          });
+        });
+      });
+    }
     this.dialogRef.close();
   }
-
 }

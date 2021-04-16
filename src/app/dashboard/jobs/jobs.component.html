@@ -15,7 +15,7 @@
         <mat-card style="box-shadow: 1px 10px 26px rgba(0,0,0,0.05); padding: 2em;" *ngFor="let job of allJobs">
             <mat-card-header>
               <img mat-card-avatar class="pictures" src="{{job.companyLogo}}" alt="Job Logo">
-              <mat-card-title><p class="rate-of-pay">{{job.rateOfPay}} /hr</p> {{job.title}}</mat-card-title>
+              <mat-card-title><p class="rate-of-pay">${{job.rateOfPay}} /hr</p><br><br> {{job.title}}</mat-card-title>
               <mat-card-subtitle>{{job.companyEmail}}</mat-card-subtitle>
               <mat-card-subtitle>{{job.date}}</mat-card-subtitle>
               </mat-card-header>

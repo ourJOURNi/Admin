@@ -38,7 +38,6 @@ mat-card {
   width: 800px;
   // border: 1.5px solid #0055a5;
   border-radius: 5px;
-  padding: 3em;
 }
 .mat-card-actions {
   padding: 6em 0em;
@@ -56,19 +55,11 @@ mat-card {
   margin: 8px 0;
 }
 
-.mat-card-header {
-    display: flex;
-    flex-direction: row;
-    margin: 48px 0px;
-    position: relative;
-    top: 30px;
-}
-
 .rate-of-pay {
   font-size: 0.75em;
   font-weight: 700;
-  background-color: #21ce99;
-  border: 1px solid #21ce99;
+  background-color: #00c400;
+  border: 1px solid #00c400;
   width: 50px;
   display: inline;
   padding: 0.1em 0.7em;
@@ -111,7 +102,7 @@ mat-toolbar {
   position: fixed;
   z-index: 9999;
   box-shadow: 1px 1px 20px rgba(0,0,0,0.15);
-  background: white;
+  background: #0055a529;
 }
 
 .search {
@@ -158,7 +149,7 @@ mat-toolbar {
   width: 100px;
 }
 .add-button{
-  background: #21ce99;
+  background: #00c400;
   color: white;
   font-weight: 600;
   font-size: 0.65em;
@@ -183,11 +174,10 @@ mat-toolbar {
 .page-button {
   background: #0055a5;
   color: white;
-  font-weight: 600;
-  font-size: 0.65em;
+  font-size: 0.7em;
   width: 100px;
   margin-left: 10px;
-  height: 40px;
+  height: 24px;
   border-radius: 5px;
   border: none;
 }
@@ -195,8 +185,7 @@ mat-toolbar {
 .page-success-button {
   background: #015028;
   color: white;
-  font-weight: 600;
-  width: 140px;
+  width: 100px;
   margin-left: 10px;
   height: 40px;
   border-radius: 5px;
@@ -206,10 +195,9 @@ mat-toolbar {
 .page-danger-button {
   background: #e4405f;
   color: white;
-  font-weight: 600;
-  width: 140px;
+  width: 100px;
   margin-left: 10px;
-  height: 40px;
+  height: 24px;
   border-radius: 5px;
   border: none;
 }

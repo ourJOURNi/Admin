@@ -78,11 +78,9 @@ public ngOnInit() {
     this.dialogRef.close();
   }
 
-  // crop(imageDestination) {
-  //   console.log('cropping');
-  //   this.modal.dismiss(
-  //     imageDestination
-  //   );
+  crop(imageDestination) {
+    console.log('cropping');
+    this.dialogRef.close()
 
-  // }
+  }
 }

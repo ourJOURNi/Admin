@@ -82,7 +82,6 @@ export class EditJobDialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-
   update(job) {
     job._id = this.id;
     console.log(job);

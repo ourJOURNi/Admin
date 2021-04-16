@@ -13,7 +13,6 @@ import { format } from 'date-fns';
 export class AddEventDialogComponent implements OnInit {
 
   addEventForm: FormGroup;
-
   formData: FormData;
   photoUploaded = false;
   uploadedPhotoURL;
@@ -73,7 +72,7 @@ export class AddEventDialogComponent implements OnInit {
         this.events.addEvent(event, this.uploadedPhotoURL).subscribe(data => {
           this.events.getEvents().subscribe(events => {
             const eventsArray = Object.values(events);
-  
+
             for (const event of eventsArray) {
               event.date = format( new Date(event.date), 'MMMM dd, yyyy');
               event.time = format( new Date(event.date), 'hh:mm a');

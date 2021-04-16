@@ -28,8 +28,8 @@ export class EventsService {
   }
 
   updateEvent(event) {
-    console.log('Updating Job...');
-    return this.http.put(`${this.BACKEND_URL}/api/admin/events/update-event`, event);
+    console.log('Updating Event...');
+    return this.http.post(`${this.BACKEND_URL}/api/admin/events/update-event`, event);
   }
 
   uploadPhoto(imageForm) {

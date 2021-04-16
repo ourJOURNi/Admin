@@ -12,6 +12,10 @@ import { format } from 'date-fns';
 export class EditEventDialogComponent implements OnInit {
 
   editEventForm: FormGroup;
+  formData: FormData;
+
+  uploadedLogoURL;
+  photoUploaded = true;
 
   id: string;
   title: string;
@@ -24,7 +28,8 @@ export class EditEventDialogComponent implements OnInit {
   date: string;
   time: string;
   description: string;
-  photo: string;
+  photo: any;
+  isoDate: string;
 
   constructor(
     private events: EventsService,
@@ -43,20 +48,21 @@ export class EditEventDialogComponent implements OnInit {
       this.description = data.description;
       this.date = data.date;
       this.time = data.time;
+      this.uploadedLogoURL = data.photo;
       this.photo = data.photo;
+      this.isoDate = new Date(data.date + ' ' + data.time).toISOString().substring(0, 21);
      }
 
   ngOnInit() {
     this.editEventForm = this.formBuilder.group({
-      title: [this.title, Validators.required, Validators.maxLength(80)],
+      title: [this.title, Validators.required],
       organizer: [this.organizer, Validators.required],
       addressOne: [this.addressOne, Validators.required],
       addressTwo: [this.addressTwo, Validators.required],
       city: [ this.city, Validators.required],
       state: [ this.state, Validators.required],
       zip: [ this.zip, Validators.required],
-      date: [ this.date, Validators.required],
-      time: [ this.time, Validators.required],
+      date: [ this.isoDate, Validators.required],
       description: [ this.description, Validators.required],
     });
   }
@@ -64,21 +70,62 @@ export class EditEventDialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+  getFormData(event) {
+    const formElement = document.querySelectorAll('form');
+    formElement.forEach(form => {
+      if (form.id === 'edit-event-form') {
+        console.log('Got form: ', form);
+        this.formData = new FormData(form);
+        console.log('Form data: ', this.formData);
+        this.photoUploaded = true;
+      }
+    });
 
+    let reader = new FileReader();
+
+    if (formElement) {
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    reader.addEventListener('load', () => {
+      // Convert image file ot base64 string
+      this.uploadedLogoURL = reader.result;
+    }, false);
+  }
   update(event) {
     event._id = this.id;
-    this.events.updateEvent(event).subscribe(data => {
-      this.events.getEvents().subscribe(events => {
-        const eventsArray = Object.values(events);
-
-        for (const event of eventsArray) {
-          event.date = format( new Date(event.date), 'MMMM dd, yyyy');
-          event.time = format( new Date(event.date), 'hh:mm a');
-        }
-
-        this.events.eventsSubject.next(eventsArray.reverse());
+    console.log(event);
+    if(!this.formData) {
+      console.log('There was no FormData!');
+      event.photo = this.uploadedLogoURL;
+      this.events.updateEvent(event).subscribe(data => {
+        this.events.getEvents().subscribe(data => {
+          console.log(data);
+          let eventsArray = Object.values(data).reverse();
+          this.events.eventsSubject.next(eventsArray);
+        });
       });
-    });
+    } else {
+      this.events.uploadPhoto(this.formData).subscribe(data => {
+        console.log('Photo upload result: ', data);
+        console.log('Photo upload done');
+        event.photo = data['objectUrl'];
+
+        console.log('Adding event...');
+        this.events.updateEvent(event).subscribe(data => {
+          this.events.getEvents().subscribe(events => {
+            const eventsArray = Object.values(events);
+
+            for (const event of eventsArray) {
+              event.date = format( new Date(event.date), 'MMMM dd, yyyy');
+              event.time = format( new Date(event.date), 'hh:mm a');
+            }
+
+            this.events.eventsSubject.next(eventsArray.reverse());
+          });
+        });
+      });
+    }
     this.dialogRef.close();
   }
 

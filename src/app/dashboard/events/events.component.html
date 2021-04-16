@@ -22,11 +22,15 @@
              (closed)="panelOpenState = false"> -->
               <mat-expansion-panel-header>
                <mat-panel-title>
-                 <h2 style="margin: 30px 0px;">Event Photo</h2>
+                 <h3 style="margin: 30px 0px;">Event Photo</h3>
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <img style="width: 335px; margin-left: 8px;" src="{{event.photo}}">
-            <button class="card-button" (click)="openImageCropper(event)">Edit</button>
+            <div style="text-align: center; margin-top: 42px;">
+              <img style="width: 335px; margin-left: 8px;" src="{{event.photo}}">
+              <br>
+              <br>
+              <button class="card-button" (click)="openImageCropper(event)">Edit</button>
+            </div>
             </mat-expansion-panel>
           </mat-accordion>
 

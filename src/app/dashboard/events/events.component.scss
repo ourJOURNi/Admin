@@ -32,4 +32,33 @@ p {
 mat-card {
   box-shadow: 1px 10px 26px rgba(0,0,0,0.05);
 }
+mat-expansion-panel {
+  background: #0055a529;
+  box-shadow: 1px 10px 26px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
 
+  .panel-toolbar {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    z-index: 0;
+
+    button {
+      font-size: 0.8em;
+      color: white;
+      margin-right: 15px;
+      padding: 0.6em 0;
+      width: 120px;
+      border-radius: 5px;
+      border: none;
+      background: #21ce99;
+      z-index: 0;
+    }
+  }
+
+  h3 {
+    color: #005191;
+  }
+}
