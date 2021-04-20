@@ -21,15 +21,14 @@ export class ReportedArchiveComponent implements OnInit {
     ngOnInit() {
       this.posts.getReportedCommentsArchive().subscribe(
         comments => {
-
-          const commentsArray = Object.values(comments);
+          const commentsArray = comments['reportedComments'].reverse();
           this.posts.reportedArchiveComments$.next(commentsArray);
 
           // Subscribe to Posts Subject in Posts Service for Real time updates
           this.posts.reportedArchiveComments$.subscribe(data => {
           this.allReportedComments = data;
           console.log(this.allReportedComments);
-        });
+          });
         }
       );
     }

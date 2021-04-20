@@ -15,6 +15,7 @@ export class DeleteReportedCommentDialogComponent implements OnInit {
   commentContents;
   reportedUserEmail;
   reportedUserName;
+  reportedUID;
 
   constructor(
     private posts: PostsService,
@@ -23,19 +24,20 @@ export class DeleteReportedCommentDialogComponent implements OnInit {
 
       this.postID = data.postID;
       this.commentID = data.commentID;
+      this.reportedUID = data.reportedUID;
       this.reportedUserEmail = data.reportedUserEmail;
       this.reportedUserName = data.reportedUserName;
       this.commentContents = data.commentContents;
+      console.log(data)
     }
 
   ngOnInit() {
   }
 
   delete() {
-    this.posts.deleteReportedComment(this.postID, this.commentID).subscribe(data => {
+    this.posts.deleteReportedComment(this.postID, this.commentID, this.reportedUID).subscribe(data => {
       this.posts.getReportedComments().subscribe(data => {
-        let commentsArray = Object.values(data);
-        this.posts.posts$.next(commentsArray);
+        this.posts.reportedPosts$.next(Object.values(data));
       });
     });
     this.dialogRef.close();

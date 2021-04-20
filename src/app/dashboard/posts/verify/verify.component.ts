@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../../../services/posts.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-
+import { Location } from '@angular/common';
 import { VerifyDialogComponent } from '../verify/verify-dialog/verify-dialog.component';
 import { DenyDialogComponent } from '../verify/deny-dialog/deny-dialog.component';
 
@@ -20,7 +20,8 @@ export class VerifyComponent implements OnInit {
   constructor(
     private posts: PostsService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private location: Location
     ) { }
 
     ngOnInit() {
@@ -47,7 +48,7 @@ export class VerifyComponent implements OnInit {
 
     goBack() {
       console.log('Going back to cali');
-      this.router.navigate(['dashboard']);
+      this.location.back();
     }
 
     goToDeniedPosts() {

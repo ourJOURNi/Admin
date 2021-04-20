@@ -1,17 +1,18 @@
 <mat-toolbar>
-    <h3 class="page-header">Denied Posts: {{allDeniedPosts.length}}</h3>
-    <span class="spacer"></span>
-    <button class="page-button" (click)="goBack()">Go Back </button>
+  <img style="margin-right: 24px;" height="40px" src="../../../../assets/United-Way-symbol.svg" alt="United-Way-Logo" srcset="">
+  <h3 class="page-header">Denied Posts: {{allDeniedPosts.length}}</h3>
+  <span class="spacer"></span>
+  <button class="page-button" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
 
-  <h4 class="page-description">These are all the posts that have been denied during the verification process.</h4>
+  <h4 class="page-description">These are all the posts that have been <span style="color: #e3405f;">denied</span> during the verification process.</h4>
 
   <div *ngIf="allDeniedPosts.length === 0" style="text-align: center; margin-top: 20%;">
       <h4 class="page-description">There have been no post that have been denied. If you see this, something is wrong.</h4>
   </div>
 
-  <mat-card *ngFor="let post of allDeniedPosts">
+  <!-- <mat-card *ngFor="let post of allDeniedPosts">
     <mat-card-header>
       <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
         <mat-card-title>{{post.creatorName}}</mat-card-title>
@@ -22,5 +23,30 @@
       <mat-card-content>
         <h3>{{post.post}}</h3>
         </mat-card-content>
-</mat-card>
+  </mat-card> -->
+
+  <mat-card *ngFor="let post of allDeniedPosts">
+    <mat-card-header>
+      <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
+        <mat-card-title>{{post.creatorName}}</mat-card-title>
+        <mat-card-subtitle>{{post.creatorEmail}}</mat-card-subtitle>
+        <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <div class="spacer"></div>
+      <mat-card-content>
+        <p class="post-title">
+          {{post.title}}
+        </p>
+        <p class="hashtags" *ngFor="let tag of post.hashtags">
+          #{{tag}},
+        </p>
+        <p class="post-content">{{post.post}}
+        </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button class="card-button" style="width: 100px;" (click)="verifyYesDialog(post)">Verify</button>
+          <button class="delete-button" style="width: 100px;" (click)="verifyNoDialog(post)">Deny</button> -->
+        </mat-card-actions>
+  </mat-card>
 </div>

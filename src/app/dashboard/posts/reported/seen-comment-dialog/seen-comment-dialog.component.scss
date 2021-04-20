@@ -1,0 +1,24 @@
+mat-dialog-container {
+  background: #edffed;
+}
+h2 {
+  color: #00c400;
+  font-size: 2em;
+}
+.message {
+  color: #222;
+  font-size: 1.3em;
+  padding: 0.5em;
+}
+.reporter-info{
+  line-height: 1em;
+  font-size: 0.7em;
+}
+.page-danger-button, .page-button{
+  width: 130px;
+  height: 32px;
+  font-weight: 600;
+}
+.page-danger-button {
+  background-color: #00c400;
+}

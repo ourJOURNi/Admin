@@ -1,13 +1,16 @@
 <mat-toolbar>
-    <h3 class="page-header">Verify Posts: {{allUnverifiedPosts.length}}</h3>
+    <img style="margin-right: 24px;" height="40px" src="../../../../assets/United-Way-symbol.svg" alt="United-Way-Logo" srcset="">
+    <h3 class="page-header">Unverified Posts: {{allUnverifiedPosts.length}}</h3>
     <span class="spacer"></span>
     <button class="page-button" (click)="goToDeniedPosts()"> Denied Archives</button>
     <button class="page-button" (click)="goBack()">Go Back </button>
 </mat-toolbar>
+
 <div class="container">
+  <p *ngIf="allUnverifiedPosts.length !== 0" class="page-description">These are all the posts that have yet to be <span style="color: #00c400; font-weight: 600;">verified</span>. If they are verified, they will be added to FYF's Posts feed. If they are <span style="color: #e3405f; font-weight: 600;">denied</span>, they will be added to an archieve of denied posts.</p>
 
   <div *ngIf="allUnverifiedPosts.length === 0" style="text-align: center; margin-top: 20%;">
-      <h4 class="page-description">There are no posts to be verifed.</h4>
+      <h4 class="page-description">There are no posts than needs to be verifed. Come back later.</h4>
   </div>
 
   <mat-card *ngFor="let post of allUnverifiedPosts">
@@ -18,19 +21,20 @@
         <mat-card-subtitle>{{post.date}}</mat-card-subtitle>
       </mat-card-header>
 
+      <div class="spacer"></div>
       <mat-card-content>
-        <p style="font-size: 1.1em; font-weight: 800; color: #0055a5;">
+        <p class="post-title">
           {{post.title}}
         </p>
-        <p *ngFor="let tag of post.hashtags" style="font-size: 0.9em; display: inline-block; margin-right: 5px;     color: #777;">
+        <p class="hashtags" *ngFor="let tag of post.hashtags">
           #{{tag}},
         </p>
-        <p style="font-size: 1em; white-space: pre-wrap;">{{post.post}}
+        <p class="post-content">{{post.post}}
         </p>
         </mat-card-content>
         <mat-card-actions>
-          <button class="card-button" style="width: 100px;" (click)="verifyYesDialog(post)">Verify</button>
-          <button class="delete-button" style="width: 100px;" (click)="verifyNoDialog(post)">Deny</button>
+          <button class="card-button" style="width: 130px; height: 32px;" (click)="verifyYesDialog(post)">Verify</button>
+          <button class="delete-button" style="width: 130px; height: 32px;" (click)="verifyNoDialog(post)">Deny</button>
         </mat-card-actions>
-</mat-card>
+  </mat-card>
 </div>

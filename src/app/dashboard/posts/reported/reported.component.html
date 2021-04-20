@@ -1,32 +1,36 @@
 <mat-toolbar>
-    <h3 class="page-header">Reported Comments: {{allReportedComments.length}} </h3>
-    <span class="spacer"></span>
-    <button class="page-button" (click)=reportedArchives()> Reported Archives </button>
-    <button class="page-button" (click)="goBack()">Go Back </button>
+  <img style="margin-right: 24px;" height="40px" src="../../../../assets/United-Way-symbol.svg" alt="United-Way-Logo" srcset="">
+  <h3 class="page-header">Reported Comments: {{allReportedComments.length}} </h3>
+  <span class="spacer"></span>
+  <button class="page-button" (click)=reportedArchives()> Reported Archives </button>
+  <button class="page-button" (click)="goBack()">Go Back </button>
 </mat-toolbar>
 <div class="container">
+  <h4 class="page-description">These are all the posts that have been <span style="color: #e3405f;">reported</span> by other users.</h4>
 
-  <div *ngIf="allReportedComments.length === 0" style="text-align: center; margin-top: 20%;">
-      <h4 class="page-description">There are no reported comments that need to be viewed</h4>
+  <div *ngIf="allReportedComments.length === 0" style="text-align: center; margin-top: 5%;">
+      <h4 class="no-reported-comments">There are no reported comments.</h4>
   </div>
 
-  <mat-card *ngFor="let post of allReportedComments">
-    <mat-card-header>
-      <img mat-card-avatar class="pictures" src="{{post.creatorProfilePicture}}" alt="Profile">
-        <mat-card-title>Reporting: {{post.reportedUserName}}</mat-card-title>
-        <mat-card-subtitle>{{post.reportedUserEmail}}</mat-card-subtitle>
-      </mat-card-header>
+<mat-card *ngFor="let post of allReportedComments">
+  <mat-card-header>
+    <img mat-card-avatar class="pictures" src="{{post.reportedUserProfilePicture}}" alt="Profile">
+    <mat-card-title>Reporting: {{post.reportedUserName}}</mat-card-title>
+    <mat-card-subtitle>{{post.reportedUserEmail}}</mat-card-subtitle>
+    </mat-card-header>
 
-      <mat-card-content>
-        <p>Post ID: {{post.postID}}</p>
-        <p >Reporting User: {{post.userFullname}}</p>
-        <p>Reporting Email: {{post.userEmail}}</p>
-        <hr style="background: #999;">
-        <p style="white-space: pre-wrap; color: #e4405f">{{post.commentContents}}</p>
-      </mat-card-content>
+    <div class="spacer"></div>
+    <mat-card-content>
+      <!-- <p>Post ID: {{post.postID}}</p> -->
+      <p class="reporter-info">Reporter: {{post.userFullname}}</p>
+      <p class="reporter-info">Reporter Email: {{post.userEmail}}</p>
+      <p class="reporter-info">Reason: {{post.reportReason}}</p>
+      <hr style="background: #999;">
+        <p style="white-space: pre-wrap; color: #e4405f">"{{post.commentContents}}"</p>
+    </mat-card-content>
       <mat-card-actions>
         <button class="card-button" (click)="openSeenReportedCommentDialog(post)">Mark as Seen</button>
         <button class="delete-button" (click)="openDeleteReportedCommentDialog(post)">Delete</button>
-        </mat-card-actions>
+      </mat-card-actions>
 </mat-card>
 </div>

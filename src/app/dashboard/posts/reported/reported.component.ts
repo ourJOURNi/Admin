@@ -4,7 +4,8 @@ import { PostsService } from '../../../services/posts.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteReportedCommentDialogComponent } from '../reported/delete-reported-comment-dialog/delete-reported-comment-dialog.component';
 import { SeenCommentDialogComponent } from '../reported/seen-comment-dialog/seen-comment-dialog.component';
-
+import { BehaviorSubject } from 'rxjs';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-reported',
@@ -13,25 +14,29 @@ import { SeenCommentDialogComponent } from '../reported/seen-comment-dialog/seen
 })
 export class ReportedComponent implements OnInit {
   allReportedComments;
+  allReportedComments$ = new BehaviorSubject(null);
+
 
   constructor(
     private posts: PostsService,
     private router: Router,
+    private location: Location,
     public dialog: MatDialog) { }
 
   ngOnInit() {
     this.posts.getReportedComments().subscribe(
       posts => {
-        this.allReportedComments = Object.values(posts).reverse();
-        // console.log(posts);
+        this.posts.reportedPosts$.next(Object.values(posts));
+        this.posts.reportedPosts$.subscribe(
+          data => {
+            this.allReportedComments = Object.values(data);
+          })
       }
     );
   }
-
   goBack() {
-    this.router.navigate(['dashboard']);
+    this.location.back()
   }
-
   reportedArchives() {
     this.router.navigate(['reported-archive']);
   }
@@ -45,11 +50,9 @@ export class ReportedComponent implements OnInit {
     dialogConfig.height = 'auto';
 
     dialogConfig.data = {
-      postID: data._id,
+      postID: data.postID,
       commentID: data.commentID,
-      commentContents: data.commentContents,
-      reportedUserEmail: data.reportedUserEmail,
-      reportedUserName: data.reportedUserName
+      reportedUID: data.reportedUID
   };
 
     this.dialog.open(DeleteReportedCommentDialogComponent, dialogConfig);
@@ -58,6 +61,7 @@ export class ReportedComponent implements OnInit {
 
   openSeenReportedCommentDialog(data) {
     const dialogConfig = new MatDialogConfig();
+    console.log(data)
 
     dialogConfig.width = '600px';
     dialogConfig.height = 'auto';
@@ -66,9 +70,14 @@ export class ReportedComponent implements OnInit {
     dialogConfig.data = {
       postID: data._id,
       commentID: data.commentID,
+      reportedUID: data.reportedUID,
       commentContents: data.commentContents,
       reportedUserEmail: data.reportedUserEmail,
-      reportedUserName: data.reportedUserName
+      reportedUserName: data.reportedUserName,
+      reportedUserProfilePicture: data.reportedUserProfilePicture,
+      reportReason: data.reportReason,
+      userEmail: data.userEmail,
+      userFullname: data.userFullname
   };
 
     this.dialog.open(SeenCommentDialogComponent, dialogConfig);

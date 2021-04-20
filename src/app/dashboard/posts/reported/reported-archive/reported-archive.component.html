@@ -1,4 +1,5 @@
 <mat-toolbar>
+  <img style="margin-right: 24px;" height="40px" src="../../../../assets/United-Way-symbol.svg" alt="United-Way-Logo" srcset="">
   <h3 class="page-header">Reported Comment Archive</h3>
   <span class="spacer"></span>
   <button class="page-button" (click)="goBack()">Go Back </button>
@@ -7,23 +8,24 @@
 
 <h4 class="page-description">These are all the comments that have been reported whether or not they have been deleted or not.</h4>
 
-<div *ngIf="allReportedComments.length[1] === 0" style="text-align: center; margin-top: 20%;">
+<div *ngIf="allReportedComments.length === 0" style="text-align: center; margin-top: 20%;">
     <h3>There have been no comments that have been added to the reported comments archieve.</h3>
 </div>
 
-<mat-card *ngFor="let comment of allReportedComments[1]">
+<mat-card *ngFor="let comment of allReportedComments">
   <mat-card-header>
-      <img mat-card-avatar class="pictures" src="{{comment.creatorProfilePicture}}" alt="Profile">
+      <img mat-card-avatar class="pictures" src="{{comment.reportedUserProfilePicture}}" alt="Profile">
         <mat-card-title>Reporting: {{comment.reportedUserName}}</mat-card-title>
         <mat-card-subtitle>{{comment.reportedUserEmail}}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
-        <p>Post ID: {{comment.postID}}</p>
-        <p >Reporting User: {{comment.userFullname}}</p>
-        <p>Reporting Email: {{comment.userEmail}}</p>
+        <!-- <p class="reporter-info">Post ID: {{comment.postID}}</p> -->
+        <p class="reporter-info">Reporter: {{comment.userFullname}}</p>
+        <p class="reporter-info">Reporter Email: {{comment.userEmail}}</p>
+        <p class="reporter-info">Reason: {{comment.reportReason}}</p>
         <hr style="background: #999;">
-        <p style="white-space: pre-wrap; color: #e4405f">{{comment.comment}}</p>
+        <p style="white-space: pre-wrap; color: #e4405f">"{{comment.commentContents}}"</p>
       </mat-card-content>
       <!-- <mat-card-actions>
 
