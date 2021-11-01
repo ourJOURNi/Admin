@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DeletePartnerSlotDialogComponent } from './delete-partner-slot-dialog.component';
 
@@ -6,7 +6,7 @@ describe('DeletePartnerSlotDialogComponent', () => {
   let component: DeletePartnerSlotDialogComponent;
   let fixture: ComponentFixture<DeletePartnerSlotDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DeletePartnerSlotDialogComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PrintChaperonesDialogComponent } from './print-chaperones-dialog.component';
 
@@ -6,7 +6,7 @@ describe('PrintChaperonesDialogComponent', () => {
   let component: PrintChaperonesDialogComponent;
   let fixture: ComponentFixture<PrintChaperonesDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PrintChaperonesDialogComponent ]
     })

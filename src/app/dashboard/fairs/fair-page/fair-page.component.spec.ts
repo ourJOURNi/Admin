@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FairPageComponent } from './fair-page.component';
 
@@ -6,7 +6,7 @@ describe('FairPageComponent', () => {
   let component: FairPageComponent;
   let fixture: ComponentFixture<FairPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FairPageComponent ]
     })

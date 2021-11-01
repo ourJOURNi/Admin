@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PrintPartnersDialogComponent } from './print-partners-dialog.component';
 
@@ -6,7 +6,7 @@ describe('PrintPartnersDialogComponent', () => {
   let component: PrintPartnersDialogComponent;
   let fixture: ComponentFixture<PrintPartnersDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PrintPartnersDialogComponent ]
     })

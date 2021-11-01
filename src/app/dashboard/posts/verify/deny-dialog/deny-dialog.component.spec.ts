@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DenyDialogComponent } from './deny-dialog.component';
 
@@ -6,7 +6,7 @@ describe('DenyDialogComponent', () => {
   let component: DenyDialogComponent;
   let fixture: ComponentFixture<DenyDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DenyDialogComponent ]
     })

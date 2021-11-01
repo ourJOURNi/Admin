@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FollowersDialogComponent } from './followers-dialog.component';
 
@@ -6,7 +6,7 @@ describe('FollowersDialogComponent', () => {
   let component: FollowersDialogComponent;
   let fixture: ComponentFixture<FollowersDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FollowersDialogComponent ]
     })

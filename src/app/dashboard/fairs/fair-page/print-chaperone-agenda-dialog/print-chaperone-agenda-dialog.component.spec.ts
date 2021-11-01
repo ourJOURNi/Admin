@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PrintChaperoneAgendaDialogComponent } from './print-chaperone-agenda-dialog.component';
 
@@ -6,7 +6,7 @@ describe('PrintChaperoneAgendaDialogComponent', () => {
   let component: PrintChaperoneAgendaDialogComponent;
   let fixture: ComponentFixture<PrintChaperoneAgendaDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PrintChaperoneAgendaDialogComponent ]
     })
