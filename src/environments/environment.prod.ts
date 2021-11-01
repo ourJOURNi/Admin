@@ -1,6 +1,6 @@
 // Admin Production
 
-import 'zone.js/dist/zone-error';
+import 'zone.js/plugins/zone-error';
 
 const adminApi = 'admin.findyourfuturesem.org';
 const fairsApi = `fairs.findyourfuturesem.org`;
