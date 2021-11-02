@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MentorsService } from '../../services/mentors.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeleteMentorDialogComponent } from '../mentors/delete-mentor-dialog/delete-mentor-dialog.component';
 import { AddMentorDialogComponent } from '../mentors/add-mentor-dialog/add-mentor-dialog.component';
 import { EditMentorDialogComponent } from '../mentors/edit-mentor-dialog/edit-mentor-dialog.component';

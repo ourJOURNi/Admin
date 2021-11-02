@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeletePostDialogComponent } from './delete-post-dialog/delete-post-dialog.component';
 import { FollowersDialogComponent } from './followers-dialog/followers-dialog.component';
 import { CommentsDialogComponent } from './comments-dialog/comments-dialog.component';

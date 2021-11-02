@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsService } from '../../services/students.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeleteStudentDialogComponent } from './delete-student-dialog/delete-dialog.component';
 import { EditStudentDialogComponent } from './edit-student-dialog/edit-student-dialog.component';
 import { differenceInYears } from 'date-fns';

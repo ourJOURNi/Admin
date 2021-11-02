@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from '../../services/events.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeleteEventDialogComponent } from '../events/delete-event-dialog/delete-event-dialog.component';
 import { AddEventDialogComponent } from '../events/add-event-dialog/add-event-dialog.component';
 import { EditEventDialogComponent } from '../events/edit-event-dialog/edit-event-dialog.component';

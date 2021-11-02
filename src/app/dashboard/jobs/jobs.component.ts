@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../services/jobs.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../jobs/delete-dialog/delete-dialog.component';
 import { AddJobDialogComponent } from '../jobs/add-job-dialog/add-job-dialog.component';
 import { EditJobDialogComponent } from '../jobs/edit-job-dialog/edit-job-dialog.component';

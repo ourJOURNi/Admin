@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FairsService } from '../../services/fairs.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeleteFairsDialogComponent } from '../fairs/delete-fair-dialog/delete-fair-dialog.component';
 import { AddFairDialogComponent } from '../fairs/add-fair-dialog/add-fair-dialog.component';
 import { EditFairDialogComponent } from '../fairs/edit-fair-dialog/edit-fair-dialog.component';

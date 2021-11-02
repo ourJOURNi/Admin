@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { PostsService } from '../../../services/posts.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { DeleteCommentDialogComponent } from '../delete-comment-dialog/delete-comment-dialog.component';
 import { format } from 'date-fns';

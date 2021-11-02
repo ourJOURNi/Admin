@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import Cropper from 'cropperjs';
 
 

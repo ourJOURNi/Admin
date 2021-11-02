@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../../../services/posts.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeleteReportedCommentDialogComponent } from '../reported/delete-reported-comment-dialog/delete-reported-comment-dialog.component';
 import { SeenCommentDialogComponent } from '../reported/seen-comment-dialog/seen-comment-dialog.component';
 import { BehaviorSubject } from 'rxjs';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../../../services/posts.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Location } from '@angular/common';
 import { VerifyDialogComponent } from '../verify/verify-dialog/verify-dialog.component';
 import { DenyDialogComponent } from '../verify/deny-dialog/deny-dialog.component';
